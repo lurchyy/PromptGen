@@ -1,0 +1,2477 @@
+[
+    {
+        "sector": "Retail Banking",
+        "description": "Retail banking focuses on providing banking services to individual consumers. This includes deposit accounts, loans, credit cards, and personal finance services aimed at everyday customers.",
+        "use_cases": [
+            {
+                "name": "Customer Segmentation Analysis",
+                "description": "Segment retail banking customers into meaningful groups based on demographics, behavior, and account usage to tailor services and marketing strategies.",
+                "sample_prompt": "You are a data analyst. Use Python to cluster retail banking customers into distinct segments based on their transaction history and demographic data. Provide a summary of key characteristics for each segment.",
+                "tone": "analytical",
+                "tags": [
+                    "segmentation",
+                    "customer",
+                    "analysis"
+                ]
+            },
+            {
+                "name": "Loan Default Risk Prediction",
+                "description": "Develop a model to predict the risk of loan defaults using customer financial data and historical loan repayment records.",
+                "sample_prompt": "You are a machine learning engineer. Write Python code using scikit-learn to build a classification model that predicts which customers are likely to default on personal loans, given historical financial data. Evaluate the model's performance metrics.",
+                "tone": "technical",
+                "tags": [
+                    "machine-learning",
+                    "risk",
+                    "classification"
+                ]
+            },
+            {
+                "name": "Personalized Product Recommendation",
+                "description": "Generate personalized banking product recommendations for customers based on their profile, account activity, and financial goals.",
+                "sample_prompt": "Act as a financial advisor. Based on a customer's transaction history and savings goals, recommend appropriate banking products such as loans or savings accounts. Explain why each product is suitable.",
+                "tone": "consultative",
+                "tags": [
+                    "recommendation",
+                    "personalization",
+                    "marketing"
+                ]
+            },
+            {
+                "name": "Fraudulent Transaction Detection",
+                "description": "Detect potentially fraudulent transactions in real-time by analyzing unusual patterns in account activity.",
+                "sample_prompt": "You are a cybersecurity analyst for a bank. Write pseudocode or Python code to flag unusual transactions (e.g., large withdrawals or foreign transfers) based on historical spending patterns. Describe how the system minimizes false positives.",
+                "tone": "analytical",
+                "tags": [
+                    "fraud",
+                    "anomaly-detection",
+                    "security"
+                ]
+            },
+            {
+                "name": "ATM Cash Flow Forecasting",
+                "description": "Forecast cash requirements for ATM machines by analyzing historical withdrawal patterns and upcoming events.",
+                "sample_prompt": "You are a data scientist at a retail bank. Develop a model or algorithm in Python to forecast the daily cash demand for each ATM location based on past withdrawal data and predicted deposit schedules. Present the forecast as a report.",
+                "tone": "analytical",
+                "tags": [
+                    "forecasting",
+                    "time-series",
+                    "optimization"
+                ]
+            },
+            {
+                "name": "Branch Performance Dashboard Creation",
+                "description": "Create an interactive dashboard to monitor key performance metrics (deposits, loans, new accounts) for each retail banking branch.",
+                "sample_prompt": "You are a business intelligence developer. Use a tool or Python to create an interactive dashboard that visualizes branch-level metrics like monthly new accounts, loan volume, and customer satisfaction. Include sample charts and explanation.",
+                "tone": "technical",
+                "tags": [
+                    "dashboard",
+                    "visualization",
+                    "performance"
+                ]
+            },
+            {
+                "name": "Budget Tracking and Analysis",
+                "description": "Develop a budgeting tool that categorizes personal spending and provides insights on saving opportunities.",
+                "sample_prompt": "You are a personal finance advisor. Write code or outline steps to categorize customer transactions into spending categories, then analyze the data to suggest how the customer can optimize their budget and save more each month.",
+                "tone": "instructional",
+                "tags": [
+                    "personal-finance",
+                    "analysis",
+                    "automation"
+                ]
+            },
+            {
+                "name": "Credit Score Improvement Strategy",
+                "description": "Analyze factors affecting a customer's credit score and recommend actions to improve it over time.",
+                "sample_prompt": "As a financial consultant, review a customer's credit report data and identify factors negatively impacting their credit score. Generate recommendations for actions (like debt repayment or credit mix adjustments) to improve the score.",
+                "tone": "consultative",
+                "tags": [
+                    "credit",
+                    "strategy",
+                    "recommendation"
+                ]
+            },
+            {
+                "name": "Regulatory Compliance Reporting",
+                "description": "Automate generation of compliance reports (e.g., Basel III metrics) for a retail bank using transactional and capital data.",
+                "sample_prompt": "You are a compliance officer. Write a program in Python that calculates required regulatory ratios (such as Tier 1 capital ratio) from bank balance sheet data and formats them into a report that meets regulatory guidelines.",
+                "tone": "technical",
+                "tags": [
+                    "compliance",
+                    "regulation",
+                    "reporting"
+                ]
+            },
+            {
+                "name": "Cross-Sell Opportunity Identification",
+                "description": "Identify opportunities to cross-sell banking products to existing customers by analyzing their financial behavior.",
+                "sample_prompt": "You are a sales analyst. Using customer account data, identify which customers are most likely to be interested in additional banking products (like a mortgage or credit card). Provide a ranked list with reasoning.",
+                "tone": "analytical",
+                "tags": [
+                    "sales",
+                    "analysis",
+                    "marketing"
+                ]
+            },
+            {
+                "name": "Customer Feedback Summarization",
+                "description": "Summarize customer feedback from surveys and support logs to inform bank service improvements.",
+                "sample_prompt": "You are a product manager. Analyze customer survey and support ticket data (provided in text form) and generate a summary report highlighting key customer concerns and suggestions for improving banking services.",
+                "tone": "analytical",
+                "tags": [
+                    "summarization",
+                    "customer-feedback",
+                    "insight"
+                ]
+            },
+            {
+                "name": "Deposit Forecasting",
+                "description": "Forecast future deposit inflows for retail branches by analyzing historical trends and market conditions.",
+                "sample_prompt": "You are a financial analyst. Use historical deposit data for multiple branches and external factors (like interest rates) to build a forecast model for next quarter's deposit inflows per branch. Present the results in both narrative and chart form.",
+                "tone": "analytical",
+                "tags": [
+                    "forecasting",
+                    "modeling",
+                    "time-series"
+                ]
+            },
+            {
+                "name": "Payment Dispute Resolution Automation",
+                "description": "Automate the triage and resolution of customer payment disputes by classifying issues and suggesting resolutions.",
+                "sample_prompt": "You are developing a support system. Classify incoming customer payment dispute messages into categories (e.g., wrong amount charged, duplicate payment) and for each category, outline steps the agent should take to resolve the issue.",
+                "tone": "consultative",
+                "tags": [
+                    "automation",
+                    "classification",
+                    "customer-service"
+                ]
+            },
+            {
+                "name": "High-Value Customer Churn Prediction",
+                "description": "Predict which high-value banking customers are at risk of closing their accounts to enable proactive retention strategies.",
+                "sample_prompt": "You are a data scientist. Build a predictive model to identify high-value customers who may close their accounts, using transaction behavior and service interaction history. Describe top churn indicators.",
+                "tone": "analytical",
+                "tags": [
+                    "churn",
+                    "risk",
+                    "machine-learning"
+                ]
+            },
+            {
+                "name": "Financial Education Content Generation",
+                "description": "Generate educational content (e.g., videos or blog posts) to explain complex banking topics to customers.",
+                "sample_prompt": "You are a content creator. Write an explanatory blog post or video script that simplifies how compound interest works for a general banking audience, with examples and analogies.",
+                "tone": "instructional",
+                "tags": [
+                    "content-creation",
+                    "education",
+                    "communication"
+                ]
+            },
+            {
+                "name": "Transaction Categorization",
+                "description": "Automatically categorize customer transactions (like groceries, utilities, entertainment) using machine learning for better personal finance insights.",
+                "sample_prompt": "You are a software developer. Implement a transaction classification system in Python that tags each bank transaction with a category (e.g., food, travel) using predefined rules or machine learning. Explain your approach.",
+                "tone": "technical",
+                "tags": [
+                    "classification",
+                    "automation",
+                    "NLP"
+                ]
+            },
+            {
+                "name": "Spending Trend Analysis",
+                "description": "Analyze customer spending trends over time to identify behavior changes or seasonal patterns.",
+                "sample_prompt": "You are a financial analyst. Use transaction history to detect significant changes in a customer's spending habits over the last year. Highlight trends and possible causes (e.g., new purchases, reduced income).",
+                "tone": "analytical",
+                "tags": [
+                    "trend-analysis",
+                    "finance",
+                    "data-analysis"
+                ]
+            },
+            {
+                "name": "Microloan Eligibility Assessment",
+                "description": "Evaluate microloan applicants (small personal loans) by analyzing limited financial data and alternative credit signals.",
+                "sample_prompt": "You are a credit analyst. Given a dataset of microloan applicants with alternative credit data (like mobile payment usage), develop a scoring approach to assess eligibility and risk. Outline the criteria used.",
+                "tone": "analytical",
+                "tags": [
+                    "risk",
+                    "alternative-data",
+                    "credit"
+                ]
+            },
+            {
+                "name": "KYC Document Automation",
+                "description": "Extract and verify customer information from identity documents (e.g., ID cards, utility bills) to streamline the Know Your Customer process.",
+                "sample_prompt": "You are building a compliance tool. Write a script to extract text from uploaded identity documents (OCR) and verify fields such as name and address against customer profile data, flagging any discrepancies.",
+                "tone": "technical",
+                "tags": [
+                    "KYC",
+                    "OCR",
+                    "verification"
+                ]
+            },
+            {
+                "name": "Fraud Pattern Analysis",
+                "description": "Identify and analyze patterns of past fraudulent activity to strengthen fraud prevention rules.",
+                "sample_prompt": "You are a fraud analyst. Analyze historical fraud case data to identify common patterns (e.g., timing, transaction type, location). Summarize findings and suggest rule adjustments for the fraud detection system.",
+                "tone": "analytical",
+                "tags": [
+                    "fraud",
+                    "pattern",
+                    "analysis"
+                ]
+            }
+        ]
+    },
+    {
+        "sector": "Corporate Finance",
+        "description": "Corporate finance deals with a company's financial activities and decisions, such as capital structuring and investment planning. It focuses on maximizing shareholder value through financial analysis and strategic funding.",
+        "use_cases": [
+            {
+                "name": "Financial Modeling and Forecasting",
+                "description": "Build comprehensive financial models to project a company's income statement, balance sheet, and cash flow under various scenarios.",
+                "sample_prompt": "You are a financial analyst. Using Python (pandas or Excel logic), create a dynamic financial model forecasting revenue, expenses, and cash flows for the next five years under different market scenarios. Present assumptions and results.",
+                "tone": "analytical",
+                "tags": [
+                    "forecasting",
+                    "modeling",
+                    "finance"
+                ]
+            },
+            {
+                "name": "M&A Synergy Analysis",
+                "description": "Analyze potential synergies and cost savings from a proposed merger or acquisition between two companies.",
+                "sample_prompt": "You are an investment analyst. Given financial data for Company A and Company B, calculate potential revenue synergies and cost synergies from an M&A deal. Provide a summary of total estimated combined EBIT impact.",
+                "tone": "analytical",
+                "tags": [
+                    "M&A",
+                    "synergy",
+                    "valuation"
+                ]
+            },
+            {
+                "name": "Budget Planning and Scenario Analysis",
+                "description": "Create interactive budget models that adjust forecasts based on different business scenarios or economic conditions.",
+                "sample_prompt": "You are a finance manager. Develop a budget planning tool in Excel or Python that allows adjusting revenue growth rates and cost assumptions to see how the budget changes. Include a clear explanation of how to use scenario switches.",
+                "tone": "consultative",
+                "tags": [
+                    "budgeting",
+                    "scenario-analysis",
+                    "planning"
+                ]
+            },
+            {
+                "name": "Valuation Model (DCF)",
+                "description": "Build a Discounted Cash Flow (DCF) model to determine a company's valuation based on projected cash flows and discount rates.",
+                "sample_prompt": "You are a valuation specialist. Write Python code to compute the intrinsic value of a company using a DCF model, given projected free cash flows and a discount rate. Explain each step and assumptions in the model.",
+                "tone": "technical",
+                "tags": [
+                    "valuation",
+                    "DCF",
+                    "finance"
+                ]
+            },
+            {
+                "name": "Capital Structure Optimization",
+                "description": "Determine the optimal mix of debt and equity financing to minimize cost of capital and maximize firm value.",
+                "sample_prompt": "You are a CFO. Analyze a company's current capital structure and suggest an optimal debt-to-equity ratio. Provide reasoning, including tax benefits of debt and risk implications, with supporting calculations.",
+                "tone": "consultative",
+                "tags": [
+                    "capital-structure",
+                    "finance",
+                    "optimization"
+                ]
+            },
+            {
+                "name": "Cash Flow Statement Automation",
+                "description": "Automate the generation of cash flow statements from raw accounting data to ensure accuracy and efficiency.",
+                "sample_prompt": "You are a financial software developer. Create a script that takes income statement and balance sheet data to automatically produce a cash flow statement (direct or indirect method). Include error checks for consistency.",
+                "tone": "technical",
+                "tags": [
+                    "automation",
+                    "reporting",
+                    "finance"
+                ]
+            },
+            {
+                "name": "CFO Report Generation",
+                "description": "Generate concise executive reports summarizing financial performance, key metrics, and forecasts for the CFO.",
+                "sample_prompt": "You are an assistant to the CFO. Given the latest monthly financial data, write a brief report highlighting revenue variance, expense trends, and actionable insights. Include charts for key metrics and an executive summary.",
+                "tone": "consultative",
+                "tags": [
+                    "reporting",
+                    "executive-summary",
+                    "analysis"
+                ]
+            },
+            {
+                "name": "Regulatory Compliance Summary",
+                "description": "Summarize key financial regulations (e.g., Sarbanes-Oxley, IFRS standards) and their impact on corporate finance processes.",
+                "sample_prompt": "You are a compliance officer. Summarize the main requirements of the latest IFRS accounting standard for leases and explain how it affects the financial statements and reporting for companies.",
+                "tone": "informative",
+                "tags": [
+                    "compliance",
+                    "regulation",
+                    "reporting"
+                ]
+            },
+            {
+                "name": "Risk Assessment (Interest Rate, FX)",
+                "description": "Evaluate the impact of interest rate or currency fluctuations on a company's financial position and suggest hedging strategies.",
+                "sample_prompt": "You are a risk analyst. Assess how a 2% increase in interest rates would affect the company's interest expenses and net income. Also, evaluate the impact of a 5% currency depreciation on revenue. Suggest appropriate hedging instruments.",
+                "tone": "analytical",
+                "tags": [
+                    "risk",
+                    "analysis",
+                    "hedging"
+                ]
+            },
+            {
+                "name": "Dashboard for Key Financial Metrics",
+                "description": "Create an interactive dashboard to track key financial KPIs such as EBITDA, ROIC, and free cash flow for internal stakeholders.",
+                "sample_prompt": "You are a business intelligence developer. Use a tool or Python to build a dashboard that displays KPIs like revenue growth, profit margins, and cash flow metrics with filters for different business units. Provide sample charts.",
+                "tone": "technical",
+                "tags": [
+                    "dashboard",
+                    "KPI",
+                    "visualization"
+                ]
+            },
+            {
+                "name": "Expense Reduction Analysis",
+                "description": "Analyze company expenses to identify cost-saving opportunities without harming core operations.",
+                "sample_prompt": "You are a financial consultant. Given a company's expense breakdown, identify areas where costs could be reduced or optimized (e.g., renegotiating vendor contracts, streamlining operations). Provide a cost-savings plan.",
+                "tone": "analytical",
+                "tags": [
+                    "cost-reduction",
+                    "analysis",
+                    "optimization"
+                ]
+            },
+            {
+                "name": "Acquisition Target Screening",
+                "description": "Screen potential acquisition targets based on financial criteria like EBITDA, growth rate, and strategic fit.",
+                "sample_prompt": "You are a corporate strategist. Write Python code to filter a list of companies by financial criteria (EBITDA, revenue growth, debt levels) and produce a shortlist of viable acquisition targets. Explain the filtering logic.",
+                "tone": "technical",
+                "tags": [
+                    "M&A",
+                    "screening",
+                    "analysis"
+                ]
+            },
+            {
+                "name": "Sensitivity Analysis",
+                "description": "Perform sensitivity analysis on key financial assumptions (like sales growth or cost of capital) to see their effect on outcomes.",
+                "sample_prompt": "You are an analyst. Conduct a sensitivity analysis on a company's valuation by varying sales growth and discount rate. Use Python or Excel to show how changes in these inputs affect the final valuation result.",
+                "tone": "analytical",
+                "tags": [
+                    "sensitivity-analysis",
+                    "modeling",
+                    "finance"
+                ]
+            },
+            {
+                "name": "Consolidated Financial Statements",
+                "description": "Automate consolidation of financial statements for multiple subsidiaries into one parent company report.",
+                "sample_prompt": "You are an accountant. Write a program that combines multiple subsidiary financial statements into a consolidated balance sheet and income statement, eliminating intercompany transactions. Outline any consolidation rules applied.",
+                "tone": "technical",
+                "tags": [
+                    "consolidation",
+                    "reporting",
+                    "automation"
+                ]
+            },
+            {
+                "name": "Merger Scenario Simulation",
+                "description": "Simulate different merger scenarios to project combined financials and analyze post-merger performance.",
+                "sample_prompt": "You are an M&A analyst. Simulate a merger of Company X and Company Y by combining their financials, then model pro forma revenue, costs, and synergies. Provide charts of projected revenue and cost structure after the merger.",
+                "tone": "analytical",
+                "tags": [
+                    "simulation",
+                    "M&A",
+                    "analysis"
+                ]
+            },
+            {
+                "name": "Investment Project Evaluation",
+                "description": "Evaluate potential investment projects using ROI, NPV, and IRR calculations.",
+                "sample_prompt": "You are a project finance analyst. Given cash flow forecasts for a new project, calculate the Net Present Value (NPV) and Internal Rate of Return (IRR) to determine if it meets the company's investment criteria. Explain each step.",
+                "tone": "technical",
+                "tags": [
+                    "NPV",
+                    "IRR",
+                    "ROI"
+                ]
+            },
+            {
+                "name": "Capital Budgeting (NPV/IRR)",
+                "description": "Optimize capital budgeting decisions by analyzing a project's NPV and IRR compared to company benchmarks.",
+                "sample_prompt": "You are a CFO. Compare two capital projects by calculating their NPV and IRR using provided cash flow data. Decide which project to pursue based on investment criteria and explain your rationale.",
+                "tone": "analytical",
+                "tags": [
+                    "capital-budgeting",
+                    "NPV",
+                    "IRR"
+                ]
+            },
+            {
+                "name": "Investor Presentation Deck",
+                "description": "Create a compelling slide deck to present financial results or strategic plans to investors or stakeholders.",
+                "sample_prompt": "You are a finance director. Outline a PowerPoint presentation that includes an overview of last quarter's financial performance, key achievements, and future strategy. Provide bullet points and visuals ideas for each slide.",
+                "tone": "persuasive",
+                "tags": [
+                    "presentation",
+                    "reporting",
+                    "communication"
+                ]
+            },
+            {
+                "name": "Cost of Capital Calculation",
+                "description": "Compute a company's weighted average cost of capital (WACC) using market data and financial statements.",
+                "sample_prompt": "You are a finance analyst. Calculate a company's WACC given its cost of equity (from CAPM), cost of debt, and capital structure percentages. Explain each component and provide the final WACC percentage.",
+                "tone": "technical",
+                "tags": [
+                    "WACC",
+                    "finance",
+                    "calculation"
+                ]
+            }
+        ]
+    },
+    {
+        "sector": "Asset Management",
+        "description": "Asset management involves managing investments on behalf of clients, including institutions and individuals. It focuses on portfolio construction, risk management, and optimizing returns based on client objectives.",
+        "use_cases": [
+            {
+                "name": "Portfolio Optimization",
+                "description": "Optimize asset allocations to maximize portfolio return for a given risk level using modern portfolio theory principles.",
+                "sample_prompt": "You are a quantitative analyst. Write Python code to perform mean-variance optimization on a given list of asset returns, finding the efficient frontier and the optimal weights for a target risk level. Explain the methodology.",
+                "tone": "technical",
+                "tags": [
+                    "optimization",
+                    "portfolio",
+                    "quantitative"
+                ]
+            },
+            {
+                "name": "Risk Analytics and VaR",
+                "description": "Calculate Value at Risk (VaR) and other risk metrics for a portfolio to assess potential losses under normal market conditions.",
+                "sample_prompt": "You are a risk manager. Using historical daily returns of a portfolio, compute the 95% Value at Risk (VaR) using a historical simulation and a parametric approach. Include code and interpret the results.",
+                "tone": "analytical",
+                "tags": [
+                    "risk",
+                    "VaR",
+                    "quantitative"
+                ]
+            },
+            {
+                "name": "Performance Attribution",
+                "description": "Analyze portfolio performance by attributing returns to asset allocation, security selection, and benchmark differences.",
+                "sample_prompt": "You are a performance analyst. Given fund and benchmark returns, break down the fund's excess return into allocation, selection, and interaction effects (Brinson model). Provide a summary report of the attribution analysis.",
+                "tone": "analytical",
+                "tags": [
+                    "attribution",
+                    "performance",
+                    "analysis"
+                ]
+            },
+            {
+                "name": "Fund Reporting Automation",
+                "description": "Automate generation of periodic reports for investors, including performance summaries, holdings, and compliance statements.",
+                "sample_prompt": "You are a fund manager's assistant. Create a Python script or template that pulls fund holdings and returns data to automatically generate a monthly PDF report with charts and narrative commentary.",
+                "tone": "technical",
+                "tags": [
+                    "automation",
+                    "reporting",
+                    "fund"
+                ]
+            },
+            {
+                "name": "Market Trend Analysis",
+                "description": "Analyze current market trends and economic indicators to provide investment insights for portfolio strategy adjustments.",
+                "sample_prompt": "You are a market analyst. Summarize recent trends in global equity markets (e.g., sector performance, macroeconomic news) and how they might impact your asset allocation decisions. Present key findings in a memo.",
+                "tone": "analytical",
+                "tags": [
+                    "market-trends",
+                    "analysis",
+                    "insight"
+                ]
+            },
+            {
+                "name": "Backtesting Trading Strategy",
+                "description": "Backtest an investment strategy (e.g., moving average crossover) over historical data to evaluate its performance and reliability.",
+                "sample_prompt": "You are a quantitative researcher. Write Python code to backtest a simple moving average crossover strategy on historical price data of a given stock or ETF. Include performance metrics and a plot of equity curve.",
+                "tone": "technical",
+                "tags": [
+                    "backtesting",
+                    "strategy",
+                    "quantitative"
+                ]
+            },
+            {
+                "name": "Scenario Stress Testing",
+                "description": "Perform stress tests on a portfolio by simulating extreme market scenarios to evaluate potential losses.",
+                "sample_prompt": "You are a risk analyst. Define several stress scenarios (e.g., market crash, interest rate spike) and quantify their impact on the current portfolio value using Python or Excel. Present the results in a report.",
+                "tone": "analytical",
+                "tags": [
+                    "stress-testing",
+                    "scenario-analysis",
+                    "risk"
+                ]
+            },
+            {
+                "name": "Asset Allocation Recommendation",
+                "description": "Provide asset allocation recommendations based on client goals and market outlook, considering risk tolerance and diversification.",
+                "sample_prompt": "You are a portfolio manager. Create a diversified asset allocation recommendation for a moderate-risk client, explaining the mix of equities, bonds, and alternatives. Justify choices with market data or research.",
+                "tone": "consultative",
+                "tags": [
+                    "asset-allocation",
+                    "strategy",
+                    "recommendation"
+                ]
+            },
+            {
+                "name": "Compliance Monitoring",
+                "description": "Monitor regulatory compliance for asset management (e.g., investment limits, reporting requirements) to avoid violations.",
+                "sample_prompt": "You are a compliance officer. Describe how you would implement an automated check to ensure fund allocations comply with regulatory limits (like no more than 10% in one stock). Outline the logic or code needed.",
+                "tone": "analytical",
+                "tags": [
+                    "compliance",
+                    "regulation",
+                    "monitoring"
+                ]
+            },
+            {
+                "name": "Portfolio Rebalancing Code",
+                "description": "Write code to rebalance a portfolio back to target weights when allocations drift beyond set thresholds.",
+                "sample_prompt": "You are a developer. Write a Python function that takes current portfolio weights and target weights, and outputs the trades needed to rebalance within a threshold (e.g., 5% deviation).",
+                "tone": "technical",
+                "tags": [
+                    "rebalance",
+                    "automation",
+                    "portfolio"
+                ]
+            },
+            {
+                "name": "ESG Portfolio Scoring",
+                "description": "Compute an ESG (Environmental, Social, Governance) score for a portfolio based on asset-level ESG ratings.",
+                "sample_prompt": "You are a sustainability analyst. Given ESG scores for individual stocks, calculate an overall ESG score for the portfolio weighted by market value. Provide insights on how to improve the portfolio's ESG profile.",
+                "tone": "analytical",
+                "tags": [
+                    "ESG",
+                    "sustainability",
+                    "analytics"
+                ]
+            },
+            {
+                "name": "Client Investment Report",
+                "description": "Generate personalized investment reports for clients, summarizing performance, risk, and portfolio changes.",
+                "sample_prompt": "You are a financial advisor. Draft a monthly report for a client summarizing their portfolio performance, asset allocation, and any recommended adjustments. Include charts and straightforward explanations.",
+                "tone": "consultative",
+                "tags": [
+                    "reporting",
+                    "client-service",
+                    "communication"
+                ]
+            },
+            {
+                "name": "Factor Model Construction",
+                "description": "Build a multi-factor model to explain asset or portfolio returns using factors like momentum, value, and size.",
+                "sample_prompt": "You are a quantitative analyst. Construct a factor model using Python that explains a stock portfolio's returns with factors such as market beta, size, and momentum. Show regression results and factor coefficients.",
+                "tone": "technical",
+                "tags": [
+                    "factor-model",
+                    "quantitative",
+                    "analysis"
+                ]
+            },
+            {
+                "name": "Derivative Pricing Model",
+                "description": "Implement a pricing model for financial derivatives (e.g., options or swaps) to value contracts.",
+                "sample_prompt": "You are a quant developer. Write Python code for a Black-Scholes model to price European call and put options given underlying price, strike, volatility, interest rate, and time to maturity. Explain the outputs.",
+                "tone": "technical",
+                "tags": [
+                    "derivatives",
+                    "pricing",
+                    "quantitative"
+                ]
+            },
+            {
+                "name": "Alpha Generation Strategy",
+                "description": "Develop a strategy for generating alpha (excess returns) through data-driven signals or active management insights.",
+                "sample_prompt": "You are a hedge fund analyst. Propose a data-driven strategy to generate alpha in equities (e.g., based on earnings surprises or alternative data). Include rationale and how performance would be measured.",
+                "tone": "analytical",
+                "tags": [
+                    "alpha",
+                    "strategy",
+                    "innovation"
+                ]
+            },
+            {
+                "name": "Sector Rotation Analysis",
+                "description": "Analyze sector performance to inform timing of sector rotation in a portfolio.",
+                "sample_prompt": "You are a market strategist. Analyze historical sector ETF returns and economic indicators to identify which sectors may outperform in the next quarter. Provide a report with charts and sector rotation recommendations.",
+                "tone": "analytical",
+                "tags": [
+                    "sector-analysis",
+                    "market-trends",
+                    "strategy"
+                ]
+            },
+            {
+                "name": "Performance Benchmarking",
+                "description": "Compare a portfolio's performance against benchmarks (e.g., S&P 500) to evaluate active management effectiveness.",
+                "sample_prompt": "You are an asset manager. Write Python code to compare your fund's monthly returns against the S&P 500 index, calculating tracking error and information ratio. Summarize how well the fund beat or lagged the benchmark.",
+                "tone": "technical",
+                "tags": [
+                    "benchmarking",
+                    "performance",
+                    "analysis"
+                ]
+            },
+            {
+                "name": "News Sentiment Impact",
+                "description": "Assess how recent financial news sentiment affects portfolio performance and make trading recommendations.",
+                "sample_prompt": "You are a data scientist. Fetch news headlines for companies in the portfolio, perform sentiment analysis, and evaluate if negative news would justify adjusting the portfolio holdings. Provide an analysis report.",
+                "tone": "analytical",
+                "tags": [
+                    "sentiment-analysis",
+                    "NLP",
+                    "market"
+                ]
+            },
+            {
+                "name": "Portfolio Monte Carlo Simulation",
+                "description": "Run Monte Carlo simulations to estimate the range of possible future portfolio returns under uncertainty.",
+                "sample_prompt": "You are a quant analyst. Write Python code to perform a Monte Carlo simulation of portfolio value over 10 years given historical volatility and correlations. Show the distribution of outcomes and probability of meeting a return target.",
+                "tone": "technical",
+                "tags": [
+                    "simulation",
+                    "Monte Carlo",
+                    "risk"
+                ]
+            },
+            {
+                "name": "Fund Flows Monitoring",
+                "description": "Analyze fund inflows and outflows to identify trends in investor behavior and potential liquidity issues.",
+                "sample_prompt": "You are a data analyst at an asset management firm. Write Python code to process daily fund flow data, visualize net inflows/outflows over time, and highlight any significant shifts or anomalies.",
+                "tone": "analytical",
+                "tags": [
+                    "analysis",
+                    "fund-flows",
+                    "liquidity"
+                ]
+            }
+        ]
+    },
+    {
+        "sector": "Investment Banking",
+        "description": "Investment banking provides advisory services for large corporate clients, including mergers and acquisitions, underwriting, and capital raising. It involves financial analysis, deal structuring, and client presentations to facilitate high-value transactions.",
+        "use_cases": [
+            {
+                "name": "Pitchbook Slide Creation",
+                "description": "Generate a polished slide deck summarizing a potential deal or market opportunity for client presentations.",
+                "sample_prompt": "You are an investment banker. Create a slide outline for a pitchbook that includes an executive summary, industry overview, financial projections, and key investment highlights for Company XYZ.",
+                "tone": "persuasive",
+                "tags": [
+                    "presentation",
+                    "pitchbook",
+                    "communication"
+                ]
+            },
+            {
+                "name": "Comparable Company Analysis",
+                "description": "Analyze a set of comparable companies to derive valuation multiples and benchmarks for an M&A or equity transaction.",
+                "sample_prompt": "You are a financial analyst. Given a list of peer companies and their financial metrics, calculate EV/EBITDA and P/E multiples, and derive an appropriate valuation range for the target company. Summarize your findings.",
+                "tone": "analytical",
+                "tags": [
+                    "valuation",
+                    "comps",
+                    "analysis"
+                ]
+            },
+            {
+                "name": "Discounted Cash Flow Modeling",
+                "description": "Build a detailed DCF model in Excel or code to estimate the enterprise value of a company.",
+                "sample_prompt": "You are an M&A analyst. Create a DCF valuation model for Company ABC using projected cash flows and a discount rate. Provide the final valuation and explain the key assumptions (growth rate, terminal value).",
+                "tone": "technical",
+                "tags": [
+                    "DCF",
+                    "valuation",
+                    "modeling"
+                ]
+            },
+            {
+                "name": "M&A Deal Scenario Analysis",
+                "description": "Evaluate different merger or acquisition scenarios, including purchase price and financing options.",
+                "sample_prompt": "You are advising on a potential acquisition. Compare two deal structures: one all-cash and one with partial stock consideration. Show the impact on acquirer's earnings per share and accretion/dilution for each scenario.",
+                "tone": "analytical",
+                "tags": [
+                    "M&A",
+                    "scenario-analysis",
+                    "finance"
+                ]
+            },
+            {
+                "name": "Sector Industry Analysis",
+                "description": "Research and summarize the current state of an industry sector, including key trends, players, and financial performance.",
+                "sample_prompt": "You are an industry analyst. Summarize the current trends in the renewable energy sector, identify the top 3 publicly traded companies in this sector, and compare their growth rates and profitability.",
+                "tone": "informative",
+                "tags": [
+                    "industry-analysis",
+                    "research",
+                    "trends"
+                ]
+            },
+            {
+                "name": "Financial Model Template",
+                "description": "Create a reusable financial model template for standard analysis tasks like budgeting or valuation.",
+                "sample_prompt": "You are a finance consultant. Provide a basic Excel structure for a three-statement financial model (income statement, balance sheet, cash flow) for a manufacturing company, including example formulas for linkages.",
+                "tone": "technical",
+                "tags": [
+                    "financial-model",
+                    "template",
+                    "Excel"
+                ]
+            },
+            {
+                "name": "Equity Research Summary",
+                "description": "Draft a concise equity research report summarizing a company's business, financials, and investment thesis.",
+                "sample_prompt": "You are an equity analyst. Summarize Company XYZ in an equity research report format, including business description, key financial metrics, SWOT analysis, and a final buy/hold/sell rating with justification.",
+                "tone": "analytical",
+                "tags": [
+                    "equity-research",
+                    "report",
+                    "analysis"
+                ]
+            },
+            {
+                "name": "IPO Roadshow Presentation",
+                "description": "Prepare a presentation outline for a company's IPO roadshow highlighting its financials and growth story.",
+                "sample_prompt": "You are leading an IPO. Outline the key slides for a roadshow deck, including market opportunity, business model, financial performance, and use of proceeds. Provide bullet points for each slide.",
+                "tone": "persuasive",
+                "tags": [
+                    "IPO",
+                    "presentation",
+                    "communication"
+                ]
+            },
+            {
+                "name": "Debt Financing Plan",
+                "description": "Develop a plan for financing a deal with debt, including terms and impact on cash flow.",
+                "sample_prompt": "You are a structuring advisor. Calculate how a $100 million acquisition financed with different mixes of debt (senior debt, mezzanine) will affect the company's interest expense and debt ratios. Summarize the preferred structure.",
+                "tone": "analytical",
+                "tags": [
+                    "debt-finance",
+                    "structuring",
+                    "analysis"
+                ]
+            },
+            {
+                "name": "Regulatory Environment Summary",
+                "description": "Summarize relevant financial regulations (like SEC or banking regulations) that could impact a transaction or client.",
+                "sample_prompt": "You are a compliance expert. Provide a brief summary of key SEC regulations that apply to underwritten public offerings in the US (e.g., registration requirements, disclosures).",
+                "tone": "informative",
+                "tags": [
+                    "regulation",
+                    "compliance",
+                    "SEC"
+                ]
+            },
+            {
+                "name": "Market Forecast for IPO",
+                "description": "Analyze market conditions to forecast the likely performance of a new IPO or public offering.",
+                "sample_prompt": "You are a market strategist. Evaluate the current market sentiment and recent IPO performance to forecast how a tech startup's upcoming IPO might perform on day one. Provide reasoning.",
+                "tone": "analytical",
+                "tags": [
+                    "market-forecast",
+                    "IPO",
+                    "analysis"
+                ]
+            },
+            {
+                "name": "Deal Valuation Sensitivity",
+                "description": "Perform sensitivity analysis on deal valuation to understand how changes in assumptions affect the outcome.",
+                "sample_prompt": "You are an investment banker. Create sensitivity tables to show how the valuation of a target company changes with variations in revenue growth and EBITDA margin. Provide insights on key drivers.",
+                "tone": "analytical",
+                "tags": [
+                    "sensitivity-analysis",
+                    "valuation",
+                    "finance"
+                ]
+            },
+            {
+                "name": "Merger Integration Plan",
+                "description": "Outline a high-level plan for integrating two companies after a merger, including cost synergies and organizational changes.",
+                "sample_prompt": "You are a consultant. Draft an outline of steps for post-merger integration between Company A and Company B, highlighting key synergy areas (like combined salesforce, consolidating facilities) and a timeline.",
+                "tone": "consultative",
+                "tags": [
+                    "integration",
+                    "M&A",
+                    "strategy"
+                ]
+            },
+            {
+                "name": "Competitive Deals Summary",
+                "description": "Summarize recent M&A or funding deals in a specific industry to inform pitch strategy.",
+                "sample_prompt": "You are a deal strategist. Summarize the last 5 major M&A deals in the fintech industry, including acquirers, targets, deal values, and strategic rationale.",
+                "tone": "informative",
+                "tags": [
+                    "M&A",
+                    "deal-tracking",
+                    "industry"
+                ]
+            },
+            {
+                "name": "Economic Impact on Deals",
+                "description": "Analyze how macroeconomic factors (like interest rates or GDP growth) could affect deal activity and valuations.",
+                "sample_prompt": "You are an economist. Write a report on how rising interest rates and inflation are likely to influence M&A activity and valuations in the manufacturing sector.",
+                "tone": "analytical",
+                "tags": [
+                    "economics",
+                    "M&A",
+                    "analysis"
+                ]
+            },
+            {
+                "name": "SPAC Merger Evaluation",
+                "description": "Evaluate a SPAC merger opportunity, comparing the terms and expected value to a traditional IPO.",
+                "sample_prompt": "You are a financial advisor. Compare a company's upcoming SPAC merger terms with a hypothetical traditional IPO at the same valuation, analyzing share dilution and investor returns.",
+                "tone": "analytical",
+                "tags": [
+                    "SPAC",
+                    "IPO",
+                    "valuation"
+                ]
+            },
+            {
+                "name": "Financial Advisory Memorandum",
+                "description": "Draft a summary memo to internal stakeholders outlining key points of a potential deal or investment opportunity.",
+                "sample_prompt": "You are an M&A analyst. Write a brief memorandum outlining the strategic rationale, financials, and next steps for considering an acquisition of Company Y.",
+                "tone": "professional",
+                "tags": [
+                    "memo",
+                    "deal",
+                    "communication"
+                ]
+            },
+            {
+                "name": "LBO Model Construction",
+                "description": "Construct a leveraged buyout (LBO) model to analyze the feasibility of acquiring a company with debt financing.",
+                "sample_prompt": "You are a private equity analyst. Build an LBO model in Excel or Python for a buyout of Company Z, projecting debt paydown, equity returns (IRR), and exit valuation. Explain key assumptions.",
+                "tone": "technical",
+                "tags": [
+                    "LBO",
+                    "modeling",
+                    "finance"
+                ]
+            },
+            {
+                "name": "Deal Pipeline Management",
+                "description": "Organize and manage the pipeline of potential deals, tracking stages and priorities.",
+                "sample_prompt": "You are a deal manager. Design a simple system or Excel template to track potential deals through stages (prospecting, negotiation, due diligence, closing), including key dates and status updates.",
+                "tone": "consultative",
+                "tags": [
+                    "pipeline",
+                    "project-management",
+                    "deal-flow"
+                ]
+            },
+            {
+                "name": "Investment Thesis Generation",
+                "description": "Formulate a clear investment thesis for a company or project based on financial data and market analysis.",
+                "sample_prompt": "You are an equity research associate. Develop an investment thesis for a renewable energy company, highlighting why it is a compelling opportunity and what risks to consider.",
+                "tone": "analytical",
+                "tags": [
+                    "investment-thesis",
+                    "analysis",
+                    "strategy"
+                ]
+            }
+        ]
+    },
+    {
+        "sector": "Insurance",
+        "description": "The insurance sector provides risk management through policies that protect individuals and businesses. It involves underwriting risks, claims processing, and financial planning to ensure company solvency and customer coverage.",
+        "use_cases": [
+            {
+                "name": "Claims Fraud Detection",
+                "description": "Identify and flag potentially fraudulent insurance claims by analyzing claim details and patterns.",
+                "sample_prompt": "You are an insurance data analyst. Use Python to train a model on historical claim data to detect fraud (e.g., unusually high claims or suspicious patterns). Present metrics and false positive rates.",
+                "tone": "analytical",
+                "tags": [
+                    "fraud",
+                    "machine-learning",
+                    "claims"
+                ]
+            },
+            {
+                "name": "Premium Pricing Optimization",
+                "description": "Optimize insurance premium rates by analyzing risk factors and market competition.",
+                "sample_prompt": "You are an actuarial analyst. Build a pricing model in Python or Excel that takes into account customer risk factors (age, driving history, etc.) to suggest optimized premium rates for an auto insurance portfolio.",
+                "tone": "technical",
+                "tags": [
+                    "pricing",
+                    "actuarial",
+                    "optimization"
+                ]
+            },
+            {
+                "name": "Underwriting Automation",
+                "description": "Automate underwriting decisions by creating rules or models for risk classification.",
+                "sample_prompt": "You are an underwriting specialist. Develop a decision tree or rule-based logic (in pseudocode or Python) to determine whether to approve or reject a life insurance application based on applicant data (age, health status, etc.).",
+                "tone": "technical",
+                "tags": [
+                    "underwriting",
+                    "automation",
+                    "decision-making"
+                ]
+            },
+            {
+                "name": "Customer Segmentation for Policy Marketing",
+                "description": "Segment insurance customers to target marketing campaigns for new policy offerings.",
+                "sample_prompt": "You are a marketing analyst. Cluster auto insurance customers into distinct segments based on demographics and claims history. Suggest targeted marketing messages or products for each segment.",
+                "tone": "analytical",
+                "tags": [
+                    "segmentation",
+                    "marketing",
+                    "customer"
+                ]
+            },
+            {
+                "name": "Policy Recommendation Engine",
+                "description": "Suggest personalized insurance policy recommendations to customers based on their profile and needs.",
+                "sample_prompt": "You are a digital advisor. Given a customer's profile (age, family status, assets), recommend appropriate insurance policies (e.g., life, auto, home) and provide a brief justification for each suggestion.",
+                "tone": "consultative",
+                "tags": [
+                    "recommendation",
+                    "personalization",
+                    "customer"
+                ]
+            },
+            {
+                "name": "New Business Risk Assessment",
+                "description": "Assess the risk level of new insurance applications using predictive modeling.",
+                "sample_prompt": "You are an actuarial data scientist. Using historical data of past applicants, build a logistic regression model to predict the probability that a new applicant will file a large claim in the first year. Explain model inputs.",
+                "tone": "analytical",
+                "tags": [
+                    "risk",
+                    "prediction",
+                    "actuarial"
+                ]
+            },
+            {
+                "name": "Reinsurance Strategy Optimization",
+                "description": "Determine optimal reinsurance coverage levels to balance risk transfer and cost.",
+                "sample_prompt": "You are a reinsurance consultant. Analyze how different reinsurance retention levels (e.g., 10%, 20%) affect the insurer's risk exposure and net premium. Summarize the trade-offs and recommend an optimal strategy.",
+                "tone": "analytical",
+                "tags": [
+                    "reinsurance",
+                    "optimization",
+                    "risk"
+                ]
+            },
+            {
+                "name": "Reserving Automation",
+                "description": "Automate the calculation of insurance claim reserves using actuarial methods.",
+                "sample_prompt": "You are an actuary. Write Python code that uses the chain-ladder method to estimate outstanding claim reserves from run-off triangles. Present the reserve estimates and confidence intervals.",
+                "tone": "technical",
+                "tags": [
+                    "reserving",
+                    "actuarial",
+                    "automation"
+                ]
+            },
+            {
+                "name": "Regulatory Compliance Reporting",
+                "description": "Generate required reports to comply with insurance regulations (e.g., Solvency II, NAIC filings).",
+                "sample_prompt": "You are a compliance officer. Outline the steps to create a Solvency II report, including calculations for the solvency capital requirement (SCR) and technical provisions.",
+                "tone": "informative",
+                "tags": [
+                    "compliance",
+                    "reporting",
+                    "regulation"
+                ]
+            },
+            {
+                "name": "Actuarial Mortality Analysis",
+                "description": "Analyze mortality rate tables and trends to update life insurance pricing and reserves.",
+                "sample_prompt": "You are an actuary. Analyze historical mortality tables and fit a Gompertz or Makeham model to project future mortality rates. Explain how changes in mortality affect life insurance premiums.",
+                "tone": "analytical",
+                "tags": [
+                    "actuarial",
+                    "mortality",
+                    "modeling"
+                ]
+            },
+            {
+                "name": "Natural Disaster Risk Modeling",
+                "description": "Simulate insurance losses from natural disasters (e.g., hurricanes) to assess portfolio vulnerability.",
+                "sample_prompt": "You are a catastrophe modeler. Use Python to simulate 10,000 hurricane events and estimate potential damage to a homeowner insurance portfolio in Florida. Provide a loss distribution summary.",
+                "tone": "analytical",
+                "tags": [
+                    "catastrophe",
+                    "simulation",
+                    "risk"
+                ]
+            },
+            {
+                "name": "Customer Churn Prediction",
+                "description": "Predict which policyholders are likely to lapse or switch to another insurer to enable retention efforts.",
+                "sample_prompt": "You are a data scientist. Build a churn prediction model for life insurance customers using policy duration, claim history, and service interactions. Identify key factors driving churn.",
+                "tone": "analytical",
+                "tags": [
+                    "churn",
+                    "prediction",
+                    "customer"
+                ]
+            },
+            {
+                "name": "Claim Process Automation",
+                "description": "Streamline claim processing by automating routine checks and communications.",
+                "sample_prompt": "You are a claims manager. Design a workflow using RPA or scripts that automatically verifies claim information against policy details, triggers payment for straightforward claims, and flags complex cases for manual review.",
+                "tone": "consultative",
+                "tags": [
+                    "automation",
+                    "claims",
+                    "workflow"
+                ]
+            },
+            {
+                "name": "Product Performance Dashboard",
+                "description": "Create a dashboard to monitor key metrics for insurance products, such as loss ratio, expense ratio, and premium growth.",
+                "sample_prompt": "You are a product manager. Use a BI tool or Python to create a dashboard that tracks performance metrics (e.g., loss ratio, growth) for each insurance product line, with filters by region and time period.",
+                "tone": "technical",
+                "tags": [
+                    "dashboard",
+                    "visualization",
+                    "monitoring"
+                ]
+            },
+            {
+                "name": "Digital Quote Generation",
+                "description": "Develop an online tool to generate personalized insurance quotes based on customer inputs.",
+                "sample_prompt": "You are a developer. Outline an algorithm to calculate an auto insurance quote in real-time given driver information, vehicle details, and coverage options. Include how discounts and surcharges are applied.",
+                "tone": "technical",
+                "tags": [
+                    "online-quote",
+                    "calculation",
+                    "automation"
+                ]
+            },
+            {
+                "name": "Coverage Gap Analysis",
+                "description": "Identify gaps in customer coverage where risk exposures are not fully insured.",
+                "sample_prompt": "You are an insurance advisor. Given a summary of a client's assets and existing policies, analyze and identify any coverage gaps (e.g., home not insured for flood). Recommend policies to address gaps.",
+                "tone": "consultative",
+                "tags": [
+                    "analysis",
+                    "coverage",
+                    "risk"
+                ]
+            },
+            {
+                "name": "Training Content Development",
+                "description": "Generate training materials (slides or guides) for insurance agents on products and regulations.",
+                "sample_prompt": "You are a trainer. Develop a slide deck outline for onboarding new insurance agents, covering policy basics, sales techniques, and compliance requirements. Provide bullet points for each slide.",
+                "tone": "instructional",
+                "tags": [
+                    "training",
+                    "education",
+                    "compliance"
+                ]
+            },
+            {
+                "name": "Loss Ratio Analysis",
+                "description": "Analyze past loss ratios to identify trends and improve underwriting decisions.",
+                "sample_prompt": "You are an actuary. Compute the 5-year historical loss ratio (claims/premiums) for a portfolio of commercial auto policies. Interpret any trends and suggest possible underwriting adjustments.",
+                "tone": "analytical",
+                "tags": [
+                    "analysis",
+                    "loss-ratio",
+                    "actuarial"
+                ]
+            },
+            {
+                "name": "Policy Document Summarization",
+                "description": "Summarize key terms from lengthy insurance policies to help customers understand coverage.",
+                "sample_prompt": "You are a customer service chatbot. Summarize the main points of an auto insurance policy (coverage limits, deductibles, exclusions) in simple language for a policyholder.",
+                "tone": "informative",
+                "tags": [
+                    "summarization",
+                    "customer-service",
+                    "NLP"
+                ]
+            },
+            {
+                "name": "Portfolio Risk Report",
+                "description": "Generate a comprehensive risk report for the insurer\u2019s entire policy portfolio.",
+                "sample_prompt": "You are a risk officer. Create a report summarizing overall portfolio risk metrics (e.g., combined ratio, concentration risk, exposure by region) using current policy data. Include recommendations for risk mitigation.",
+                "tone": "analytical",
+                "tags": [
+                    "risk",
+                    "reporting",
+                    "portfolio"
+                ]
+            }
+        ]
+    },
+    {
+        "sector": "Venture Capital",
+        "description": "Venture capital invests in early-stage startups with high growth potential, providing funding and support in exchange for equity. It involves evaluating business plans, market opportunities, and startup teams.",
+        "use_cases": [
+            {
+                "name": "Startup Valuation Model",
+                "description": "Build a valuation model for a startup using methods like discounted cash flow or comparables adjusted for early-stage uncertainty.",
+                "sample_prompt": "You are a VC analyst. Create a financial model to estimate the valuation of a pre-revenue startup using forecasted cash flows and a risk-adjusted discount rate. Explain assumptions clearly.",
+                "tone": "technical",
+                "tags": [
+                    "valuation",
+                    "modeling",
+                    "startup"
+                ]
+            },
+            {
+                "name": "Market Opportunity Analysis",
+                "description": "Assess the total addressable market and growth trends for a startup\u2019s target market.",
+                "sample_prompt": "You are a market researcher. Estimate the total addressable market (TAM) for a new plant-based food startup. Include data sources, assumptions, and growth projections.",
+                "tone": "analytical",
+                "tags": [
+                    "market-research",
+                    "TAM",
+                    "analysis"
+                ]
+            },
+            {
+                "name": "Cap Table Management",
+                "description": "Manage and project ownership dilution in a startup\u2019s capitalization table across funding rounds.",
+                "sample_prompt": "You are a startup CFO. Given a cap table with initial founders' shares and a new funding round, write a script to update equity stakes, option pool adjustments, and dilution impacts. Provide the revised cap table.",
+                "tone": "technical",
+                "tags": [
+                    "cap-table",
+                    "equity",
+                    "modeling"
+                ]
+            },
+            {
+                "name": "Investment Memo Drafting",
+                "description": "Create a concise memo summarizing a startup investment opportunity, including thesis, risks, and key metrics.",
+                "sample_prompt": "You are an analyst. Draft an investment memo for a Series A pitch in an AI health-tech startup, covering the business model, market, team, and investment rationale. Highlight key risks.",
+                "tone": "professional",
+                "tags": [
+                    "memo",
+                    "investment-thesis",
+                    "analysis"
+                ]
+            },
+            {
+                "name": "Pitch Deck Critique",
+                "description": "Review a startup pitch deck and provide suggestions for improvement in content and structure.",
+                "sample_prompt": "You are a VC partner. Analyze this pitch deck outline and suggest ways to improve its storytelling, clarity of financials, and competitive positioning. Provide concrete feedback.",
+                "tone": "consultative",
+                "tags": [
+                    "pitch-deck",
+                    "feedback",
+                    "communication"
+                ]
+            },
+            {
+                "name": "Competitive Landscape Analysis",
+                "description": "Map and analyze competitors in the startup\u2019s space to highlight differentiation and market position.",
+                "sample_prompt": "You are an analyst. Given a startup's description, list its main competitors, compare their business models, and assess how the startup differentiates itself. Present a competitive matrix.",
+                "tone": "analytical",
+                "tags": [
+                    "competition",
+                    "market",
+                    "analysis"
+                ]
+            },
+            {
+                "name": "Portfolio Allocation Strategy",
+                "description": "Recommend how to allocate investments across different startups or stages to balance risk and return.",
+                "sample_prompt": "You are a portfolio manager. Given a fund's mandate and risk tolerance, design a portfolio allocation across seed, Series A, and Series B startups in various sectors. Explain the diversification strategy.",
+                "tone": "consultative",
+                "tags": [
+                    "portfolio",
+                    "allocation",
+                    "strategy"
+                ]
+            },
+            {
+                "name": "Exit Strategy Planning",
+                "description": "Develop potential exit scenarios (IPO, acquisition) for a startup investment and their financial outcomes.",
+                "sample_prompt": "You are a VC analyst. Outline possible exit strategies for a startup (IPO, strategic sale) and estimate potential returns under each scenario given projected revenue at exit. Provide a comparison.",
+                "tone": "analytical",
+                "tags": [
+                    "exit-strategy",
+                    "forecast",
+                    "analysis"
+                ]
+            },
+            {
+                "name": "Due Diligence Report Summary",
+                "description": "Summarize key findings from due diligence on a startup, including market, financials, and technology evaluation.",
+                "sample_prompt": "You are conducting due diligence. Write a summary report highlighting the startup's market opportunity, technology risks, financial health, and any red flags discovered.",
+                "tone": "professional",
+                "tags": [
+                    "due-diligence",
+                    "report",
+                    "analysis"
+                ]
+            },
+            {
+                "name": "Industry Trend Report",
+                "description": "Compile recent trends, statistics, and innovations in a startup\u2019s industry to inform investment decisions.",
+                "sample_prompt": "You are a research analyst. Create a report on recent trends in the fintech lending sector, including market size, regulatory changes, and emerging technologies impacting startups.",
+                "tone": "informative",
+                "tags": [
+                    "industry-analysis",
+                    "trends",
+                    "research"
+                ]
+            },
+            {
+                "name": "Funding Scenario Simulation",
+                "description": "Simulate different funding scenarios (e.g., amount raised, valuation) to see their effects on ownership and runway.",
+                "sample_prompt": "You are a startup founder. Model three funding scenarios (best case, base, worst case) for your next round, showing how much capital you raise, dilution incurred, and runway extension. Present outcomes in a table.",
+                "tone": "analytical",
+                "tags": [
+                    "simulation",
+                    "funding",
+                    "modeling"
+                ]
+            },
+            {
+                "name": "Term Sheet Key Points Summary",
+                "description": "Extract and explain the key terms (valuation, liquidation preference, board seats) from a venture term sheet.",
+                "sample_prompt": "You are a legal analyst. Summarize the key economic terms in a given venture capital term sheet and explain their implications for the founders and investors.",
+                "tone": "informative",
+                "tags": [
+                    "term-sheet",
+                    "legal",
+                    "VC"
+                ]
+            },
+            {
+                "name": "Startup Growth Forecasting",
+                "description": "Forecast a startup's user growth or revenue trajectory using historical data and market assumptions.",
+                "sample_prompt": "You are a growth analyst. Using provided user growth data for the past 6 months, forecast the startup's user base over the next year under different viral growth assumptions. Display results in a chart.",
+                "tone": "technical",
+                "tags": [
+                    "forecasting",
+                    "growth",
+                    "analytics"
+                ]
+            },
+            {
+                "name": "Investment Risk Assessment",
+                "description": "Identify and assess major risks (market, technology, execution) associated with investing in a startup.",
+                "sample_prompt": "You are a risk analyst. Evaluate the top 5 risks facing a startup (e.g., market adoption, regulatory, technical) and rate their likelihood and impact. Suggest mitigation strategies for each.",
+                "tone": "analytical",
+                "tags": [
+                    "risk",
+                    "assessment",
+                    "startup"
+                ]
+            },
+            {
+                "name": "Sector Research for Startups",
+                "description": "Conduct deep research on a startup's sector to inform investment readiness and market fit.",
+                "sample_prompt": "You are a sector analyst. Provide a detailed report on the healthcare technology sector, including growth drivers, major players, funding trends, and any regulatory factors affecting startups.",
+                "tone": "informative",
+                "tags": [
+                    "sector-research",
+                    "analysis",
+                    "trends"
+                ]
+            },
+            {
+                "name": "ROI Simulation for VC Portfolio",
+                "description": "Simulate portfolio returns by modeling exit outcomes of all startups in a fund over time.",
+                "sample_prompt": "You are a VC fund manager. Run a Monte Carlo simulation of portfolio returns assuming different exit multiples and success rates for your startup investments. Show the distribution of ROI for the fund.",
+                "tone": "technical",
+                "tags": [
+                    "simulation",
+                    "portfolio",
+                    "ROI"
+                ]
+            },
+            {
+                "name": "Investor Update Presentation",
+                "description": "Create a slide deck to update limited partners on the fund\u2019s performance and notable portfolio news.",
+                "sample_prompt": "You are a fund manager. Outline a quarterly investor presentation with slides covering fund performance metrics, recent investments, exits, and next steps.",
+                "tone": "persuasive",
+                "tags": [
+                    "presentation",
+                    "reporting",
+                    "communication"
+                ]
+            },
+            {
+                "name": "Business Plan Analysis",
+                "description": "Critically analyze a startup\u2019s business plan for strengths, weaknesses, and scalability.",
+                "sample_prompt": "You are a venture analyst. Review a startup's business plan executive summary and identify key strengths and weaknesses. Provide suggestions on improving the plan's clarity and completeness.",
+                "tone": "analytical",
+                "tags": [
+                    "business-plan",
+                    "analysis",
+                    "strategy"
+                ]
+            },
+            {
+                "name": "Competitive Benchmarking for Startups",
+                "description": "Benchmark a startup's performance metrics (e.g., user growth, burn rate) against similar startups.",
+                "sample_prompt": "You are a data analyst. Compare the key metrics (CAC, LTV, burn rate) of a startup with industry benchmarks. Present insights on where the startup stands relative to peers.",
+                "tone": "analytical",
+                "tags": [
+                    "benchmarking",
+                    "analysis",
+                    "metrics"
+                ]
+            },
+            {
+                "name": "Startup Metrics Dashboard",
+                "description": "Build a dashboard to monitor critical startup metrics like MRR (monthly recurring revenue) and churn rate.",
+                "sample_prompt": "You are a product manager. Use a BI tool or Python to create a dashboard tracking MRR, churn rate, and customer acquisition costs for a SaaS startup, updated monthly.",
+                "tone": "technical",
+                "tags": [
+                    "dashboard",
+                    "metrics",
+                    "startups"
+                ]
+            }
+        ]
+    },
+    {
+        "sector": "Private Equity",
+        "description": "Private equity involves investing in companies (often using significant leverage) to improve their value and sell at a profit. It focuses on buyouts, restructuring, and eventual exits (IPOs or sales) to achieve returns.",
+        "use_cases": [
+            {
+                "name": "Leveraged Buyout Model",
+                "description": "Build a financial model to evaluate a leveraged buyout deal, including debt paydown and returns to equity.",
+                "sample_prompt": "You are a private equity analyst. Create an LBO model in Excel or Python for acquiring Company X, projecting debt repayment schedule, and calculating equity IRR and cash-on-cash multiple.",
+                "tone": "technical",
+                "tags": [
+                    "LBO",
+                    "modeling",
+                    "finance"
+                ]
+            },
+            {
+                "name": "Portfolio Company Value Creation Plan",
+                "description": "Develop a plan to increase the value of a portfolio company through operational improvements or strategic changes.",
+                "sample_prompt": "You are a consultant. Draft a value creation plan for a manufacturing portfolio company, including cost reduction initiatives, revenue growth strategies, and timeline for implementation.",
+                "tone": "consultative",
+                "tags": [
+                    "value-creation",
+                    "strategy",
+                    "operations"
+                ]
+            },
+            {
+                "name": "Acquisition Target Screening",
+                "description": "Screen and shortlist potential acquisition targets using financial criteria and strategic fit.",
+                "sample_prompt": "You are a deal analyst. Given a list of companies with financial metrics, filter and rank potential acquisition targets based on EBITDA margin, growth rate, and industry alignment. Present a shortlist.",
+                "tone": "analytical",
+                "tags": [
+                    "M&A",
+                    "screening",
+                    "analysis"
+                ]
+            },
+            {
+                "name": "IRR and MOIC Calculation",
+                "description": "Calculate the internal rate of return (IRR) and multiple on invested capital (MOIC) for a given deal cash flows.",
+                "sample_prompt": "You are a financial analyst. Given cash flow projections for a buyout and exit, compute the IRR and MOIC for the deal. Explain how these metrics evaluate performance.",
+                "tone": "technical",
+                "tags": [
+                    "IRR",
+                    "MOIC",
+                    "calculation"
+                ]
+            },
+            {
+                "name": "Integration Plan Post-Acquisition",
+                "description": "Outline steps for integrating a newly acquired company into the portfolio, focusing on synergies and risks.",
+                "sample_prompt": "You are an integration manager. Create a high-level post-acquisition integration plan covering IT integration, HR and cultural alignment, and cost synergy targets. Include a timeline.",
+                "tone": "consultative",
+                "tags": [
+                    "integration",
+                    "M&A",
+                    "planning"
+                ]
+            },
+            {
+                "name": "Divestiture Strategy",
+                "description": "Develop a strategy for divesting a non-core asset, including valuation and sale process.",
+                "sample_prompt": "You are a PE partner. Outline the steps to prepare and execute the sale of a non-core business unit, including valuation approach, potential buyers, and expected timeline.",
+                "tone": "consultative",
+                "tags": [
+                    "divestiture",
+                    "strategy",
+                    "M&A"
+                ]
+            },
+            {
+                "name": "Deal Pipeline Dashboard",
+                "description": "Create a dashboard to track status and key metrics of potential and ongoing deals in the pipeline.",
+                "sample_prompt": "You are a portfolio manager. Use a BI tool or Python to build a dashboard that shows all current deals by stage, target company metrics, and potential returns. Include filters and performance indicators.",
+                "tone": "technical",
+                "tags": [
+                    "dashboard",
+                    "deals",
+                    "tracking"
+                ]
+            },
+            {
+                "name": "Debt Structure Optimization",
+                "description": "Optimize the mix of debt instruments (senior, mezzanine) to finance acquisitions, balancing cost and flexibility.",
+                "sample_prompt": "You are a finance director. Analyze how using a higher proportion of mezzanine debt versus senior debt affects the acquisition cost and risk. Provide a recommendation with pros and cons.",
+                "tone": "analytical",
+                "tags": [
+                    "debt-finance",
+                    "optimization",
+                    "analysis"
+                ]
+            },
+            {
+                "name": "Capital Call Schedule Generator",
+                "description": "Automate creation of capital call schedules and forecasts for LP contributions in a fund.",
+                "sample_prompt": "You are a fund administrator. Write a script that generates a capital call schedule based on committed capital and drawdown dates, outputting expected contributions and cash requirements for each quarter.",
+                "tone": "technical",
+                "tags": [
+                    "capital-call",
+                    "automation",
+                    "fund"
+                ]
+            },
+            {
+                "name": "Due Diligence Summary Report",
+                "description": "Summarize key findings from due diligence on a target acquisition, including risks and opportunities.",
+                "sample_prompt": "You are a deal analyst. Compile a due diligence summary for a target in the healthcare sector, highlighting financial risks, customer concentration, and any regulatory issues found.",
+                "tone": "professional",
+                "tags": [
+                    "due-diligence",
+                    "report",
+                    "analysis"
+                ]
+            },
+            {
+                "name": "Exit Strategy Simulation",
+                "description": "Simulate different exit scenarios (IPO, sale) and their financial outcomes for an investment.",
+                "sample_prompt": "You are a financial modeler. Calculate projected returns under various exit scenarios for a portfolio company (e.g., sale to strategic buyer at different multiples, IPO). Present a comparison table with IRR and equity returns.",
+                "tone": "analytical",
+                "tags": [
+                    "exit-strategy",
+                    "simulation",
+                    "analysis"
+                ]
+            },
+            {
+                "name": "Industry Consolidation Analysis",
+                "description": "Analyze consolidation trends in an industry to identify opportunities for buyouts or exits.",
+                "sample_prompt": "You are a market analyst. Research the manufacturing equipment industry and identify recent M&A activity. Determine if consolidation trends suggest new acquisition opportunities.",
+                "tone": "informative",
+                "tags": [
+                    "industry-analysis",
+                    "M&A",
+                    "trends"
+                ]
+            },
+            {
+                "name": "Regulatory Compliance Overview",
+                "description": "Summarize the regulatory requirements affecting private equity funds and their portfolio companies.",
+                "sample_prompt": "You are a compliance officer. Summarize key regulations like AIFMD and Dodd-Frank that apply to private equity funds and explain their impact on fund operations and reporting.",
+                "tone": "informative",
+                "tags": [
+                    "compliance",
+                    "regulation",
+                    "private-equity"
+                ]
+            },
+            {
+                "name": "Performance Attribution in Portfolio",
+                "description": "Attribute overall fund performance to individual deals or sectors to understand drivers of return.",
+                "sample_prompt": "You are a performance analyst. Break down the fund's return into contributions from each portfolio company and sector. Present how much each deal contributed to net IRR.",
+                "tone": "analytical",
+                "tags": [
+                    "attribution",
+                    "performance",
+                    "portfolio"
+                ]
+            },
+            {
+                "name": "Fund Performance Reporting",
+                "description": "Generate a report on fund performance metrics like IRR, TVPI, and DPI for investors.",
+                "sample_prompt": "You are a fund manager. Prepare a quarterly performance report for LPs including metrics (IRR, TVPI, DPI), a summary of exits and new investments, and commentary on performance drivers.",
+                "tone": "consultative",
+                "tags": [
+                    "reporting",
+                    "performance",
+                    "fund"
+                ]
+            },
+            {
+                "name": "Investment Committee Memorandum",
+                "description": "Draft a memo summarizing a proposed deal and recommendation for the investment committee\u2019s approval.",
+                "sample_prompt": "You are a deal team member. Write an investment committee memo for acquiring Company Z, including investment thesis, risks, financial projections, and recommendation with supporting analysis.",
+                "tone": "professional",
+                "tags": [
+                    "memo",
+                    "deal",
+                    "communication"
+                ]
+            },
+            {
+                "name": "Leverage Scenario Analysis",
+                "description": "Analyze how different leverage ratios affect deal outcomes and equity returns.",
+                "sample_prompt": "You are an analyst. Simulate the effect of using different debt-to-EBITDA ratios (e.g., 4x vs 6x) on the equity IRR of a buyout. Present charts showing IRR vs. leverage.",
+                "tone": "analytical",
+                "tags": [
+                    "sensitivity-analysis",
+                    "leverage",
+                    "returns"
+                ]
+            },
+            {
+                "name": "Benchmark PE Fund Returns",
+                "description": "Compare the fund\u2019s historical returns to industry benchmarks or indices.",
+                "sample_prompt": "You are a performance analyst. Compare the private equity fund\u2019s 5-year IRR and MOIC to industry benchmarks (e.g., Cambridge Associates PE Index) and analyze any gaps.",
+                "tone": "analytical",
+                "tags": [
+                    "benchmarking",
+                    "performance",
+                    "analysis"
+                ]
+            },
+            {
+                "name": "Waterfall Distribution Model",
+                "description": "Build a waterfall model to calculate profit distributions to limited partners and general partners.",
+                "sample_prompt": "You are a fund accountant. Create a waterfall distribution schedule in Excel given fund cash flows, management fees, and carried interest terms. Show how returns are split between LPs and GP.",
+                "tone": "technical",
+                "tags": [
+                    "waterfall",
+                    "modeling",
+                    "fund"
+                ]
+            },
+            {
+                "name": "Fundraising Deck Creation",
+                "description": "Design a pitch deck to raise a new private equity fund, highlighting track record and strategy.",
+                "sample_prompt": "You are a PE partner. Outline slides for a fundraise deck, including firm track record, fund strategy, team expertise, and target investment sectors. Provide bullet points for each slide.",
+                "tone": "persuasive",
+                "tags": [
+                    "presentation",
+                    "fundraising",
+                    "communication"
+                ]
+            }
+        ]
+    },
+    {
+        "sector": "Fintech & Payments",
+        "description": "Fintech and payments sector merges finance and technology to improve financial services, including digital wallets, mobile banking, blockchain, and payment processing. It focuses on innovation in payments, security, and user experience.",
+        "use_cases": [
+            {
+                "name": "Fraud Detection in Fintech",
+                "description": "Detect and prevent fraudulent transactions in digital payment systems.",
+                "sample_prompt": "You are a security analyst. Develop a Python script using anomaly detection to identify fraudulent credit card transactions in a payment dataset. Explain how you ensure low false positives.",
+                "tone": "analytical",
+                "tags": [
+                    "fraud",
+                    "fintech",
+                    "anomaly-detection"
+                ]
+            },
+            {
+                "name": "Payment Reconciliation Automation",
+                "description": "Automate the reconciliation of transactions between payment gateways and bank statements.",
+                "sample_prompt": "You are a software developer. Write a program that matches transactions from a payment gateway log to entries in bank statement records, flagging any mismatches. Outline the reconciliation logic.",
+                "tone": "technical",
+                "tags": [
+                    "automation",
+                    "reconciliation",
+                    "payments"
+                ]
+            },
+            {
+                "name": "Blockchain Integration Use Case",
+                "description": "Develop a blockchain-based solution for secure and transparent financial transactions.",
+                "sample_prompt": "You are a blockchain engineer. Describe a use case and outline the architecture for using blockchain to settle cross-border payments, improving security and auditability.",
+                "tone": "technical",
+                "tags": [
+                    "blockchain",
+                    "payments",
+                    "innovation"
+                ]
+            },
+            {
+                "name": "Crypto Risk Assessment",
+                "description": "Assess risks in cryptocurrency portfolios or payment processes and suggest mitigation.",
+                "sample_prompt": "You are a crypto analyst. Analyze a cryptocurrency payment platform's risk factors (volatility, regulatory, security) and propose strategies to mitigate these risks for users.",
+                "tone": "analytical",
+                "tags": [
+                    "crypto",
+                    "risk",
+                    "analysis"
+                ]
+            },
+            {
+                "name": "Payment API Development",
+                "description": "Design and implement APIs for integrating payment functionality into apps or platforms.",
+                "sample_prompt": "You are a developer. Outline the design of a RESTful API for initiating and tracking mobile payments, including endpoints for creating payments, checking status, and handling callbacks.",
+                "tone": "technical",
+                "tags": [
+                    "API",
+                    "development",
+                    "payments"
+                ]
+            },
+            {
+                "name": "Regulatory Compliance Overview",
+                "description": "Summarize financial regulations like PSD2 and AML as they apply to fintech and payments.",
+                "sample_prompt": "You are a compliance consultant. Summarize the main requirements of PSD2 (Payment Services Directive 2) for European fintech companies and how it impacts third-party payment providers.",
+                "tone": "informative",
+                "tags": [
+                    "compliance",
+                    "PSD2",
+                    "regulation"
+                ]
+            },
+            {
+                "name": "Transaction Anomaly Detection",
+                "description": "Identify unusual patterns in transaction data that may indicate errors or fraud.",
+                "sample_prompt": "You are a data scientist. Use unsupervised learning in Python to identify anomalies in transaction volumes for an e-commerce payment platform. Provide examples of flagged transactions.",
+                "tone": "technical",
+                "tags": [
+                    "anomaly-detection",
+                    "machine-learning",
+                    "payments"
+                ]
+            },
+            {
+                "name": "Digital Wallet Feature Specification",
+                "description": "Define key features and requirements for a secure digital wallet application.",
+                "sample_prompt": "You are a product manager. List and explain the essential features of a digital wallet app (such as multi-currency support, security, backup), and outline a basic app flow for user onboarding.",
+                "tone": "consultative",
+                "tags": [
+                    "product-management",
+                    "digital-wallet",
+                    "security"
+                ]
+            },
+            {
+                "name": "Mobile Wallet Security",
+                "description": "Analyze security measures for mobile payment applications to protect user data.",
+                "sample_prompt": "You are a cybersecurity specialist. Evaluate common vulnerabilities in mobile payment apps and recommend best practices (like encryption, biometric authentication) to secure a mobile wallet.",
+                "tone": "analytical",
+                "tags": [
+                    "security",
+                    "mobile-payments",
+                    "analysis"
+                ]
+            },
+            {
+                "name": "Real-time Payment Monitoring",
+                "description": "Implement a system to monitor and alert on real-time payments activity and issues.",
+                "sample_prompt": "You are an operations analyst. Describe how to set up a real-time dashboard that tracks transaction volumes and failure rates, with alerts for anomalies (e.g., sudden drop in transactions).",
+                "tone": "technical",
+                "tags": [
+                    "monitoring",
+                    "dashboard",
+                    "payments"
+                ]
+            },
+            {
+                "name": "Failed Transaction Analysis",
+                "description": "Analyze reasons behind payment failures to improve success rates.",
+                "sample_prompt": "You are a support analyst. Analyze transaction logs to identify the most common causes of failed payments (e.g., insufficient funds, network errors) and suggest improvements.",
+                "tone": "analytical",
+                "tags": [
+                    "analysis",
+                    "payments",
+                    "operations"
+                ]
+            },
+            {
+                "name": "Open Banking Data Strategy",
+                "description": "Leverage open banking APIs and data to create innovative financial services or insights.",
+                "sample_prompt": "You are a fintech strategist. Propose a use case for combining open banking transaction data with AI to provide personalized financial insights to users. Outline the data integration approach.",
+                "tone": "consultative",
+                "tags": [
+                    "open-banking",
+                    "data",
+                    "innovation"
+                ]
+            },
+            {
+                "name": "Buy Now Pay Later Analysis",
+                "description": "Assess the impact and risks of Buy Now, Pay Later (BNPL) services on customers and merchants.",
+                "sample_prompt": "You are a financial analyst. Evaluate how BNPL adoption affects a retailer's cash flow and customer default risk. Provide a summary of benefits and potential pitfalls.",
+                "tone": "analytical",
+                "tags": [
+                    "BNPL",
+                    "analysis",
+                    "risk"
+                ]
+            },
+            {
+                "name": "Customer Onboarding Automation",
+                "description": "Automate KYC and identity verification steps in customer onboarding for fintech services.",
+                "sample_prompt": "You are a developer. Write pseudocode or outline a workflow that uses OCR and third-party services to verify a new user's identity documents and complete KYC checks automatically.",
+                "tone": "technical",
+                "tags": [
+                    "KYC",
+                    "automation",
+                    "onboarding"
+                ]
+            },
+            {
+                "name": "Fintech Trend Report",
+                "description": "Summarize current technology and market trends shaping the fintech industry.",
+                "sample_prompt": "You are an industry analyst. Provide a report on emerging trends in fintech (like embedded finance, blockchain payments, AI in banking) and their potential market impact.",
+                "tone": "informative",
+                "tags": [
+                    "trends",
+                    "report",
+                    "fintech"
+                ]
+            },
+            {
+                "name": "Payment Gateway Performance Analysis",
+                "description": "Compare the performance and fees of different payment gateways to determine the best fit.",
+                "sample_prompt": "You are a business analyst. Compare two major payment gateways in terms of transaction fees, uptime, and API reliability. Present a summary table with pros and cons.",
+                "tone": "analytical",
+                "tags": [
+                    "analysis",
+                    "payment-gateway",
+                    "comparison"
+                ]
+            },
+            {
+                "name": "Cost Optimization in Payments",
+                "description": "Identify ways to reduce transaction and processing costs for a payment platform.",
+                "sample_prompt": "You are a finance analyst. Examine a merchant's payment processing statements and suggest how they could reduce costs (e.g., changing gateways, batching transactions).",
+                "tone": "analytical",
+                "tags": [
+                    "cost-optimization",
+                    "analysis",
+                    "payments"
+                ]
+            },
+            {
+                "name": "Loyalty and Rewards Program Design",
+                "description": "Design a loyalty program integrated with payment transactions to increase user engagement.",
+                "sample_prompt": "You are a product manager. Outline a rewards program tied to credit card transactions (points system, tiers). Explain how users earn rewards and how the program benefits the fintech app.",
+                "tone": "consultative",
+                "tags": [
+                    "loyalty-program",
+                    "design",
+                    "marketing"
+                ]
+            },
+            {
+                "name": "Smart Contract Development",
+                "description": "Develop smart contracts for finance-related applications (e.g., escrow, tokenized assets).",
+                "sample_prompt": "You are a blockchain developer. Write a basic Ethereum smart contract in Solidity for a simple escrow service that holds funds until a condition is met (provide an example condition).",
+                "tone": "technical",
+                "tags": [
+                    "smart-contract",
+                    "blockchain",
+                    "development"
+                ]
+            },
+            {
+                "name": "New Payment Method Feasibility Study",
+                "description": "Assess feasibility and security of integrating a new payment method (e.g., contactless crypto, biometric payments).",
+                "sample_prompt": "You are a fintech researcher. Evaluate the technical and regulatory feasibility of using biometric payment methods (like fingerprint payments) in retail. Summarize challenges and opportunities.",
+                "tone": "informative",
+                "tags": [
+                    "research",
+                    "payment-method",
+                    "innovation"
+                ]
+            }
+        ]
+    },
+    {
+        "sector": "Expert Networks",
+        "description": "Expert networks connect clients with industry experts for insights and advice. They manage expert profiles, facilitate consultations, and leverage expert knowledge for research and decision-making.",
+        "use_cases": [
+            {
+                "name": "Expert Interview Summarization",
+                "description": "Summarize key points and insights from expert interviews or consultation transcripts.",
+                "sample_prompt": "You are an analyst. Summarize the main findings and recommendations from the following expert interview transcript, highlighting unique perspectives and consensus views.",
+                "tone": "informative",
+                "tags": [
+                    "summarization",
+                    "expertise",
+                    "analysis"
+                ]
+            },
+            {
+                "name": "Expert Matching Algorithm",
+                "description": "Develop an algorithm to match client questions with relevant experts based on expertise profiles.",
+                "sample_prompt": "You are a data scientist. Create a scoring algorithm that ranks experts for a client inquiry by comparing the query topic keywords to experts' listed skills and past consultation tags.",
+                "tone": "technical",
+                "tags": [
+                    "matching",
+                    "algorithm",
+                    "experts"
+                ]
+            },
+            {
+                "name": "Expert Survey Design",
+                "description": "Design surveys or questionnaires to gather insights from industry experts.",
+                "sample_prompt": "You are a market researcher. Draft a survey to capture expert opinions on emerging trends in renewable energy. Include questions about technology adoption and regulatory challenges.",
+                "tone": "consultative",
+                "tags": [
+                    "survey-design",
+                    "expert-opinion",
+                    "research"
+                ]
+            },
+            {
+                "name": "Panel Transcript Analysis",
+                "description": "Analyze a panel discussion transcript to identify themes and consensus among experts.",
+                "sample_prompt": "You are a consultant. Analyze this panel discussion transcript on AI ethics and extract major themes, areas of agreement, and divergent viewpoints.",
+                "tone": "analytical",
+                "tags": [
+                    "analysis",
+                    "transcript",
+                    "expertise"
+                ]
+            },
+            {
+                "name": "Knowledge Graph Construction",
+                "description": "Build a knowledge graph linking experts to topics, companies, and industries for better search.",
+                "sample_prompt": "You are a data engineer. Describe how to construct a knowledge graph where nodes are experts and companies, and edges represent areas of expertise. Outline the data sources needed.",
+                "tone": "technical",
+                "tags": [
+                    "knowledge-graph",
+                    "network",
+                    "data-engineering"
+                ]
+            },
+            {
+                "name": "Expert Credibility Assessment",
+                "description": "Evaluate the credibility of experts by analyzing background, publications, and endorsement network.",
+                "sample_prompt": "You are a research analyst. Outline criteria and a scoring model to assess an expert's credibility, using metrics like peer-reviewed publications, citations, and professional endorsements.",
+                "tone": "analytical",
+                "tags": [
+                    "credibility",
+                    "evaluation",
+                    "expert"
+                ]
+            },
+            {
+                "name": "Expert Q&A Generation",
+                "description": "Generate plausible questions and answers on a topic as if sourced from domain experts.",
+                "sample_prompt": "You are an industry specialist. Generate a list of 10 frequently asked questions about cloud computing with expert-level answers, suitable for a knowledge base.",
+                "tone": "informative",
+                "tags": [
+                    "FAQ",
+                    "knowledge-base",
+                    "expertise"
+                ]
+            },
+            {
+                "name": "Key Insights Compilation",
+                "description": "Compile and synthesize key insights from multiple experts on a given issue.",
+                "sample_prompt": "You are a consultant. Given summaries of three expert interviews on consumer behavior, create a report synthesizing common insights and noting any unique viewpoints.",
+                "tone": "analytical",
+                "tags": [
+                    "synthesis",
+                    "insights",
+                    "collaboration"
+                ]
+            },
+            {
+                "name": "Expertise Tagging",
+                "description": "Automatically tag experts with keywords based on their background and content contributions.",
+                "sample_prompt": "You are an AI specialist. Develop a method to extract key expertise keywords from an expert's bio and publications. Assign tags like 'cybersecurity' or 'regulatory-compliance'.",
+                "tone": "technical",
+                "tags": [
+                    "tagging",
+                    "NLP",
+                    "experts"
+                ]
+            },
+            {
+                "name": "Expert Knowledge Base Construction",
+                "description": "Create a searchable knowledge base of expert Q&A and documents for users to find insights.",
+                "sample_prompt": "You are a knowledge manager. Outline the structure and content for an expert knowledge base, including categories and search functions. Include how to tag content by topic and expert.",
+                "tone": "consultative",
+                "tags": [
+                    "knowledge-base",
+                    "database",
+                    "content-management"
+                ]
+            },
+            {
+                "name": "Cross-Expert Comparison",
+                "description": "Compare perspectives on a topic from multiple experts to identify consensus or disagreement.",
+                "sample_prompt": "You are a research analyst. Compare the viewpoints of three experts on renewable energy adoption, noting any agreements or contrasting opinions and their reasoning.",
+                "tone": "analytical",
+                "tags": [
+                    "comparison",
+                    "analysis",
+                    "experts"
+                ]
+            },
+            {
+                "name": "Expert Outreach Email Template",
+                "description": "Create a professional email template for contacting experts to request consultation.",
+                "sample_prompt": "You are a project manager. Draft an email to invite a subject-matter expert to a consultation call, clearly explaining the project context, time commitment, and deliverables.",
+                "tone": "professional",
+                "tags": [
+                    "communication",
+                    "template",
+                    "outreach"
+                ]
+            },
+            {
+                "name": "Expert Biography Extraction",
+                "description": "Extract structured information (education, experience) from an expert\u2019s profile or CV.",
+                "sample_prompt": "You are a data scientist. Write code or outline a process to parse an expert's LinkedIn profile and extract key details like degrees, current role, and years of experience.",
+                "tone": "technical",
+                "tags": [
+                    "NLP",
+                    "extraction",
+                    "profile"
+                ]
+            },
+            {
+                "name": "Content Generation from Expert Quotes",
+                "description": "Generate articles or reports that incorporate quotes from experts to provide authoritative insights.",
+                "sample_prompt": "You are a content writer. Using given quotes from industry experts on cybersecurity, write an informative blog post that weaves in these quotes with explanatory context.",
+                "tone": "creative",
+                "tags": [
+                    "content-creation",
+                    "expert-quote",
+                    "blog"
+                ]
+            },
+            {
+                "name": "Trend Analysis with Expert Input",
+                "description": "Analyze market trends by synthesizing insights from industry experts.",
+                "sample_prompt": "You are a data analyst. Summarize recent consumer electronics trends by combining expert interviews and market data. Highlight any expert opinions that validate the data findings.",
+                "tone": "analytical",
+                "tags": [
+                    "trends",
+                    "analysis",
+                    "expert-opinion"
+                ]
+            },
+            {
+                "name": "Expertise Gap Analysis",
+                "description": "Identify missing expertise areas in a project by comparing required skills to available expert profiles.",
+                "sample_prompt": "You are a team lead. Given a project requiring AI and cybersecurity expertise, check your expert network for coverage and identify any missing skill areas.",
+                "tone": "analytical",
+                "tags": [
+                    "gap-analysis",
+                    "skills",
+                    "expertise"
+                ]
+            },
+            {
+                "name": "Expert Network Strategy",
+                "description": "Formulate a strategy to grow and diversify an expert network in new domains.",
+                "sample_prompt": "You are an operations manager. Propose a plan to recruit experts in a new emerging field (e.g., blockchain in healthcare), including channels and selection criteria.",
+                "tone": "consultative",
+                "tags": [
+                    "strategy",
+                    "growth",
+                    "network"
+                ]
+            },
+            {
+                "name": "Conference Transcript Summarization",
+                "description": "Summarize the key points from expert talks or panel sessions at industry conferences.",
+                "sample_prompt": "You are a summarization expert. Given a transcript of a keynote address on AI regulation, highlight the main points and any consensus reached among panelists.",
+                "tone": "informative",
+                "tags": [
+                    "summarization",
+                    "conference",
+                    "expert"
+                ]
+            },
+            {
+                "name": "Expert Topic Recommendation System",
+                "description": "Recommend topics or questions to experts based on their expertise and current trends.",
+                "sample_prompt": "You are a content platform manager. Develop an algorithm to suggest potential research questions to experts based on emerging trends in their field (e.g., using recent publications or news).",
+                "tone": "technical",
+                "tags": [
+                    "recommendation",
+                    "algorithm",
+                    "experts"
+                ]
+            },
+            {
+                "name": "Influence Network Analysis",
+                "description": "Analyze connections and influence among experts to identify key opinion leaders.",
+                "sample_prompt": "You are a data analyst. Using social network analysis, identify which experts are most central in the network of AI researchers based on co-authorship and citation data.",
+                "tone": "analytical",
+                "tags": [
+                    "network-analysis",
+                    "influence",
+                    "experts"
+                ]
+            }
+        ]
+    },
+    {
+        "sector": "Financial Data Providers",
+        "description": "Financial data providers collect and distribute market data, analytics, and news to financial institutions. They focus on data quality, API access, and comprehensive coverage of instruments for analysis.",
+        "use_cases": [
+            {
+                "name": "API Data Retrieval Script",
+                "description": "Write scripts to fetch financial data (stock prices, economic indicators) from data provider APIs.",
+                "sample_prompt": "You are a data engineer. Use Python to connect to a financial data API (like Yahoo Finance or Bloomberg) and retrieve historical stock prices for a given ticker. Show sample output.",
+                "tone": "technical",
+                "tags": [
+                    "API",
+                    "data-retrieval",
+                    "python"
+                ]
+            },
+            {
+                "name": "Financial Data Cleaning",
+                "description": "Clean and preprocess raw financial datasets by handling missing values and anomalies.",
+                "sample_prompt": "You are a data analyst. Given a raw dataset of daily stock prices with gaps, write Python code to fill missing dates, handle outliers, and ensure continuous time series consistency.",
+                "tone": "technical",
+                "tags": [
+                    "data-cleaning",
+                    "time-series",
+                    "python"
+                ]
+            },
+            {
+                "name": "Market Data Dashboard",
+                "description": "Create an interactive dashboard displaying key financial market metrics in real-time.",
+                "sample_prompt": "You are a BI developer. Build a dashboard with live stock index values, volume heatmap, and a table of top movers using a data provider API. Include dropdowns to select time ranges.",
+                "tone": "technical",
+                "tags": [
+                    "dashboard",
+                    "visualization",
+                    "real-time"
+                ]
+            },
+            {
+                "name": "Data Quality Report",
+                "description": "Generate a report that checks the completeness and accuracy of a financial dataset.",
+                "sample_prompt": "You are a data scientist. Analyze a financial dataset and provide a report on missing values percentage, data type mismatches, and any inconsistencies found.",
+                "tone": "analytical",
+                "tags": [
+                    "data-quality",
+                    "reporting",
+                    "analysis"
+                ]
+            },
+            {
+                "name": "Vendor API Comparison",
+                "description": "Compare features and data coverage of different financial data provider APIs.",
+                "sample_prompt": "You are a researcher. Compare two financial data providers in terms of coverage (e.g., stock exchanges, news), update frequency, and API cost. Summarize the pros and cons of each.",
+                "tone": "informative",
+                "tags": [
+                    "comparison",
+                    "data-vendor",
+                    "API"
+                ]
+            },
+            {
+                "name": "Real-time Data Pipeline",
+                "description": "Design a pipeline to ingest and process streaming financial market data.",
+                "sample_prompt": "You are a data engineer. Outline a real-time data pipeline architecture for ingesting stock tick data into a database, including components like message queues and data stores.",
+                "tone": "technical",
+                "tags": [
+                    "pipeline",
+                    "streaming",
+                    "architecture"
+                ]
+            },
+            {
+                "name": "Backtesting Data Setup",
+                "description": "Set up historical data for backtesting trading strategies with an LLM or in code.",
+                "sample_prompt": "You are a quant developer. Write Python code to download 10 years of historical stock data and prepare it for backtesting a moving average crossover strategy.",
+                "tone": "technical",
+                "tags": [
+                    "backtesting",
+                    "data-preparation",
+                    "Python"
+                ]
+            },
+            {
+                "name": "Data Licensing Compliance",
+                "description": "Ensure usage of financial data complies with licensing terms (like redistribution restrictions).",
+                "sample_prompt": "You are a compliance officer. Describe steps to track and enforce compliance with data licensing agreements for a financial analytics platform using a data provider.",
+                "tone": "informative",
+                "tags": [
+                    "compliance",
+                    "data-licensing",
+                    "policy"
+                ]
+            },
+            {
+                "name": "Correlation Analysis of Data Sets",
+                "description": "Analyze correlations between different financial datasets (e.g., prices vs economic indicators).",
+                "sample_prompt": "You are a quant analyst. Compute and visualize the correlation between S&P 500 returns and US GDP growth rates over time, explaining any significant relationships.",
+                "tone": "analytical",
+                "tags": [
+                    "correlation",
+                    "analysis",
+                    "data"
+                ]
+            },
+            {
+                "name": "Alternative Data Integration",
+                "description": "Integrate non-traditional data sources (like social media or satellite data) into financial analysis.",
+                "sample_prompt": "You are a data scientist. Outline how to combine satellite imagery of parking lots with traditional retail sales data to improve sales forecasts for retailers.",
+                "tone": "consultative",
+                "tags": [
+                    "alternative-data",
+                    "integration",
+                    "innovation"
+                ]
+            },
+            {
+                "name": "Custom Metrics Calculation",
+                "description": "Compute specialized financial metrics or indicators (e.g., beta, alpha) from raw data.",
+                "sample_prompt": "You are a finance analyst. Using historical price data, calculate the beta of a stock relative to the S&P 500 and interpret its meaning.",
+                "tone": "analytical",
+                "tags": [
+                    "metrics",
+                    "calculation",
+                    "finance"
+                ]
+            },
+            {
+                "name": "Automated News Sentiment Pipeline",
+                "description": "Build an automated pipeline to fetch news articles and compute sentiment scores.",
+                "sample_prompt": "You are a data engineer. Create a Python pipeline that fetches news headlines from an API, applies NLP sentiment analysis, and stores daily sentiment scores in a database.",
+                "tone": "technical",
+                "tags": [
+                    "NLP",
+                    "pipeline",
+                    "news"
+                ]
+            },
+            {
+                "name": "Data Schema Design for Market Data",
+                "description": "Design a database schema optimized for storing and querying financial time-series data.",
+                "sample_prompt": "You are a database designer. Propose a schema for storing stock price histories and related metadata (like ticker, exchange) in a relational database.",
+                "tone": "technical",
+                "tags": [
+                    "database",
+                    "schema",
+                    "design"
+                ]
+            },
+            {
+                "name": "Visual Analytics for Large Datasets",
+                "description": "Perform visual analysis (e.g., heatmaps, scatter plots) on large financial datasets to identify patterns.",
+                "sample_prompt": "You are a data analyst. Generate a heatmap showing correlation between sectors' weekly returns using a large historical dataset, and highlight any strong correlations.",
+                "tone": "analytical",
+                "tags": [
+                    "visualization",
+                    "analysis",
+                    "big-data"
+                ]
+            },
+            {
+                "name": "ETL Process Design",
+                "description": "Create an ETL process to transform raw financial data into analysis-ready form.",
+                "sample_prompt": "You are a data engineer. Outline an ETL workflow that extracts daily FX rates, cleans the data, and loads it into a warehouse for analysis.",
+                "tone": "technical",
+                "tags": [
+                    "ETL",
+                    "data-engineering",
+                    "workflow"
+                ]
+            },
+            {
+                "name": "Data Anomaly Detection",
+                "description": "Detect anomalies or outliers in financial data (e.g., pricing errors, missing data spikes).",
+                "sample_prompt": "You are a data scientist. Implement a method to detect and visualize outliers in a timeseries of daily stock prices (e.g., using z-scores or isolation forest).",
+                "tone": "analytical",
+                "tags": [
+                    "anomaly-detection",
+                    "analysis",
+                    "Python"
+                ]
+            },
+            {
+                "name": "API Usage Optimization",
+                "description": "Optimize the use of data APIs to reduce latency and costs (e.g., batch calls, caching).",
+                "sample_prompt": "You are a developer. Suggest strategies to reduce API costs for a service that fetches stock quotes frequently (e.g., caching results, batching requests).",
+                "tone": "consultative",
+                "tags": [
+                    "optimization",
+                    "API",
+                    "cost-savings"
+                ]
+            },
+            {
+                "name": "Financial Knowledge Graph",
+                "description": "Build a knowledge graph connecting financial entities like companies, industries, and stock tickers.",
+                "sample_prompt": "You are a data scientist. Describe how to construct a knowledge graph where nodes represent companies, people, and sectors, and edges represent relationships (e.g., CEO of, competitor).",
+                "tone": "technical",
+                "tags": [
+                    "knowledge-graph",
+                    "entities",
+                    "data"
+                ]
+            },
+            {
+                "name": "Large Dataset Summarization",
+                "description": "Summarize insights from large financial datasets using NLP or data aggregation.",
+                "sample_prompt": "You are a data analyst. Summarize the key statistics (mean, volatility, correlations) of a multi-year stock price dataset and present them in a concise report.",
+                "tone": "analytical",
+                "tags": [
+                    "summarization",
+                    "analytics",
+                    "big-data"
+                ]
+            },
+            {
+                "name": "Automated Financial News Summarization",
+                "description": "Generate concise summaries of financial news articles for quick insights.",
+                "sample_prompt": "You are a news analyst. Summarize the main points of this financial news article into a brief paragraph, highlighting the key impacts on the market.",
+                "tone": "informative",
+                "tags": [
+                    "NLP",
+                    "news",
+                    "summarization"
+                ]
+            }
+        ]
+    },
+    {
+        "sector": "Primary Market Research",
+        "description": "Primary market research involves collecting and analyzing original data from surveys, interviews, and focus groups. It provides direct insights into consumer preferences, market demand, and product feedback.",
+        "use_cases": [
+            {
+                "name": "Survey Analysis",
+                "description": "Analyze survey responses (quantitative and qualitative) to draw actionable insights for product or market research.",
+                "sample_prompt": "You are a market researcher. Given a dataset of survey responses, calculate key statistics (mean, distribution) for each question and summarize the overall findings and trends.",
+                "tone": "analytical",
+                "tags": [
+                    "survey",
+                    "analysis",
+                    "statistics"
+                ]
+            },
+            {
+                "name": "Focus Group Summary",
+                "description": "Summarize findings from focus group discussions, highlighting common themes and quotes.",
+                "sample_prompt": "You are a UX researcher. Summarize the major themes and participant quotes from this focus group transcript about a new app prototype.",
+                "tone": "informative",
+                "tags": [
+                    "summarization",
+                    "qualitative",
+                    "UX"
+                ]
+            },
+            {
+                "name": "Market Segmentation",
+                "description": "Segment market or consumers into groups based on survey data to tailor marketing strategies.",
+                "sample_prompt": "You are a data analyst. Use clustering (k-means or similar) on customer survey responses to identify distinct market segments. Describe each segment's key characteristics.",
+                "tone": "analytical",
+                "tags": [
+                    "segmentation",
+                    "clustering",
+                    "marketing"
+                ]
+            },
+            {
+                "name": "Consumer Persona Development",
+                "description": "Create detailed consumer personas based on demographic and behavior research data.",
+                "sample_prompt": "You are a product manager. Based on the research data, draft three consumer personas (with names, demographics, and needs) for our primary target market.",
+                "tone": "creative",
+                "tags": [
+                    "persona",
+                    "marketing",
+                    "branding"
+                ]
+            },
+            {
+                "name": "Customer Journey Mapping",
+                "description": "Map the steps a customer takes from awareness to purchase using qualitative data.",
+                "sample_prompt": "You are a customer experience specialist. Outline a customer journey map for someone buying our software service, from initial awareness through purchase and support.",
+                "tone": "informative",
+                "tags": [
+                    "customer-journey",
+                    "CX",
+                    "mapping"
+                ]
+            },
+            {
+                "name": "Usability Testing Report",
+                "description": "Generate a report of usability test findings including issues and recommendations.",
+                "sample_prompt": "You are a UX designer. Summarize the usability test results for the website redesign, listing key usability issues found and suggested fixes.",
+                "tone": "analytical",
+                "tags": [
+                    "UX",
+                    "usability",
+                    "testing"
+                ]
+            },
+            {
+                "name": "Product Concept Evaluation",
+                "description": "Assess consumer feedback on a new product concept to estimate interest and improvements.",
+                "sample_prompt": "You are a product analyst. Given customer feedback on a new product mockup, summarize the level of interest and suggest any improvements to the concept.",
+                "tone": "analytical",
+                "tags": [
+                    "product-development",
+                    "feedback",
+                    "analysis"
+                ]
+            },
+            {
+                "name": "Survey Data Visualization",
+                "description": "Create charts and graphs to visualize survey results for a research presentation.",
+                "sample_prompt": "You are a data visualization expert. Using Python, generate charts (bar, pie, histograms) for given survey questions, and explain what each chart shows.",
+                "tone": "technical",
+                "tags": [
+                    "visualization",
+                    "survey",
+                    "presentation"
+                ]
+            },
+            {
+                "name": "Brand Perception Analysis",
+                "description": "Analyze customer research data to gauge public perception of a brand.",
+                "sample_prompt": "You are a marketing analyst. From the survey data, extract sentiment and themes about our brand image and create a summary report on brand perception.",
+                "tone": "analytical",
+                "tags": [
+                    "branding",
+                    "sentiment",
+                    "analysis"
+                ]
+            },
+            {
+                "name": "NPS Analysis",
+                "description": "Calculate and interpret Net Promoter Score (NPS) from customer survey results.",
+                "sample_prompt": "You are a customer success manager. Compute the NPS from provided survey data and explain what it indicates about customer loyalty. Suggest ways to improve the score.",
+                "tone": "analytical",
+                "tags": [
+                    "NPS",
+                    "customer-loyalty",
+                    "analysis"
+                ]
+            },
+            {
+                "name": "Open-Ended Response Categorization",
+                "description": "Categorize and summarize open-ended survey responses using text analysis.",
+                "sample_prompt": "You are a market researcher. Use natural language processing to cluster open-ended survey responses into themes and provide a summary of the most common topics mentioned.",
+                "tone": "technical",
+                "tags": [
+                    "NLP",
+                    "text-analysis",
+                    "survey"
+                ]
+            },
+            {
+                "name": "Market Needs Assessment",
+                "description": "Identify unmet customer needs by analyzing research data and feedback.",
+                "sample_prompt": "You are a business strategist. Based on survey and interview data, identify the top three unmet needs of customers in our market and recommend product features to address them.",
+                "tone": "analytical",
+                "tags": [
+                    "market-research",
+                    "needs-assessment",
+                    "analysis"
+                ]
+            },
+            {
+                "name": "Questionnaire Design",
+                "description": "Design a survey questionnaire to collect primary market insights on a specific topic.",
+                "sample_prompt": "You are a survey expert. Draft a set of 10 questions to assess customer satisfaction with our online platform, including Likert-scale and open-ended questions.",
+                "tone": "consultative",
+                "tags": [
+                    "survey-design",
+                    "questionnaire",
+                    "research"
+                ]
+            },
+            {
+                "name": "Research Plan Outline",
+                "description": "Outline a detailed plan for conducting primary market research on a new product.",
+                "sample_prompt": "You are a market research manager. Create an outline for a research plan to study consumer interest in a proposed mobile app, including objectives, methods, and timeline.",
+                "tone": "consultative",
+                "tags": [
+                    "research-plan",
+                    "project-management",
+                    "strategy"
+                ]
+            },
+            {
+                "name": "Competitive Analysis (Primary Data)",
+                "description": "Analyze competitor products or strategies based on primary research data.",
+                "sample_prompt": "You are a product strategist. Summarize findings from interviews with users of competitor products, highlighting strengths and weaknesses relative to our offering.",
+                "tone": "analytical",
+                "tags": [
+                    "competitive-analysis",
+                    "primary-data",
+                    "strategy"
+                ]
+            },
+            {
+                "name": "Pricing Sensitivity Analysis",
+                "description": "Determine optimal pricing from survey feedback using techniques like Van Westendorp analysis.",
+                "sample_prompt": "You are an economist. Given survey data on price preferences, perform a Van Westendorp Price Sensitivity Analysis and summarize the acceptable price range for a product.",
+                "tone": "technical",
+                "tags": [
+                    "pricing",
+                    "analysis",
+                    "consumer"
+                ]
+            },
+            {
+                "name": "Market Trend Report (Qualitative)",
+                "description": "Create a report of emerging market trends based on qualitative research findings.",
+                "sample_prompt": "You are a market analyst. Compile insights from customer interviews and focus groups to report on emerging preferences in personal finance apps (e.g., budgeting, investing features).",
+                "tone": "informative",
+                "tags": [
+                    "trend-report",
+                    "qualitative",
+                    "analysis"
+                ]
+            },
+            {
+                "name": "User Feedback Thematic Analysis",
+                "description": "Perform thematic analysis on user feedback to identify common satisfaction drivers or pain points.",
+                "sample_prompt": "You are a UX researcher. Analyze customer feedback from product reviews to identify top themes driving user satisfaction and dissatisfaction.",
+                "tone": "analytical",
+                "tags": [
+                    "thematic-analysis",
+                    "feedback",
+                    "UX"
+                ]
+            },
+            {
+                "name": "Concept Testing Results",
+                "description": "Analyze responses from a concept test to determine viability of a new product idea.",
+                "sample_prompt": "You are a product manager. Given survey results from a concept test for a new wearable device, determine if there is sufficient interest and what features to improve before launch.",
+                "tone": "analytical",
+                "tags": [
+                    "concept-test",
+                    "analysis",
+                    "product"
+                ]
+            },
+            {
+                "name": "Customer Satisfaction Report",
+                "description": "Generate a report summarizing customer satisfaction levels and drivers based on research data.",
+                "sample_prompt": "You are a customer success analyst. Summarize the overall customer satisfaction from survey data and identify the top factors influencing satisfaction.",
+                "tone": "analytical",
+                "tags": [
+                    "customer-satisfaction",
+                    "report",
+                    "analysis"
+                ]
+            }
+        ]
+    }
+]
