@@ -8,6 +8,30 @@ from db1 import get_db
 from models.sector import Sector
 from models.usecase import UseCase
 from models.prompt import Prompt
+from models.subusecase import SubUseCase
+def llm_subusecase_match(user_input, subusecase_list):
+    """LLM fuzzy match user input to a sub-use case string from the list. Returns the best match or None."""
+    if not subusecase_list:
+        return None
+    groq_client = groq.Groq(api_key=GROQ_API_KEY)
+    system_prompt = (
+        f"You are a financial sub-use case matcher. Here is the list of sub-use cases:\n"
+        f"{subusecase_list}\n"
+        "Given the user input, determine if it matches (by intent or phrasing) one of these sub-use cases. "
+        "If yes, reply ONLY with the matching sub-use case string (no extra words). "
+        "If not, reply ONLY with: NO_MATCH."
+    )
+    user_prompt = f"User Input: {user_input}"
+    response = groq_client.chat.completions.create(
+        model="llama-3.3-70b-versatile",
+        temperature=0.1,
+        messages=[
+            {"role": "system", "content": system_prompt},
+            {"role": "user", "content": user_prompt},
+        ]
+    )
+    result = response.choices[0].message.content.strip()
+    return result if result != "NO_MATCH" else None
 
 router = APIRouter()
 GROQ_API_KEY = os.getenv("GROQ_API_KEY")
@@ -219,6 +243,7 @@ def universal_prompt_handler(
             raise HTTPException(status_code=404, detail="Use case not found in sector.")
 
     # If user_input exists: run LLM matching logic
+
     match_result = llm_match_decision(
         req.sector, req.use_case, req.user_input, use_case_names
     )
@@ -228,6 +253,30 @@ def universal_prompt_handler(
             UseCase.sector_id == sector_obj.id,
             UseCase.name == match_result
         ).first()
+        # --- SUB-USE CASE MATCHING ---
+        subusecase_qs = db.query(SubUseCase).filter(
+            SubUseCase.sector_id == sector_obj.id,
+            SubUseCase.use_case == match_result
+        ).all()
+        subusecase_names = [suc.sub_use_case for suc in subusecase_qs]
+        sub_match = None
+        if req.user_input.strip() and subusecase_names:
+            sub_match = llm_subusecase_match(req.user_input, subusecase_names)
+        if sub_match:
+            subusecase_obj = next((suc for suc in subusecase_qs if suc.sub_use_case == sub_match), None)
+            if subusecase_obj:
+                final_prompt = clean_generated_prompt(subusecase_obj.prompt)
+                variables = extract_variables_from_prompt(final_prompt)
+                return {
+                    "source": "sub_use_case",
+                    "sector": req.sector,
+                    "use_case": match_result,
+                    "sub_use_case": sub_match,
+                    "user_input": req.user_input,
+                    "prompt_template": final_prompt,
+                    "variables": variables
+                }
+        # --- END SUB-USE CASE MATCHING ---
         prompt_obj = db.query(Prompt).filter(Prompt.use_case_id == match_uc.id).first()
         if prompt_obj:
             final_prompt = review_and_edit_prompt(
