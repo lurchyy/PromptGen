@@ -10,5 +10,6 @@ class SubUseCase(Base):
     use_case = Column(String, nullable=False)
     sub_use_case = Column(String, nullable=False)
     prompt = Column(Text, nullable=False)
+    model = Column(String, nullable=False, default="gpt")
 
     sector = relationship("Sector")

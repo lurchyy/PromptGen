@@ -2,6 +2,7 @@ import os
 import re
 import groq
 from fastapi import APIRouter, Depends, HTTPException
+from fastapi import Query
 from pydantic import BaseModel
 from sqlalchemy.orm import Session
 from db1 import get_db
@@ -39,7 +40,8 @@ GROQ_API_KEY = os.getenv("GROQ_API_KEY")
 class PromptRequest(BaseModel):
     sector: str
     use_case: str
-    user_input: str = ""  
+    user_input: str = ""
+    model: str = "gpt"  # e.g. 'gpt', 'claude', 'gemini'
 
 class VariableFillRequest(BaseModel):
     prompt_template: str
@@ -59,18 +61,27 @@ def deduplicate(variables):
 def extract_variables_from_prompt(prompt: str):
     # Find the section that contains the word 'input' in its heading (case-insensitive)
     input_section = None
-    # Try to find a markdown heading (e.g., **Input:**, ## Input, # Input, or Input: on its own line)
     input_section_match = re.search(r"(^|\n)[#\*\s]*input[\s\-:]*\n(.*?)(\n[#\*\s]*[A-Z][^\n]*:|\n[#\*\s]*[A-Z][^\n]*|\n\*\*Output|\n##|\n#|\Z)", prompt, re.IGNORECASE | re.DOTALL)
     if input_section_match:
-        # Group 2 is the content under the input section
         input_section = input_section_match.group(2)
     else:
-        # Fallback: search for the first block that contains 'input' in the heading
         input_section = prompt
-
     raw_vars = re.findall(r"\[\[([^\]]+)\]\]", input_section)
     variables = deduplicate(raw_vars)
     return list(variables)
+
+def extract_filled_variables(user_input: str, variables: list) -> dict:
+    """
+    Try to extract values for variables from user input (very basic: looks for 'Variable: value' or 'Variable = value').
+    Returns a dict of {variable: value or None}
+    """
+    result = {v: None for v in variables}
+    for v in variables:
+        # Look for 'Variable: value' or 'Variable = value' (case-insensitive)
+        m = re.search(rf"{re.escape(v)}\s*[:=]\s*(.+?)(\n|$)", user_input, re.IGNORECASE)
+        if m:
+            result[v] = m.group(1).strip()
+    return result
 
 
 def clean_generated_prompt(prompt: str) -> str:
@@ -224,12 +235,17 @@ def universal_prompt_handler(
             UseCase.name.ilike(req.use_case.strip())
         ).first()
         if match_uc:
-            prompt_obj = db.query(Prompt).filter(Prompt.use_case_id == match_uc.id).first()
+            prompt_obj = db.query(Prompt).filter(
+                Prompt.use_case_id == match_uc.id,
+                Prompt.model == getattr(req, 'model', 'gpt')
+            ).first()
             if prompt_obj:
                 # Only clean the prompt, do not run review_and_edit_prompt
                 final_prompt = clean_generated_prompt(prompt_obj.content)
                 variables = extract_variables_from_prompt(final_prompt)
+                # Stage 1: Return prompt template and required variables
                 return {
+                    "stage": 1,
                     "source": "datalake",
                     "sector": req.sector,
                     "use_case": match_uc.name,
@@ -256,7 +272,8 @@ def universal_prompt_handler(
         # --- SUB-USE CASE MATCHING ---
         subusecase_qs = db.query(SubUseCase).filter(
             SubUseCase.sector_id == sector_obj.id,
-            SubUseCase.use_case == match_result
+            SubUseCase.use_case == match_result,
+            SubUseCase.model == getattr(req, 'model', 'gpt')
         ).all()
         subusecase_names = [suc.sub_use_case for suc in subusecase_qs]
         sub_match = None
@@ -267,7 +284,21 @@ def universal_prompt_handler(
             if subusecase_obj:
                 final_prompt = clean_generated_prompt(subusecase_obj.prompt)
                 variables = extract_variables_from_prompt(final_prompt)
+                # Stage 2/3: Check for missing fields
+                filled = extract_filled_variables(req.user_input, variables)
+                missing = [k for k, v in filled.items() if not v]
+                if missing:
+                    return {
+                        "stage": 2,
+                        "clarify": True,
+                        "missing_variables": missing,
+                        "prompt_template": final_prompt,
+                        "variables": variables,
+                        "message": f"Please provide values for: {', '.join(missing)}"
+                    }
+                # All fields present, return final prompt
                 return {
+                    "stage": 3,
                     "source": "sub_use_case",
                     "sector": req.sector,
                     "use_case": match_result,
@@ -277,14 +308,29 @@ def universal_prompt_handler(
                     "variables": variables
                 }
         # --- END SUB-USE CASE MATCHING ---
-        prompt_obj = db.query(Prompt).filter(Prompt.use_case_id == match_uc.id).first()
+        prompt_obj = db.query(Prompt).filter(
+            Prompt.use_case_id == match_uc.id,
+            Prompt.model == getattr(req, 'model', 'gpt')
+        ).first()
         if prompt_obj:
             final_prompt = review_and_edit_prompt(
                 prompt_obj.content, req.sector, match_result, req.user_input
             )
             final_prompt = clean_generated_prompt(final_prompt)
             variables = extract_variables_from_prompt(final_prompt)
+            filled = extract_filled_variables(req.user_input, variables)
+            missing = [k for k, v in filled.items() if not v]
+            if missing:
+                return {
+                    "stage": 2,
+                    "clarify": True,
+                    "missing_variables": missing,
+                    "prompt_template": final_prompt,
+                    "variables": variables,
+                    "message": f"Please provide values for: {', '.join(missing)}"
+                }
             return {
+                "stage": 3,
                 "source": "datalake_llm_match",
                 "sector": req.sector,
                 "use_case": match_result,
@@ -304,7 +350,19 @@ def universal_prompt_handler(
         )
         final_prompt = clean_generated_prompt(final_prompt)
         variables = extract_variables_from_prompt(final_prompt)
+        filled = extract_filled_variables(req.user_input, variables)
+        missing = [k for k, v in filled.items() if not v]
+        if missing:
+            return {
+                "stage": 2,
+                "clarify": True,
+                "missing_variables": missing,
+                "prompt_template": final_prompt,
+                "variables": variables,
+                "message": f"Please provide values for: {', '.join(missing)}"
+            }
         return {
+            "stage": 3,
             "source": "dynamic",
             "sector": req.sector,
             "use_case": req.use_case,
@@ -345,3 +403,22 @@ def fill_prompt_variables(payload: VariableFillRequest):
             filled_prompt = "[ERROR: Prompt could not be converted to string]"
 
     return {"final_prompt": filled_prompt}
+
+    # New endpoint: GET /sub-use-cases
+@router.get("/sub-use-cases")
+def get_sub_use_cases(
+    sector: str = Query(...),
+    use_case: str = Query(...),
+    db: Session = Depends(get_db),
+):
+    # Find sector
+    sector_obj = db.query(Sector).filter(Sector.name == sector).first()
+    if not sector_obj:
+        raise HTTPException(status_code=404, detail="Sector not found.")
+    # Find sub-use-cases for sector and use_case
+    subusecases = db.query(SubUseCase).filter(
+        SubUseCase.sector_id == sector_obj.id,
+        SubUseCase.use_case == use_case
+    ).all()
+    sub_use_case_names = [suc.sub_use_case for suc in subusecases]
+    return {"sub_use_cases": sub_use_case_names}
