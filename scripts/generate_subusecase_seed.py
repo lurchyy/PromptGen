@@ -1,18 +1,25 @@
 import json
+
 import os
 from sqlalchemy.orm import Session
 from dotenv import load_dotenv
-from groq import Groq
 import re
 import sys
+
+try:
+    import google.generativeai as genai
+except ImportError:
+    print("google-generativeai not found. Please install with: pip install google-generativeai")
+    raise
 
 sys.path.append("..")
 from db1 import SessionLocal
 from models.sector import Sector
 from models.subusecase import SubUseCase
 
+
 load_dotenv()
-GROQ_API_KEY = os.getenv("GROQ_API_KEY")
+GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 
 system_prompt = """
 You are an expert Prompt Engineer.
@@ -49,18 +56,15 @@ def clean_generated_prompt(prompt: str) -> str:
     prompt = re.sub(r"(?s)\*\*Example Output:\*\*.*?```.*?```\s*", "", prompt)
     return prompt.strip()
 
+
 def generate_prompt(sub_use_case: str) -> str:
     try:
-        client = Groq(api_key=GROQ_API_KEY)
-        chat_completion = client.chat.completions.create(
-            messages=[
-                {"role": "system", "content": system_prompt},
-                {"role": "user", "content": f"Use Case: {sub_use_case}"}
-            ],
-            model="llama-3.3-70b-versatile",
-            temperature=0.4
-        )
-        return chat_completion.choices[0].message.content
+        genai.configure(api_key=GEMINI_API_KEY)
+        model = genai.GenerativeModel('gemini-2.5-pro')
+        prompt = f"{system_prompt}\nUse Case: {sub_use_case}"
+        response = model.generate_content(prompt)
+        # Gemini's response is in response.text
+        return response.text
     except Exception as e:
         print(f"❌ Error generating prompt for {sub_use_case}: {e}")
         return None

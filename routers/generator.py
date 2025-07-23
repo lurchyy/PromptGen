@@ -1,3 +1,20 @@
+def extract_filled_variables(user_input, variables):
+    """
+    Given a user input string and a list of variable names, attempt to extract values for each variable.
+    Returns a dict: {variable: value or ''}
+    This is a simple implementation: it checks if the variable name (case-insensitive) appears in the user input,
+    and if so, returns the user input as the value; otherwise, returns ''.
+    You can improve this logic to parse structured input if needed.
+    """
+    result = {}
+    user_input_lower = user_input.lower() if user_input else ''
+    for var in variables:
+        # If variable name appears in user input, assign user input as value (simple heuristic)
+        if var.lower() in user_input_lower and user_input.strip():
+            result[var] = user_input.strip()
+        else:
+            result[var] = ''
+    return result
 import os
 import re
 import groq
@@ -53,36 +70,62 @@ def deduplicate(variables):
     deduped = []
     for v in variables:
         v = v.strip()
-        if v not in seen:
+        if v and v not in seen:
             deduped.append(v)
             seen.add(v)
     return deduped
 
-def extract_variables_from_prompt(prompt: str):
-    # Find the section that contains the word 'input' in its heading (case-insensitive)
-    input_section = None
-    input_section_match = re.search(r"(^|\n)[#\*\s]*input[\s\-:]*\n(.*?)(\n[#\*\s]*[A-Z][^\n]*:|\n[#\*\s]*[A-Z][^\n]*|\n\*\*Output|\n##|\n#|\Z)", prompt, re.IGNORECASE | re.DOTALL)
-    if input_section_match:
-        input_section = input_section_match.group(2)
-    else:
-        input_section = prompt
-    raw_vars = re.findall(r"\[\[([^\]]+)\]\]", input_section)
-    variables = deduplicate(raw_vars)
-    return list(variables)
 
-def extract_filled_variables(user_input: str, variables: list) -> dict:
+def extract_input_section(prompt):
     """
-    Try to extract values for variables from user input (very basic: looks for 'Variable: value' or 'Variable = value').
-    Returns a dict of {variable: value or None}
+    Return ONLY the actual 'Input' section (as text) from the full prompt.
     """
-    result = {v: None for v in variables}
-    for v in variables:
-        # Look for 'Variable: value' or 'Variable = value' (case-insensitive)
-        m = re.search(rf"{re.escape(v)}\s*[:=]\s*(.+?)(\n|$)", user_input, re.IGNORECASE)
+    # More flexible pattern to match various input section formats
+    patterns = [
+        r"###\s*\*\*Input Data\*\*\s*\n(.*?)(?=\n###|\n##|\n\*\*\*|\Z)",
+        r"##\s*Input Data\s*\n(.*?)(?=\n###|\n##|\n\*\*\*|\Z)",
+        r"\*\*Input Data\*\*\s*\n(.*?)(?=\n###|\n##|\n\*\*\*|\Z)",
+        r"Input Data:?\s*\n(.*?)(?=\n###|\n##|\n\*\*\*|\Z)"
+    ]
+    
+    for pattern in patterns:
+        m = re.search(pattern, prompt, re.IGNORECASE | re.DOTALL)
         if m:
-            result[v] = m.group(1).strip()
-    return result
+            return m.group(1).strip()
+    
+    return ""
 
+def extract_input_headings(prompt):
+    """
+    Returns all bolded/bulleted field labels (the headings) in the Input section.
+    """
+    input_section = extract_input_section(prompt)
+    if not input_section:
+        return []
+    
+    headings = []
+    for line in input_section.splitlines():
+        line = line.strip()
+        if not line:
+            continue
+            
+        # Pattern for: *   **Portfolio Holdings:** [[...]]
+        # Also handles: **Portfolio Holdings:** [[...]]
+        patterns = [
+            r"^\*\s*\*\*([^*\(\[\:]+?)(?:\s*\(Optional\))?\s*:\*\*\s*\[\[",
+            r"^\*\*([^*\(\[\:]+?)(?:\s*\(Optional\))?\s*:\*\*\s*\[\[",
+            r"^[\*\-\s\d\.]*\*\*([^*\(\[\:]+?)(?:\s*\(Optional\))?\s*:\*\*\s*\[\["
+        ]
+        
+        for pattern in patterns:
+            m = re.match(pattern, line)
+            if m:
+                heading = m.group(1).strip()
+                if heading and heading not in headings:
+                    headings.append(heading)
+                break
+    
+    return headings
 
 def clean_generated_prompt(prompt: str) -> str:
     prompt = re.sub(r"^\s*here is the improved prompt\s*\n", "", prompt, flags=re.IGNORECASE)
@@ -211,7 +254,7 @@ def universal_prompt_handler(
             new_prompt, req.sector, req.use_case, req.user_input
         )
         final_prompt = clean_generated_prompt(final_prompt)
-        variables = extract_variables_from_prompt(final_prompt)
+        variables = extract_input_headings(final_prompt)
         return {
             "source": "custom",
             "sector": req.sector,
@@ -242,7 +285,7 @@ def universal_prompt_handler(
             if prompt_obj:
                 # Only clean the prompt, do not run review_and_edit_prompt
                 final_prompt = clean_generated_prompt(prompt_obj.content)
-                variables = extract_variables_from_prompt(final_prompt)
+                variables = extract_input_headings(final_prompt)
                 # Stage 1: Return prompt template and required variables
                 return {
                     "stage": 1,
@@ -283,7 +326,7 @@ def universal_prompt_handler(
             subusecase_obj = next((suc for suc in subusecase_qs if suc.sub_use_case == sub_match), None)
             if subusecase_obj:
                 final_prompt = clean_generated_prompt(subusecase_obj.prompt)
-                variables = extract_variables_from_prompt(final_prompt)
+                variables = extract_input_headings(final_prompt)
                 # Stage 2/3: Check for missing fields
                 filled = extract_filled_variables(req.user_input, variables)
                 missing = [k for k, v in filled.items() if not v]
@@ -317,7 +360,7 @@ def universal_prompt_handler(
                 prompt_obj.content, req.sector, match_result, req.user_input
             )
             final_prompt = clean_generated_prompt(final_prompt)
-            variables = extract_variables_from_prompt(final_prompt)
+            variables = extract_input_headings(final_prompt)
             filled = extract_filled_variables(req.user_input, variables)
             missing = [k for k, v in filled.items() if not v]
             if missing:
@@ -349,7 +392,7 @@ def universal_prompt_handler(
             new_prompt, req.sector, req.use_case, req.user_input
         )
         final_prompt = clean_generated_prompt(final_prompt)
-        variables = extract_variables_from_prompt(final_prompt)
+        variables = extract_input_headings(final_prompt)
         filled = extract_filled_variables(req.user_input, variables)
         missing = [k for k, v in filled.items() if not v]
         if missing:

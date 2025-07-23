@@ -7,10 +7,16 @@ from db1 import SessionLocal
 from models.usecase import UseCase
 from models.prompt import Prompt
 from dotenv import load_dotenv
-from groq import Groq
+
+try:
+    import google.generativeai as genai
+except ImportError:
+    print("google-generativeai not found. Please install with: pip install google-generativeai")
+    raise
+
 
 load_dotenv()
-GROQ_API_KEY = os.getenv("GROQ_API_KEY")
+GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 
 MODEL_VARIANTS = {
     "gpt": """Write this for GPT-4/4o models. GPT excels at:
@@ -91,19 +97,15 @@ If the task requires a document or data upload, create a placeholder for it. Oth
 
 Instruct the LLM to flag and report any unavailable or missing data that cannot be found from public sources or uploads"""
 
+
 def generate_prompt_for_usecase(usecase_name: str, model: str) -> str:
     system_prompt = BASE_SYSTEM_PROMPT + "\n" + MODEL_VARIANTS[model]
     try:
-        client = Groq(api_key=GROQ_API_KEY)
-        chat_completion = client.chat.completions.create(
-            messages=[
-                {"role": "system", "content": system_prompt},
-                {"role": "user", "content": f"Use Case: {usecase_name}"}
-            ],
-            model="llama3-70b-8192",
-            temperature=0.4
-        )
-        return chat_completion.choices[0].message.content
+        genai.configure(api_key=GEMINI_API_KEY)
+        gemini_model = genai.GenerativeModel('gemini-2.5-flash')
+        prompt = f"{system_prompt}\nUse Case: {usecase_name}"
+        response = gemini_model.generate_content(prompt)
+        return response.text
     except Exception as e:
         print(f"❌ Error generating prompt for {usecase_name} ({model}): {e}")
         return None
@@ -124,22 +126,26 @@ def main():
                 Prompt.model == model
             ).first()
             if not prompt_obj:
-                print(f"⚠️ No prompt found for: {use_case.name} [{model}] (skipping)")
+                print(f"➕ No prompt found for: {use_case.name} [{model}]. Generating new prompt...")
+                generated = generate_prompt_for_usecase(use_case.name, model)
+                if generated:
+                    cleaned = clean_generated_prompt(generated)
+                    new_prompt = Prompt(use_case_id=use_case.id, model=model, content=cleaned)
+                    db.add(new_prompt)
+                    db.commit()
+                    print(f"✅ New prompt created for: {use_case.name} [{model}]")
+                else:
+                    print(f"❌ Failed to generate new prompt for: {use_case.name} [{model}]")
                 continue
             print(f"🔄 Improving prompt for: {use_case.name} [{model}]")
             # Send the current prompt to the LLM for improvement
             system_prompt = BASE_SYSTEM_PROMPT + "\n" + MODEL_VARIANTS[model]
             try:
-                client = Groq(api_key=GROQ_API_KEY)
-                chat_completion = client.chat.completions.create(
-                    messages=[
-                        {"role": "system", "content": system_prompt},
-                        {"role": "user", "content": f"Here is the current prompt. Please improve it for the specified model.\n\nCurrent Prompt:\n{prompt_obj.content}"}
-                    ],
-                    model="llama3-70b-8192",
-                    temperature=0.4
-                )
-                improved = chat_completion.choices[0].message.content
+                genai.configure(api_key=GEMINI_API_KEY)
+                gemini_model = genai.GenerativeModel('gemini-2.5-pro')
+                prompt = f"{system_prompt}\nHere is the current prompt. Please improve it for the specified model.\n\nCurrent Prompt:\n{prompt_obj.content}"
+                response = gemini_model.generate_content(prompt)
+                improved = response.text
                 cleaned_prompt = clean_generated_prompt(improved)
                 prompt_obj.content = cleaned_prompt
                 db.commit()

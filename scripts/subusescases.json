@@ -1224,241 +1224,241 @@
         "Prompt-Worthy": "Yes"
     },
     {
-        "Sector": "Financial Data Providers (e.g. Bloomberg, S\\&P Capital IQ, YCharts, Quartr)",
+        "Sector": "Financial Data Providers (e.g. Bloomberg, S&P Capital IQ, YCharts, Quartr)",
         "Use Case": "Data query and retrieval",
         "Sub-Use Case": "Interpret a user’s natural language query (e.g., 'What was Company X’s revenue in 2022?') and translate it into the appropriate database query, then retrieve the exact figure.",
         "Prompt-Worthy": "Yes"
     },
     {
-        "Sector": "Financial Data Providers (e.g. Bloomberg, S\\&P Capital IQ, YCharts, Quartr)",
+        "Sector": "Financial Data Providers (e.g. Bloomberg, S&P Capital IQ, YCharts, Quartr)",
         "Use Case": "Data query and retrieval",
         "Sub-Use Case": "Fetch and deliver specific financial data points on demand (for example, a stock’s current PE ratio or last quarter’s EPS) when requested by a user or application.",
         "Prompt-Worthy": "Yes"
     },
     {
-        "Sector": "Financial Data Providers (e.g. Bloomberg, S\\&P Capital IQ, YCharts, Quartr)",
+        "Sector": "Financial Data Providers (e.g. Bloomberg, S&P Capital IQ, YCharts, Quartr)",
         "Use Case": "Data query and retrieval",
         "Sub-Use Case": "Validate the accuracy of retrieved data by cross-referencing multiple sources if available, before presenting it to the user.",
         "Prompt-Worthy": "Yes"
     },
     {
-        "Sector": "Financial Data Providers (e.g. Bloomberg, S\\&P Capital IQ, YCharts, Quartr)",
+        "Sector": "Financial Data Providers (e.g. Bloomberg, S&P Capital IQ, YCharts, Quartr)",
         "Use Case": "Data query and retrieval",
         "Sub-Use Case": "Handle ambiguous or incomplete user queries by asking clarifying questions or making a reasonable assumption (with user confirmation) to provide the correct data.",
         "Prompt-Worthy": "Yes"
     },
     {
-        "Sector": "Financial Data Providers (e.g. Bloomberg, S\\&P Capital IQ, YCharts, Quartr)",
+        "Sector": "Financial Data Providers (e.g. Bloomberg, S&P Capital IQ, YCharts, Quartr)",
         "Use Case": "Automated report generation",
         "Sub-Use Case": "Automatically generate a one-page company report including key financial metrics, recent stock performance, and a few bullet points of recent news highlights.",
         "Prompt-Worthy": "Yes"
     },
     {
-        "Sector": "Financial Data Providers (e.g. Bloomberg, S\\&P Capital IQ, YCharts, Quartr)",
+        "Sector": "Financial Data Providers (e.g. Bloomberg, S&P Capital IQ, YCharts, Quartr)",
         "Use Case": "Automated report generation",
         "Sub-Use Case": "Enable user customization of reports (such as selecting specific metrics or date ranges) and dynamically produce the report based on those inputs.",
         "Prompt-Worthy": "Yes"
     },
     {
-        "Sector": "Financial Data Providers (e.g. Bloomberg, S\\&P Capital IQ, YCharts, Quartr)",
+        "Sector": "Financial Data Providers (e.g. Bloomberg, S&P Capital IQ, YCharts, Quartr)",
         "Use Case": "Automated report generation",
         "Sub-Use Case": "Summarize daily market performance (major indices moves, top gainers/losers) into a quick report that can be sent as a daily newsletter to users.",
         "Prompt-Worthy": "Yes"
     },
     {
-        "Sector": "Financial Data Providers (e.g. Bloomberg, S\\&P Capital IQ, YCharts, Quartr)",
+        "Sector": "Financial Data Providers (e.g. Bloomberg, S&P Capital IQ, YCharts, Quartr)",
         "Use Case": "Automated report generation",
         "Sub-Use Case": "Include basic charts or graphs (e.g., a line chart of stock price or revenue trend) in the generated reports to provide visual context alongside the text and numbers.",
         "Prompt-Worthy": "Yes"
     },
     {
-        "Sector": "Financial Data Providers (e.g. Bloomberg, S\\&P Capital IQ, YCharts, Quartr)",
+        "Sector": "Financial Data Providers (e.g. Bloomberg, S&P Capital IQ, YCharts, Quartr)",
         "Use Case": "Earnings call transcript delivery",
         "Sub-Use Case": "Livestream transcribe an ongoing earnings call using speech recognition, providing users with near real-time text updates as the call progresses.",
         "Prompt-Worthy": "Yes"
     },
     {
-        "Sector": "Financial Data Providers (e.g. Bloomberg, S\\&P Capital IQ, YCharts, Quartr)",
+        "Sector": "Financial Data Providers (e.g. Bloomberg, S&P Capital IQ, YCharts, Quartr)",
         "Use Case": "Earnings call transcript delivery",
         "Sub-Use Case": "Automatically correct common transcription errors (like company names or financial terms) in real-time using context or predefined dictionaries.",
         "Prompt-Worthy": "Yes"
     },
     {
-        "Sector": "Financial Data Providers (e.g. Bloomberg, S\\&P Capital IQ, YCharts, Quartr)",
+        "Sector": "Financial Data Providers (e.g. Bloomberg, S&P Capital IQ, YCharts, Quartr)",
         "Use Case": "Earnings call transcript delivery",
         "Sub-Use Case": "Provide key highlights or bullet points during the live call (for example, after prepared remarks) for users who want quick insights without reading the full transcript immediately.",
         "Prompt-Worthy": "Yes"
     },
     {
-        "Sector": "Financial Data Providers (e.g. Bloomberg, S\\&P Capital IQ, YCharts, Quartr)",
+        "Sector": "Financial Data Providers (e.g. Bloomberg, S&P Capital IQ, YCharts, Quartr)",
         "Use Case": "Earnings call transcript delivery",
         "Sub-Use Case": "Make the full transcript available within minutes of the call ending and notify users that the transcript is ready for searching or reading.",
         "Prompt-Worthy": "Yes"
     },
     {
-        "Sector": "Financial Data Providers (e.g. Bloomberg, S\\&P Capital IQ, YCharts, Quartr)",
+        "Sector": "Financial Data Providers (e.g. Bloomberg, S&P Capital IQ, YCharts, Quartr)",
         "Use Case": "Transcript summarization and highlights",
         "Sub-Use Case": "Use NLP/LLM algorithms to summarize a full earnings call transcript into a concise set of bullet points, capturing revenue figures, guidance changes, and major announcements.",
         "Prompt-Worthy": "Yes"
     },
     {
-        "Sector": "Financial Data Providers (e.g. Bloomberg, S\\&P Capital IQ, YCharts, Quartr)",
+        "Sector": "Financial Data Providers (e.g. Bloomberg, S&P Capital IQ, YCharts, Quartr)",
         "Use Case": "Transcript summarization and highlights",
         "Sub-Use Case": "Generate an executive summary paragraph of an earnings call that provides an overview of the quarter’s results and outlook for users who want a quick read.",
         "Prompt-Worthy": "Yes"
     },
     {
-        "Sector": "Financial Data Providers (e.g. Bloomberg, S\\&P Capital IQ, YCharts, Quartr)",
+        "Sector": "Financial Data Providers (e.g. Bloomberg, S&P Capital IQ, YCharts, Quartr)",
         "Use Case": "Transcript summarization and highlights",
         "Sub-Use Case": "Highlight the portions of the transcript where important topics (like guidance, new product announcements, or significant Q\\&A disclosures) occur, to allow quick navigation.",
         "Prompt-Worthy": "Yes"
     },
     {
-        "Sector": "Financial Data Providers (e.g. Bloomberg, S\\&P Capital IQ, YCharts, Quartr)",
+        "Sector": "Financial Data Providers (e.g. Bloomberg, S&P Capital IQ, YCharts, Quartr)",
         "Use Case": "Transcript summarization and highlights",
         "Sub-Use Case": "Allow users to ask a question about the call transcript (e.g., 'Did they mention pricing strategy?') and retrieve the relevant section or summary of that topic in response.",
         "Prompt-Worthy": "Yes"
     },
     {
-        "Sector": "Financial Data Providers (e.g. Bloomberg, S\\&P Capital IQ, YCharts, Quartr)",
+        "Sector": "Financial Data Providers (e.g. Bloomberg, S&P Capital IQ, YCharts, Quartr)",
         "Use Case": "Sentiment and trend analysis",
         "Sub-Use Case": "Run sentiment analysis on a large set of documents (earnings calls, news articles) to gauge overall positive/negative tone and present trends in sentiment over time or by sector.",
         "Prompt-Worthy": "Yes"
     },
     {
-        "Sector": "Financial Data Providers (e.g. Bloomberg, S\\&P Capital IQ, YCharts, Quartr)",
+        "Sector": "Financial Data Providers (e.g. Bloomberg, S&P Capital IQ, YCharts, Quartr)",
         "Use Case": "Sentiment and trend analysis",
         "Sub-Use Case": "Detect spikes in the frequency of certain keywords or topics (e.g., 'inflation' or 'AI') across news and transcripts in a given period and flag these as emerging trends.",
         "Prompt-Worthy": "Yes"
     },
     {
-        "Sector": "Financial Data Providers (e.g. Bloomberg, S\\&P Capital IQ, YCharts, Quartr)",
+        "Sector": "Financial Data Providers (e.g. Bloomberg, S&P Capital IQ, YCharts, Quartr)",
         "Use Case": "Sentiment and trend analysis",
         "Sub-Use Case": "Compare sentiment scores for a particular company’s earnings calls over the last several quarters and summarize how management’s tone has shifted over time.",
         "Prompt-Worthy": "Yes"
     },
     {
-        "Sector": "Financial Data Providers (e.g. Bloomberg, S\\&P Capital IQ, YCharts, Quartr)",
+        "Sector": "Financial Data Providers (e.g. Bloomberg, S&P Capital IQ, YCharts, Quartr)",
         "Use Case": "Sentiment and trend analysis",
         "Sub-Use Case": "Produce a dashboard or report showing trending topics and sentiment in the market, updating it regularly so analysts can see what themes are gaining or losing prominence.",
         "Prompt-Worthy": "Yes"
     },
     {
-        "Sector": "Financial Data Providers (e.g. Bloomberg, S\\&P Capital IQ, YCharts, Quartr)",
+        "Sector": "Financial Data Providers (e.g. Bloomberg, S&P Capital IQ, YCharts, Quartr)",
         "Use Case": "Comparative analytics and benchmarking",
         "Sub-Use Case": "Generate a side-by-side comparison of two companies' financials (revenue, growth, margins, etc.) and include brief AI-generated commentary on key differences.",
         "Prompt-Worthy": "Yes"
     },
     {
-        "Sector": "Financial Data Providers (e.g. Bloomberg, S\\&P Capital IQ, YCharts, Quartr)",
+        "Sector": "Financial Data Providers (e.g. Bloomberg, S&P Capital IQ, YCharts, Quartr)",
         "Use Case": "Comparative analytics and benchmarking",
         "Sub-Use Case": "Analyze the text of two companies’ disclosures (like earnings call transcripts or annual letters) to compare how each one discusses strategy or risks, and summarize the differences.",
         "Prompt-Worthy": "Yes"
     },
     {
-        "Sector": "Financial Data Providers (e.g. Bloomberg, S\\&P Capital IQ, YCharts, Quartr)",
+        "Sector": "Financial Data Providers (e.g. Bloomberg, S&P Capital IQ, YCharts, Quartr)",
         "Use Case": "Comparative analytics and benchmarking",
         "Sub-Use Case": "Allow a user to select a group of companies and automatically produce a benchmarking report that ranks them on key performance metrics and highlights who leads or lags in each metric.",
         "Prompt-Worthy": "Yes"
     },
     {
-        "Sector": "Financial Data Providers (e.g. Bloomberg, S\\&P Capital IQ, YCharts, Quartr)",
+        "Sector": "Financial Data Providers (e.g. Bloomberg, S&P Capital IQ, YCharts, Quartr)",
         "Use Case": "Comparative analytics and benchmarking",
         "Sub-Use Case": "Identify anomalies in a benchmarking set (e.g., one company’s R\\&D spending as a percentage of revenue is an outlier) and point them out with possible explanations.",
         "Prompt-Worthy": "Yes"
     },
     {
-        "Sector": "Financial Data Providers (e.g. Bloomberg, S\\&P Capital IQ, YCharts, Quartr)",
+        "Sector": "Financial Data Providers (e.g. Bloomberg, S&P Capital IQ, YCharts, Quartr)",
         "Use Case": "News aggregation and summarization",
         "Sub-Use Case": "Aggregate financial news from multiple sources and produce a daily news digest with short summaries, categorized by topic (market news, company earnings, etc.).",
         "Prompt-Worthy": "Yes"
     },
     {
-        "Sector": "Financial Data Providers (e.g. Bloomberg, S\\&P Capital IQ, YCharts, Quartr)",
+        "Sector": "Financial Data Providers (e.g. Bloomberg, S&P Capital IQ, YCharts, Quartr)",
         "Use Case": "News aggregation and summarization",
         "Sub-Use Case": "For each stock in a user’s watchlist, gather the latest news headlines and generate a brief summary of the developments relevant to that company.",
         "Prompt-Worthy": "Yes"
     },
     {
-        "Sector": "Financial Data Providers (e.g. Bloomberg, S\\&P Capital IQ, YCharts, Quartr)",
+        "Sector": "Financial Data Providers (e.g. Bloomberg, S&P Capital IQ, YCharts, Quartr)",
         "Use Case": "News aggregation and summarization",
         "Sub-Use Case": "When a breaking news article is released, quickly summarize it into key bullet points and send an alert to users interested in that topic or company.",
         "Prompt-Worthy": "Yes"
     },
     {
-        "Sector": "Financial Data Providers (e.g. Bloomberg, S\\&P Capital IQ, YCharts, Quartr)",
+        "Sector": "Financial Data Providers (e.g. Bloomberg, S&P Capital IQ, YCharts, Quartr)",
         "Use Case": "News aggregation and summarization",
         "Sub-Use Case": "Filter out less relevant news so that users receive summaries only of impactful stories for their interests (e.g., major events affecting their portfolio or sector).",
         "Prompt-Worthy": "Yes"
     },
     {
-        "Sector": "Financial Data Providers (e.g. Bloomberg, S\\&P Capital IQ, YCharts, Quartr)",
+        "Sector": "Financial Data Providers (e.g. Bloomberg, S&P Capital IQ, YCharts, Quartr)",
         "Use Case": "AI chat support",
         "Sub-Use Case": "Answer user questions about financial data in plain language (e.g., 'What is the 5-year average ROE of Company Y?') by retrieving the data and providing a brief explanation.",
         "Prompt-Worthy": "Yes"
     },
     {
-        "Sector": "Financial Data Providers (e.g. Bloomberg, S\\&P Capital IQ, YCharts, Quartr)",
+        "Sector": "Financial Data Providers (e.g. Bloomberg, S&P Capital IQ, YCharts, Quartr)",
         "Use Case": "AI chat support",
         "Sub-Use Case": "Assist users in refining their queries if they are too vague (for example, clarifying whether 'performance' means stock price or revenue growth) to ensure they get the information they want.",
         "Prompt-Worthy": "Yes"
     },
     {
-        "Sector": "Financial Data Providers (e.g. Bloomberg, S\\&P Capital IQ, YCharts, Quartr)",
+        "Sector": "Financial Data Providers (e.g. Bloomberg, S&P Capital IQ, YCharts, Quartr)",
         "Use Case": "AI chat support",
         "Sub-Use Case": "Provide definitions or explanations of financial terms when users ask (e.g., 'What is free cash flow?'), possibly with a short example or context from recent data.",
         "Prompt-Worthy": "Yes"
     },
     {
-        "Sector": "Financial Data Providers (e.g. Bloomberg, S\\&P Capital IQ, YCharts, Quartr)",
+        "Sector": "Financial Data Providers (e.g. Bloomberg, S&P Capital IQ, YCharts, Quartr)",
         "Use Case": "AI chat support",
         "Sub-Use Case": "Guide users through using the platform via chat, such as helping them locate a feature or perform a comparison, by giving step-by-step instructions in response to their questions.",
         "Prompt-Worthy": "Yes"
     },
     {
-        "Sector": "Financial Data Providers (e.g. Bloomberg, S\\&P Capital IQ, YCharts, Quartr)",
+        "Sector": "Financial Data Providers (e.g. Bloomberg, S&P Capital IQ, YCharts, Quartr)",
         "Use Case": "Data extraction from filings",
         "Sub-Use Case": "Automatically parse a company's 10-K/10-Q to extract structured data from key financial tables (income statement, balance sheet, cash flow) for use in analysis.",
         "Prompt-Worthy": "Yes"
     },
     {
-        "Sector": "Financial Data Providers (e.g. Bloomberg, S\\&P Capital IQ, YCharts, Quartr)",
+        "Sector": "Financial Data Providers (e.g. Bloomberg, S&P Capital IQ, YCharts, Quartr)",
         "Use Case": "Data extraction from filings",
         "Sub-Use Case": "Identify and pull out specific sections or data points from a filing (for example, all 'Risk Factors' text or the exact wording of the outlook statement) for quick review.",
         "Prompt-Worthy": "Yes"
     },
     {
-        "Sector": "Financial Data Providers (e.g. Bloomberg, S\\&P Capital IQ, YCharts, Quartr)",
+        "Sector": "Financial Data Providers (e.g. Bloomberg, S&P Capital IQ, YCharts, Quartr)",
         "Use Case": "Data extraction from filings",
         "Sub-Use Case": "Extract all mentions of a given term (like 'inflation' or 'currency risk') from a batch of filings and present them with surrounding context to the user.",
         "Prompt-Worthy": "Yes"
     },
     {
-        "Sector": "Financial Data Providers (e.g. Bloomberg, S\\&P Capital IQ, YCharts, Quartr)",
+        "Sector": "Financial Data Providers (e.g. Bloomberg, S&P Capital IQ, YCharts, Quartr)",
         "Use Case": "Data extraction from filings",
         "Sub-Use Case": "Summarize changes between consecutive filings (e.g., last year vs this year’s 10-K) by highlighting new risk factors, significant wording changes in MD\\&A, or updates in financials.",
         "Prompt-Worthy": "Yes"
     },
     {
-        "Sector": "Financial Data Providers (e.g. Bloomberg, S\\&P Capital IQ, YCharts, Quartr)",
+        "Sector": "Financial Data Providers (e.g. Bloomberg, S&P Capital IQ, YCharts, Quartr)",
         "Use Case": "Client-facing insights",
         "Sub-Use Case": "Set up triggers to generate a short insight note when a significant data change is detected (e.g., 'Company A’s gross margin dropped 5 percentage points this quarter - likely causes include...').",
         "Prompt-Worthy": "Yes"
     },
     {
-        "Sector": "Financial Data Providers (e.g. Bloomberg, S\\&P Capital IQ, YCharts, Quartr)",
+        "Sector": "Financial Data Providers (e.g. Bloomberg, S&P Capital IQ, YCharts, Quartr)",
         "Use Case": "Client-facing insights",
         "Sub-Use Case": "Write a concise analysis blurb when a stock in a user’s portfolio moves sharply (e.g., down 10% in a day), explaining possible reasons (earnings miss, sector news) behind the move.",
         "Prompt-Worthy": "Yes"
     },
     {
-        "Sector": "Financial Data Providers (e.g. Bloomberg, S\\&P Capital IQ, YCharts, Quartr)",
+        "Sector": "Financial Data Providers (e.g. Bloomberg, S&P Capital IQ, YCharts, Quartr)",
         "Use Case": "Client-facing insights",
         "Sub-Use Case": "Provide personalized portfolio insights, such as 'Your portfolio is up 2% today mainly due to XYZ stock's earnings beat,' delivered as a notification.",
         "Prompt-Worthy": "Yes"
     },
     {
-        "Sector": "Financial Data Providers (e.g. Bloomberg, S\\&P Capital IQ, YCharts, Quartr)",
+        "Sector": "Financial Data Providers (e.g. Bloomberg, S&P Capital IQ, YCharts, Quartr)",
         "Use Case": "Client-facing insights",
         "Sub-Use Case": "Translate complex data changes into plain language explanations for users (e.g., explain why a portfolio’s risk level changed after a trade, in simple terms with no jargon).",
         "Prompt-Worthy": "Yes"
@@ -2472,289 +2472,289 @@
         "Prompt-Worthy": "Yes"
     },
     {
-        "Sector": "Financial Data Providers (e.g. Bloomberg, S&P Capital IQ, YCharts, Quartr)",
+        "Sector": "Financial Advisors / FP&A Teams",
         "Use Case": "Budgeting and forecasting (FP\\&A)",
         "Sub-Use Case": "Gather budget inputs from all departments, consolidate them into a master financial model, and flag any department submissions that deviate significantly from prior year or targets.",
         "Prompt-Worthy": "Yes"
     },
     {
-        "Sector": "Financial Data Providers (e.g. Bloomberg, S&P Capital IQ, YCharts, Quartr)",
+        "Sector": "Financial Advisors / FP&A Teams",
         "Use Case": "Budgeting and forecasting (FP\\&A)",
         "Sub-Use Case": "Project the next year’s income and expenses based on historical trends and planned initiatives, producing a high-level forecast (P\\&L) for management review.",
         "Prompt-Worthy": "Yes"
     },
     {
-        "Sector": "Financial Data Providers (e.g. Bloomberg, S&P Capital IQ, YCharts, Quartr)",
+        "Sector": "Financial Advisors / FP&A Teams",
         "Use Case": "Budgeting and forecasting (FP\\&A)",
         "Sub-Use Case": "Identify gaps between the bottom-up budget (aggregated department budgets) and the top-down targets, and prepare suggestions for adjustments or negotiation to align the two.",
         "Prompt-Worthy": "Yes"
     },
     {
-        "Sector": "Financial Data Providers (e.g. Bloomberg, S&P Capital IQ, YCharts, Quartr)",
+        "Sector": "Financial Advisors / FP&A Teams",
         "Use Case": "Budgeting and forecasting (FP\\&A)",
         "Sub-Use Case": "Present the final budget in a meeting with a summary of key assumptions (growth rates, headcount changes) and highlights of where major increases or cuts are occurring.",
         "Prompt-Worthy": "Yes"
     },
     {
-        "Sector": "Financial Data Providers (e.g. Bloomberg, S&P Capital IQ, YCharts, Quartr)",
+        "Sector": "Financial Advisors / FP&A Teams",
         "Use Case": "Variance analysis & reporting (FP\\&A)",
         "Sub-Use Case": "Compare monthly or quarterly actual results to the budget and identify the largest variances (both favorable and unfavorable) in each major category.",
         "Prompt-Worthy": "Yes"
     },
     {
-        "Sector": "Financial Data Providers (e.g. Bloomberg, S&P Capital IQ, YCharts, Quartr)",
+        "Sector": "Financial Advisors / FP&A Teams",
         "Use Case": "Variance analysis & reporting (FP\\&A)",
         "Sub-Use Case": "Investigate the reasons behind significant variances (e.g., higher revenue due to a one-time deal, or expense overrun due to an unexpected cost) by consulting with department heads, and summarize these explanations.",
         "Prompt-Worthy": "Yes"
     },
     {
-        "Sector": "Financial Data Providers (e.g. Bloomberg, S&P Capital IQ, YCharts, Quartr)",
+        "Sector": "Financial Advisors / FP&A Teams",
         "Use Case": "Variance analysis & reporting (FP\\&A)",
         "Sub-Use Case": "Prepare a variance analysis report for management with charts showing budget vs. actual for major categories and written commentary explaining the reasons for the top variances.",
         "Prompt-Worthy": "Yes"
     },
     {
-        "Sector": "Financial Data Providers (e.g. Bloomberg, S&P Capital IQ, YCharts, Quartr)",
+        "Sector": "Financial Advisors / FP&A Teams",
         "Use Case": "Variance analysis & reporting (FP\\&A)",
         "Sub-Use Case": "Recommend any forecast adjustments or cost control actions if certain negative variances are expected to continue (e.g., flag rising costs that may need budget reallocation).",
         "Prompt-Worthy": "Yes"
     },
     {
-        "Sector": "Financial Data Providers (e.g. Bloomberg, S&P Capital IQ, YCharts, Quartr)",
+        "Sector": "Financial Advisors / FP&A Teams",
         "Use Case": "Management reporting dashboard (FP\\&A)",
         "Sub-Use Case": "Determine the key performance indicators (KPIs) and metrics to include in the management dashboard (e.g., revenue growth, EBITDA margin, cash on hand) based on leadership priorities.",
         "Prompt-Worthy": "Yes"
     },
     {
-        "Sector": "Financial Data Providers (e.g. Bloomberg, S&P Capital IQ, YCharts, Quartr)",
+        "Sector": "Financial Advisors / FP&A Teams",
         "Use Case": "Management reporting dashboard (FP\\&A)",
         "Sub-Use Case": "Automate data collection for the dashboard each month (via spreadsheets or BI tools) and ensure the data is accurate and up-to-date.",
         "Prompt-Worthy": "Yes"
     },
     {
-        "Sector": "Financial Data Providers (e.g. Bloomberg, S&P Capital IQ, YCharts, Quartr)",
+        "Sector": "Financial Advisors / FP&A Teams",
         "Use Case": "Management reporting dashboard (FP\\&A)",
         "Sub-Use Case": "Update the management dashboard with the latest figures and add brief commentary or color (e.g., 'Revenue up 5% MoM due to new product launch') for context.",
         "Prompt-Worthy": "Yes"
     },
     {
-        "Sector": "Financial Data Providers (e.g. Bloomberg, S&P Capital IQ, YCharts, Quartr)",
+        "Sector": "Financial Advisors / FP&A Teams",
         "Use Case": "Management reporting dashboard (FP\\&A)",
         "Sub-Use Case": "Distribute or present the dashboard to executives, highlighting any metric that deviated notably from expectations and answering any questions about the data.",
         "Prompt-Worthy": "Yes"
     },
     {
-        "Sector": "Financial Data Providers (e.g. Bloomberg, S&P Capital IQ, YCharts, Quartr)",
+        "Sector": "Financial Advisors / FP&A Teams",
         "Use Case": "Strategic financial analysis (FP\\&A)",
         "Sub-Use Case": "Evaluate a capital expenditure proposal (such as purchasing new equipment or opening a new location) by forecasting its cash flows, calculating NPV/IRR, and summarizing whether it is financially viable or not.",
         "Prompt-Worthy": "Yes"
     },
     {
-        "Sector": "Financial Data Providers (e.g. Bloomberg, S&P Capital IQ, YCharts, Quartr)",
+        "Sector": "Financial Advisors / FP&A Teams",
         "Use Case": "Strategic financial analysis (FP\\&A)",
         "Sub-Use Case": "Analyze a pricing change scenario (for instance, a 5% price increase) by modeling its impact on sales volume and profit margins, and provide a recommendation on whether the company should implement it.",
         "Prompt-Worthy": "Yes"
     },
     {
-        "Sector": "Financial Data Providers (e.g. Bloomberg, S&P Capital IQ, YCharts, Quartr)",
+        "Sector": "Financial Advisors / FP&A Teams",
         "Use Case": "Strategic financial analysis (FP\\&A)",
         "Sub-Use Case": "Assess a potential acquisition or investment opportunity by creating a simple model of how it would affect the company’s financials (revenue, EBITDA, etc.) and summarizing the strategic fit and financial return.",
         "Prompt-Worthy": "Yes"
     },
     {
-        "Sector": "Financial Data Providers (e.g. Bloomberg, S&P Capital IQ, YCharts, Quartr)",
+        "Sector": "Financial Advisors / FP&A Teams",
         "Use Case": "Strategic financial analysis (FP\\&A)",
         "Sub-Use Case": "Conduct ad hoc scenario analysis (e.g., the impact of a 10% increase in raw material costs on margins) and present the findings to management with suggested actions to mitigate any negative effects.",
         "Prompt-Worthy": "Yes"
     },
     {
-        "Sector": "Financial Data Providers (e.g. Bloomberg, S&P Capital IQ, YCharts, Quartr)",
+        "Sector": "Financial Advisors / FP&A Teams",
         "Use Case": "Data consolidation and cleansing (FP\\&A)",
         "Sub-Use Case": "Collect financial and operational data from multiple business units or systems (sales, HR, etc.) and merge it into a single dataset or database for company-wide analysis.",
         "Prompt-Worthy": "Yes"
     },
     {
-        "Sector": "Financial Data Providers (e.g. Bloomberg, S&P Capital IQ, YCharts, Quartr)",
+        "Sector": "Financial Advisors / FP&A Teams",
         "Use Case": "Data consolidation and cleansing (FP\\&A)",
         "Sub-Use Case": "Clean the combined data by standardizing account names/codes, correcting errors or outliers (e.g., fixing an obviously wrong date or a misplaced decimal), and ensuring completeness.",
         "Prompt-Worthy": "Yes"
     },
     {
-        "Sector": "Financial Data Providers (e.g. Bloomberg, S&P Capital IQ, YCharts, Quartr)",
+        "Sector": "Financial Advisors / FP&A Teams",
         "Use Case": "Data consolidation and cleansing (FP\\&A)",
         "Sub-Use Case": "Validate the consolidated data against source systems (for example, ensure the sum of departmental revenues equals total company revenue) and document any adjustments made.",
         "Prompt-Worthy": "Yes"
     },
     {
-        "Sector": "Financial Data Providers (e.g. Bloomberg, S&P Capital IQ, YCharts, Quartr)",
+        "Sector": "Financial Advisors / FP&A Teams",
         "Use Case": "Data consolidation and cleansing (FP\\&A)",
         "Sub-Use Case": "Set up the cleaned data in a structure (pivot tables or BI tool) that will be used for reporting and analysis, and document the process so that monthly consolidations can be repeated consistently.",
         "Prompt-Worthy": "Yes"
     },
     {
-        "Sector": "Financial Data Providers (e.g. Bloomberg, S&P Capital IQ, YCharts, Quartr)",
+        "Sector": "Financial Advisors / FP&A Teams",
         "Use Case": "Financial model building (FP\\&A)",
         "Sub-Use Case": "Develop a financial model for a new business initiative or project, projecting income statements, cash flows, and balance sheets over a multi-year period based on various assumptions.",
         "Prompt-Worthy": "Yes"
     },
     {
-        "Sector": "Financial Data Providers (e.g. Bloomberg, S&P Capital IQ, YCharts, Quartr)",
+        "Sector": "Financial Advisors / FP&A Teams",
         "Use Case": "Financial model building (FP\\&A)",
         "Sub-Use Case": "Incorporate different scenarios into the model (best case, worst case, base case) and set up toggles or inputs so management can see how outcomes change with certain assumptions.",
         "Prompt-Worthy": "Yes"
     },
     {
-        "Sector": "Financial Data Providers (e.g. Bloomberg, S&P Capital IQ, YCharts, Quartr)",
+        "Sector": "Financial Advisors / FP&A Teams",
         "Use Case": "Financial model building (FP\\&A)",
         "Sub-Use Case": "Ensure the model is rigorously tested (e.g., check that balance sheet balances, cash flow ties to the P\\&L) and correct any errors in formulas or logic identified.",
         "Prompt-Worthy": "Yes"
     },
     {
-        "Sector": "Financial Data Providers (e.g. Bloomberg, S&P Capital IQ, YCharts, Quartr)",
+        "Sector": "Financial Advisors / FP&A Teams",
         "Use Case": "Financial model building (FP\\&A)",
         "Sub-Use Case": "Document the model’s assumptions and instructions (perhaps in a summary tab or memo) so that others can understand how to use and update it.",
         "Prompt-Worthy": "Yes"
     },
     {
-        "Sector": "Financial Data Providers (e.g. Bloomberg, S&P Capital IQ, YCharts, Quartr)",
+        "Sector": "Financial Advisors / FP&A Teams",
         "Use Case": "Investment/wealth plan development (Advisor)",
         "Sub-Use Case": "Compile all the client’s relevant personal and financial information (goals, timeline, risk tolerance, assets, liabilities) and summarize their current situation as the starting point for the plan.",
         "Prompt-Worthy": "Yes"
     },
     {
-        "Sector": "Financial Data Providers (e.g. Bloomberg, S&P Capital IQ, YCharts, Quartr)",
+        "Sector": "Financial Advisors / FP&A Teams",
         "Use Case": "Investment/wealth plan development (Advisor)",
         "Sub-Use Case": "Create long-term projections (e.g., retirement savings growth, college funding) using assumptions like investment return and inflation, to see if the client is on track or has shortfalls.",
         "Prompt-Worthy": "Yes"
     },
     {
-        "Sector": "Financial Data Providers (e.g. Bloomberg, S&P Capital IQ, YCharts, Quartr)",
+        "Sector": "Financial Advisors / FP&A Teams",
         "Use Case": "Investment/wealth plan development (Advisor)",
         "Sub-Use Case": "Develop recommendations across different areas (investment strategy, insurance, estate planning, debt repayment) tailored to the client’s goals, and list them with rationale.",
         "Prompt-Worthy": "Yes"
     },
     {
-        "Sector": "Financial Data Providers (e.g. Bloomberg, S&P Capital IQ, YCharts, Quartr)",
+        "Sector": "Financial Advisors / FP&A Teams",
         "Use Case": "Investment/wealth plan development (Advisor)",
         "Sub-Use Case": "Assemble a comprehensive financial plan document or presentation, including an executive summary of the client's goals and the key actions they should take.",
         "Prompt-Worthy": "Yes"
     },
     {
-        "Sector": "Financial Data Providers (e.g. Bloomberg, S&P Capital IQ, YCharts, Quartr)",
+        "Sector": "Financial Advisors / FP&A Teams",
         "Use Case": "Portfolio performance review (Advisor)",
         "Sub-Use Case": "Calculate the client’s portfolio return over the review period and compare it to a relevant benchmark (like S\\&P 500 or a 60/40 portfolio) to evaluate relative performance.",
         "Prompt-Worthy": "Yes"
     },
     {
-        "Sector": "Financial Data Providers (e.g. Bloomberg, S&P Capital IQ, YCharts, Quartr)",
+        "Sector": "Financial Advisors / FP&A Teams",
         "Use Case": "Portfolio performance review (Advisor)",
         "Sub-Use Case": "Identify which investments contributed most to the performance and which lagged, and explain briefly each notable one.",
         "Prompt-Worthy": "Yes"
     },
     {
-        "Sector": "Financial Data Providers (e.g. Bloomberg, S&P Capital IQ, YCharts, Quartr)",
+        "Sector": "Financial Advisors / FP&A Teams",
         "Use Case": "Portfolio performance review (Advisor)",
         "Sub-Use Case": "Summarize if the current asset allocation is still aligned with client's risk profile and goals, and note whether any rebalancing or adjustments are needed.",
         "Prompt-Worthy": "Yes"
     },
     {
-        "Sector": "Financial Data Providers (e.g. Bloomberg, S&P Capital IQ, YCharts, Quartr)",
+        "Sector": "Financial Advisors / FP&A Teams",
         "Use Case": "Portfolio performance review (Advisor)",
         "Sub-Use Case": "Provide recommendations like rebalancing or fund changes based on the performance analysis, to discuss with the client.",
         "Prompt-Worthy": "Yes"
     },
     {
-        "Sector": "Financial Data Providers (e.g. Bloomberg, S&P Capital IQ, YCharts, Quartr)",
+        "Sector": "Financial Advisors / FP&A Teams",
         "Use Case": "Client meeting preparation (Advisor)",
         "Sub-Use Case": "Review the client’s portfolio and recent transactions ahead of the meeting to identify any issues or topics to discuss (e.g., cash buildup, recent volatility in a holding).",
         "Prompt-Worthy": "Yes"
     },
     {
-        "Sector": "Financial Data Providers (e.g. Bloomberg, S&P Capital IQ, YCharts, Quartr)",
+        "Sector": "Financial Advisors / FP&A Teams",
         "Use Case": "Client meeting preparation (Advisor)",
         "Sub-Use Case": "Read through past meeting notes and communications to refresh on what was last discussed and promised, ensuring you address any open items or follow-ups.",
         "Prompt-Worthy": "Yes"
     },
     {
-        "Sector": "Financial Data Providers (e.g. Bloomberg, S&P Capital IQ, YCharts, Quartr)",
+        "Sector": "Financial Advisors / FP&A Teams",
         "Use Case": "Client meeting preparation (Advisor)",
         "Sub-Use Case": "Prepare an agenda with key topics to discuss (like portfolio changes, goal updates, new recommendations) so the meeting stays focused and productive.",
         "Prompt-Worthy": "Yes"
     },
     {
-        "Sector": "Financial Data Providers (e.g. Bloomberg, S&P Capital IQ, YCharts, Quartr)",
+        "Sector": "Financial Advisors / FP&A Teams",
         "Use Case": "Client meeting preparation (Advisor)",
         "Sub-Use Case": "Gather any necessary informational materials (brochures, product info, educational pieces) that might be relevant for the client’s questions or planned discussion points.",
         "Prompt-Worthy": "Yes"
     },
     {
-        "Sector": "Financial Data Providers (e.g. Bloomberg, S&P Capital IQ, YCharts, Quartr)",
+        "Sector": "Financial Advisors / FP&A Teams",
         "Use Case": "Client communication & education (Advisor)",
         "Sub-Use Case": "Draft an email to clients during a market downturn to reassure them, explaining in simple terms what's happening and reiterating the importance of their long-term plan.",
         "Prompt-Worthy": "Yes"
     },
     {
-        "Sector": "Financial Data Providers (e.g. Bloomberg, S&P Capital IQ, YCharts, Quartr)",
+        "Sector": "Financial Advisors / FP&A Teams",
         "Use Case": "Client communication & education (Advisor)",
         "Sub-Use Case": "Create a short educational piece (like a blog post or PDF) explaining a financial concept the client asked about, such as 'dollar-cost averaging,' including examples.",
         "Prompt-Worthy": "Yes"
     },
     {
-        "Sector": "Financial Data Providers (e.g. Bloomberg, S&P Capital IQ, YCharts, Quartr)",
+        "Sector": "Financial Advisors / FP&A Teams",
         "Use Case": "Client communication & education (Advisor)",
         "Sub-Use Case": "Explain a new recommendation to the client (for instance, why increasing international exposure might be beneficial) in a letter or call script, using analogies or clear reasoning instead of jargon.",
         "Prompt-Worthy": "Yes"
     },
     {
-        "Sector": "Financial Data Providers (e.g. Bloomberg, S&P Capital IQ, YCharts, Quartr)",
+        "Sector": "Financial Advisors / FP&A Teams",
         "Use Case": "Client communication & education (Advisor)",
         "Sub-Use Case": "Regularly update clients with a brief newsletter or call about their portfolio and relevant news, tailored to their interest level (some clients want detail, others just reassurance).",
         "Prompt-Worthy": "Yes"
     },
     {
-        "Sector": "Financial Data Providers (e.g. Bloomberg, S&P Capital IQ, YCharts, Quartr)",
+        "Sector": "Financial Advisors / FP&A Teams",
         "Use Case": "Product research and recommendation (Advisor)",
         "Sub-Use Case": "Research multiple mutual funds or ETFs for a particular asset class (e.g., emerging market equity) and compare their fees, performance, and holdings; pick one that best suits the client and justify why.",
         "Prompt-Worthy": "Yes"
     },
     {
-        "Sector": "Financial Data Providers (e.g. Bloomberg, S&P Capital IQ, YCharts, Quartr)",
+        "Sector": "Financial Advisors / FP&A Teams",
         "Use Case": "Product research and recommendation (Advisor)",
         "Sub-Use Case": "Look into various insurance policies (term life, whole life) for the client’s needs and summarize the benefits and costs of each, and recommend the most appropriate option.",
         "Prompt-Worthy": "Yes"
     },
     {
-        "Sector": "Financial Data Providers (e.g. Bloomberg, S&P Capital IQ, YCharts, Quartr)",
+        "Sector": "Financial Advisors / FP&A Teams",
         "Use Case": "Product research and recommendation (Advisor)",
         "Sub-Use Case": "Analyze different mortgage or loan offers if the client is refinancing or purchasing property, and provide a comparison of interest rates, total cost, and flexibility, with a suggestion on which to choose.",
         "Prompt-Worthy": "Yes"
     },
     {
-        "Sector": "Financial Data Providers (e.g. Bloomberg, S&P Capital IQ, YCharts, Quartr)",
+        "Sector": "Financial Advisors / FP&A Teams",
         "Use Case": "Product research and recommendation (Advisor)",
         "Sub-Use Case": "Write a concise recommendation memo for the client detailing a new product (like a managed account or an annuity) you think they should consider, and how it fits their plan.",
         "Prompt-Worthy": "Yes"
     },
     {
-        "Sector": "Financial Data Providers (e.g. Bloomberg, S&P Capital IQ, YCharts, Quartr)",
+        "Sector": "Financial Advisors / FP&A Teams",
         "Use Case": "Internal forecasting & cost analysis (FP\\&A)",
         "Sub-Use Case": "Forecast the department’s or business unit’s expenses for the next year based on headcount plans and known projects, highlighting any expected increases or savings versus the current year.",
         "Prompt-Worthy": "Yes"
     },
     {
-        "Sector": "Financial Data Providers (e.g. Bloomberg, S&P Capital IQ, YCharts, Quartr)",
+        "Sector": "Financial Advisors / FP&A Teams",
         "Use Case": "Internal forecasting & cost analysis (FP\\&A)",
         "Sub-Use Case": "Analyze trends in operational costs (like software subscriptions or utilities) over the past years and identify areas where costs can be optimized, summarizing potential savings.",
         "Prompt-Worthy": "Yes"
     },
     {
-        "Sector": "Financial Data Providers (e.g. Bloomberg, S&P Capital IQ, YCharts, Quartr)",
+        "Sector": "Financial Advisors / FP&A Teams",
         "Use Case": "Internal forecasting & cost analysis (FP\\&A)",
         "Sub-Use Case": "Prepare a report on the company's fixed vs variable costs structure and how a change in sales volume would impact profitability, aiding in scenario planning.",
         "Prompt-Worthy": "Yes"
     },
     {
-        "Sector": "Financial Data Providers (e.g. Bloomberg, S&P Capital IQ, YCharts, Quartr)",
+        "Sector": "Financial Advisors / FP&A Teams",
         "Use Case": "Internal forecasting & cost analysis (FP\\&A)",
         "Sub-Use Case": "Examine the ROI of a recent internal project or initiative by comparing the projected benefits vs actual costs incurred, and summarize whether it met expectations or not.",
         "Prompt-Worthy": "Yes"
