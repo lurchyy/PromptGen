@@ -1,20 +1,4 @@
-def extract_filled_variables(user_input, variables):
-    """
-    Given a user input string and a list of variable names, attempt to extract values for each variable.
-    Returns a dict: {variable: value or ''}
-    This is a simple implementation: it checks if the variable name (case-insensitive) appears in the user input,
-    and if so, returns the user input as the value; otherwise, returns ''.
-    You can improve this logic to parse structured input if needed.
-    """
-    result = {}
-    user_input_lower = user_input.lower() if user_input else ''
-    for var in variables:
-        # If variable name appears in user input, assign user input as value (simple heuristic)
-        if var.lower() in user_input_lower and user_input.strip():
-            result[var] = user_input.strip()
-        else:
-            result[var] = ''
-    return result
+
 import os
 import re
 ## groq import removed
@@ -90,57 +74,75 @@ def deduplicate(variables):
             seen.add(v)
     return deduped
 
+def extract_filled_variables(user_input, variables):
+    """
+    Given a user input string and a list of variable names, attempt to extract values for each variable.
+    Returns a dict: {variable: value or ''}
+    This is a simple implementation: it checks if the variable name (case-insensitive) appears in the user input,
+    and if so, returns the user input as the value; otherwise, returns ''.
+    You can improve this logic to parse structured input if needed.
+    """
+    result = {}
+    user_input_lower = user_input.lower() if user_input else ''
+    for var in variables:
+        # If variable name appears in user input, assign user input as value (simple heuristic)
+        if var.lower() in user_input_lower and user_input.strip():
+            result[var] = user_input.strip()
+        else:
+            result[var] = ''
+    return result
 
-def extract_input_section(prompt):
-    """
-    Return ONLY the actual 'Input' section (as text) from the full prompt.
-    """
-    # More flexible pattern to match various input section formats
-    patterns = [
-        r"###\s*\*\*Input Data\*\*\s*\n(.*?)(?=\n###|\n##|\n\*\*\*|\Z)",
-        r"##\s*Input Data\s*\n(.*?)(?=\n###|\n##|\n\*\*\*|\Z)",
-        r"\*\*Input Data\*\*\s*\n(.*?)(?=\n###|\n##|\n\*\*\*|\Z)",
-        r"Input Data:?\s*\n(.*?)(?=\n###|\n##|\n\*\*\*|\Z)"
-    ]
-    
-    for pattern in patterns:
-        m = re.search(pattern, prompt, re.IGNORECASE | re.DOTALL)
-        if m:
-            return m.group(1).strip()
-    
-    return ""
 
-def extract_input_headings(prompt):
+import ast
+import re
+
+def extract_input_headings(prompt_template: str) -> list:
     """
-    Returns all bolded/bulleted field labels (the headings) in the Input section.
+    Uses Gemini LLM to extract all input variable names (in [[Variable Name]] format) from a prompt template.
+    Returns a list of variable names as strings.
     """
-    input_section = extract_input_section(prompt)
-    if not input_section:
-        return []
+    system_prompt = (
+        """You are an expert prompt parser. Given a prompt template, extract all user inputs required by the prompt. User inputs are typically under the Input section. Do not include any variables that require file uploads or other non-text inputs. If a variable is optional, include "(Optional)" in the variable name.
+        Return ONLY a Python list of strings.
+        Do not include any explanation, comments, or extra text.
+        Do not return anything else as a response, just the list of variable names. No additional formatting or text."""
+    )
+    user_prompt = f"Prompt Template:\n{prompt_template}\n\nExtract all input variable names as a Python list."
     
-    headings = []
-    for line in input_section.splitlines():
-        line = line.strip()
-        if not line:
-            continue
-            
-        # Pattern for: *   **Portfolio Holdings:** [[...]]
-        # Also handles: **Portfolio Holdings:** [[...]]
-        patterns = [
-            r"^\*\s*\*\*([^*\(\[\:]+?)(?:\s*\(Optional\))?\s*:\*\*\s*\[\[",
-            r"^\*\*([^*\(\[\:]+?)(?:\s*\(Optional\))?\s*:\*\*\s*\[\[",
-            r"^[\*\-\s\d\.]*\*\*([^*\(\[\:]+?)(?:\s*\(Optional\))?\s*:\*\*\s*\[\["
-        ]
-        
-        for pattern in patterns:
-            m = re.match(pattern, line)
-            if m:
-                heading = m.group(1).strip()
-                if heading and heading not in headings:
-                    headings.append(heading)
-                break
+    # This response will be the string with the markdown block
+    response = get_llm_response([
+        {"role": "system", "content": system_prompt},
+        {"role": "user", "content": user_prompt}
+    ], model="gemini-2.5-flash") # Assuming you meant gemini-1.5-flash
+
+    # --- Start of the fix ---
     
-    return headings
+    # Use regex to find and extract the content within the python markdown block
+    match = re.search(r"```python\s*([\s\S]*?)\s*```", response)
+    
+    clean_response = ""
+    if match:
+        clean_response = match.group(1).strip()
+    else:
+        # If no markdown block is found, assume the response is already clean
+        clean_response = response.strip()
+
+    # --- End of the fix ---
+
+    try:
+        # Now, parse the cleaned string
+        variables = ast.literal_eval(clean_response)
+        if isinstance(variables, list):
+            return variables
+    except (ValueError, SyntaxError) as e:
+        print(f"Failed to parse the cleaned response: {e}")
+        print(f"Cleaned response was: {clean_response}")
+
+    # Fallback: return empty list if parsing fails
+    return []
+
+
+
 
 def clean_generated_prompt(prompt: str) -> str:
     prompt = re.sub(r"^\s*here is the improved prompt\s*\n", "", prompt, flags=re.IGNORECASE)
@@ -447,35 +449,42 @@ def fill_prompt_with_user_inputs(prompt_template: str, user_inputs: dict) -> str
     Fill the prompt template with user-provided inputs.
     """
     filled_prompt = prompt_template
-    for variable_name, user_value in user_inputs.items():
-        if not user_value or not str(user_value).strip():
-            continue
-        clean_value = str(user_value).strip()
-        # Pattern 1: Replace bullet point format with placeholder
-        bullet_pattern = rf"(^\s*[\*\-]\s*\*\*{re.escape(variable_name)}\s*(?:\(Optional\))?\s*:\*\*\s*)\[\[.*?\]\]"
-        filled_prompt = re.sub(
-            bullet_pattern,
-            rf"\1{clean_value}",
-            filled_prompt,
-            flags=re.IGNORECASE | re.MULTILINE
-        )
-        # Pattern 2: Replace standalone placeholders
-        standalone_pattern = rf"\[\[{re.escape(variable_name)}\]\]"
-        filled_prompt = re.sub(
-            standalone_pattern,
-            clean_value,
-            filled_prompt,
-            flags=re.IGNORECASE
-        )
-        # Pattern 3: Replace more complex formats
-        heading_pattern = rf"(\*\*{re.escape(variable_name)}\s*(?:\(Optional\))?\s*:\*\*\s*)\[\[.*?\]\]"
-        filled_prompt = re.sub(
-            heading_pattern,
-            rf"\1{clean_value}",
-            filled_prompt,
-            flags=re.IGNORECASE
-        )
-    return filled_prompt
+    variables = extract_input_headings(prompt_template)
+    # Find the Input section by searching for the word 'Input' (case-insensitive)
+    lower_prompt = filled_prompt.lower()
+    input_word = "input"
+    idx = lower_prompt.find(input_word)
+    if idx == -1:
+        raise ValueError("Input section not found in prompt template. Please check the template format.")
+    # Find the start of the line containing 'Input'
+    line_start = filled_prompt.rfind('\n', 0, idx) + 1 if '\n' in filled_prompt[:idx] else 0
+    # Find the end of the Input section: next blank line or next section header
+    after_input = filled_prompt[line_start:]
+    # Find the end of the Input section by looking for two consecutive newlines or a section header (e.g., '**Output**')
+    section_end = after_input.find('\n\n')
+    if section_end == -1:
+        # Try to find next section header (e.g., '**Output**', 'Output', etc.)
+        import re
+        m = re.search(r"\n\s*(\*\*)?[A-Za-z]+(\*\*)?\s*:?", after_input[len(input_word):])
+        if m:
+            section_end = m.start() + len(input_word)
+        else:
+            section_end = len(after_input)
+    input_section = after_input[:section_end]
+    before = filled_prompt[:line_start]
+    after = after_input[section_end:]
+    # Replace only the values for each variable in the Input section
+    import re
+    def replace_var_line(var, value, input_section):
+        # Match lines like 'VarName : ...' (allow spaces, colon optional)
+        pattern = rf"(^|\n)\s*{re.escape(var)}\s*:?\s*.*?(?=\n|$)"
+        repl = f"\1{var} : {value}"
+        return re.sub(pattern, repl, input_section, flags=re.IGNORECASE)
+    for var in variables:
+        user_value = user_inputs.get(var, '').strip()
+        input_section = replace_var_line(var, user_value, input_section)
+    new_prompt = before + input_section + after
+    return new_prompt
 
 def extract_and_validate_inputs(prompt_template: str, user_inputs: dict) -> dict:
     """
@@ -505,7 +514,7 @@ def create_input_form_data(prompt_template: str) -> list:
     form_fields = []
     for var in variables:
         # Determine if field is optional
-        is_optional = "(Optional)" in extract_input_section(prompt_template)
+        is_optional = "(Optional)" in extract_input_headings(prompt_template)
         placeholder = f"Enter {var.lower()}..."
         form_fields.append({
             "name": var,
