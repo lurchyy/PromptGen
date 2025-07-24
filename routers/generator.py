@@ -17,7 +17,8 @@ def extract_filled_variables(user_input, variables):
     return result
 import os
 import re
-import groq
+## groq import removed
+import google.generativeai as genai
 from fastapi import APIRouter, Depends, HTTPException
 from fastapi import Query
 from pydantic import BaseModel
@@ -31,7 +32,10 @@ def llm_subusecase_match(user_input, subusecase_list):
     """LLM fuzzy match user input to a sub-use case string from the list. Returns the best match or None."""
     if not subusecase_list:
         return None
-    groq_client = groq.Groq(api_key=GROQ_API_KEY)
+    # Accept model argument for LLM selection
+    import inspect
+    frame = inspect.currentframe().f_back
+    model = frame.f_locals.get('model', 'gpt')
     system_prompt = (
         f"You are a financial sub-use case matcher. Here is the list of sub-use cases:\n"
         f"{subusecase_list}\n"
@@ -40,25 +44,36 @@ def llm_subusecase_match(user_input, subusecase_list):
         "If not, reply ONLY with: NO_MATCH."
     )
     user_prompt = f"User Input: {user_input}"
-    response = groq_client.chat.completions.create(
-        model="llama-3.3-70b-versatile",
-        temperature=0.1,
-        messages=[
-            {"role": "system", "content": system_prompt},
-            {"role": "user", "content": user_prompt},
-        ]
-    )
-    result = response.choices[0].message.content.strip()
+    result = get_llm_response([
+        {"role": "system", "content": system_prompt},
+        {"role": "user", "content": user_prompt}
+    ], model=model)
     return result if result != "NO_MATCH" else None
 
 router = APIRouter()
-GROQ_API_KEY = os.getenv("GROQ_API_KEY")
+## GROQ_API_KEY removed
+GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
+
+def get_llm_response(messages, model="gpt"):
+    """
+    Unified LLM response for Gemini only.
+    messages: list of dicts with 'role' and 'content'.
+    model: 'gemini' (Google Gemini)
+    """
+    if not GEMINI_API_KEY:
+        raise Exception("GEMINI_API_KEY not set")
+    genai.configure(api_key=GEMINI_API_KEY)
+    # Gemini expects a single prompt string, so concatenate all messages
+    prompt = "\n".join([f"{m['role']}: {m['content']}" for m in messages])
+    gemini_model = genai.GenerativeModel("gemini-2.5-flash")
+    response = gemini_model.generate_content(prompt)
+    return response.text.strip() if hasattr(response, "text") else str(response)
 
 class PromptRequest(BaseModel):
     sector: str
     use_case: str
     user_input: str = ""
-    model: str = "gpt"  # e.g. 'gpt', 'claude', 'gemini'
+    model: str = "gemini"  # Only 'gemini' is supported
 
 class VariableFillRequest(BaseModel):
     prompt_template: str
@@ -134,7 +149,9 @@ def clean_generated_prompt(prompt: str) -> str:
     return prompt.strip()
 
 def llm_match_decision(sector, user_use_case, text_input, use_case_list):
-    groq_client = groq.Groq(api_key=GROQ_API_KEY)  # Do not pass 'proxies' or other unsupported kwargs
+    import inspect
+    frame = inspect.currentframe().f_back
+    model = frame.f_locals.get('model', 'gpt')
     system_prompt = (
         f"You are a financial use case matcher. Here is the list of use cases for the {sector} sector:\n"
         f"{use_case_list}\n"
@@ -147,18 +164,15 @@ def llm_match_decision(sector, user_use_case, text_input, use_case_list):
         f"User Use Case: {user_use_case}\n"
         f"User Input: {text_input}"
     )
-    response = groq_client.chat.completions.create(
-        model="llama-3.3-70b-versatile",
-        temperature=0.1,
-        messages=[
-            {"role": "system", "content": system_prompt},
-            {"role": "user", "content": user_prompt},
-        ]
-    )
-    return response.choices[0].message.content.strip()
+    return get_llm_response([
+        {"role": "system", "content": system_prompt},
+        {"role": "user", "content": user_prompt}
+    ], model=model)
 
 def generate_structured_prompt(sector, use_case, user_input):
-    groq_client = groq.Groq(api_key=GROQ_API_KEY)
+    import inspect
+    frame = inspect.currentframe().f_back
+    model = frame.f_locals.get('model', 'gpt')
     system_prompt = """
 You are an expert Prompt Engineer.
 
@@ -187,25 +201,21 @@ The prompt should include clear, minimal input instructions, detailed output str
 If the task requires a document or data upload, create a placeholder for it. Otherwise, instruct the LLM to attempt research or acknowledge missing data.
 
 Instruct the LLM to flag and report any unavailable or missing data that cannot be found from public sources or uploads."""
-    user_prompt = f"""
-Sector: {sector}
-Use Case: {use_case}
-User Goal: {user_input}
-
-Write a complete one-shot prompt that enables an LLM to execute the task in the context above.
-"""
-    response = groq_client.chat.completions.create(
-        model="llama-3.3-70b-versatile",
-        temperature=0.4,
-        messages=[
-            {"role": "system", "content": system_prompt},
-            {"role": "user", "content": user_prompt}
-        ]
+    user_prompt = (
+        f"Sector: {sector}\n"
+        f"Use Case: {use_case}\n"
+        f"User Goal: {user_input}\n\n"
+        "Write a complete one-shot prompt that enables an LLM to execute the task in the context above."
     )
-    return response.choices[0].message.content.strip()
+    return get_llm_response([
+        {"role": "system", "content": system_prompt},
+        {"role": "user", "content": user_prompt}
+    ], model=model)
 
 def review_and_edit_prompt(prompt, sector, use_case, user_input):
-    groq_client = groq.Groq(api_key=GROQ_API_KEY)
+    import inspect
+    frame = inspect.currentframe().f_back
+    model = frame.f_locals.get('model', 'gpt')
     system_prompt = """
 You are an expert prompt editor. Given a draft prompt, the financial sector, the use case, and the user’s specific task description:
 - If the prompt already precisely and fully matches the user's actual request, return it unchanged.
@@ -216,25 +226,17 @@ You are an expert prompt editor. Given a draft prompt, the financial sector, the
 - Do not edit the input fields or output structure
 Do not include any additional explanations or comments or introduction(like Here is the improved prompt: )
 """
-    user_prompt = f"""
-# Sector: {sector}
-# Use Case: {use_case}
-User Input: {user_input}
-
-Draft Prompt to Review:
-\"\"\"{prompt}\"\"\"
-
-Edit the above draft so it exactly matches the user query, if necessary.
-"""
-    response = groq_client.chat.completions.create(
-        model="llama-3.3-70b-versatile",
-        temperature=0.1,
-        messages=[
-            {"role": "system", "content": system_prompt},
-            {"role": "user", "content": user_prompt}
-        ]
+    user_prompt = (
+        f"# Sector: {sector}\n"
+        f"# Use Case: {use_case}\n"
+        f"User Input: {user_input}\n\n"
+        f"Draft Prompt to Review:\n{prompt}\n\n"
+        "Edit the above draft so it exactly matches the user query, if necessary."
     )
-    return response.choices[0].message.content.strip()
+    return get_llm_response([
+        {"role": "system", "content": system_prompt},
+        {"role": "user", "content": user_prompt}
+    ], model=model)
 
 @router.post("/prompt-universal")
 def universal_prompt_handler(
@@ -280,7 +282,7 @@ def universal_prompt_handler(
         if match_uc:
             prompt_obj = db.query(Prompt).filter(
                 Prompt.use_case_id == match_uc.id,
-                Prompt.model == getattr(req, 'model', 'gpt')
+                Prompt.model == 'gemini'
             ).first()
             if prompt_obj:
                 # Only clean the prompt, do not run review_and_edit_prompt
@@ -316,7 +318,7 @@ def universal_prompt_handler(
         subusecase_qs = db.query(SubUseCase).filter(
             SubUseCase.sector_id == sector_obj.id,
             SubUseCase.use_case == match_result,
-            SubUseCase.model == getattr(req, 'model', 'gpt')
+            SubUseCase.model == 'gemini'
         ).all()
         subusecase_names = [suc.sub_use_case for suc in subusecase_qs]
         sub_match = None
@@ -353,7 +355,7 @@ def universal_prompt_handler(
         # --- END SUB-USE CASE MATCHING ---
         prompt_obj = db.query(Prompt).filter(
             Prompt.use_case_id == match_uc.id,
-            Prompt.model == getattr(req, 'model', 'gpt')
+            Prompt.model == 'gemini'
         ).first()
         if prompt_obj:
             final_prompt = review_and_edit_prompt(
@@ -416,36 +418,157 @@ def universal_prompt_handler(
 
 from fastapi import HTTPException
 
+
+# Enhanced version of prompt filling with better validation and processing
 @router.post("/prompt-fill-variables")
-def fill_prompt_variables(payload: VariableFillRequest):
-    # 🛑 BLOCK if variables are empty or all values are blank/empty
-    if (
-        not payload.variables or
-        all(not (v and str(v).strip()) for v in payload.variables.values())
-    ):
+def fill_prompt_variables_enhanced(payload: VariableFillRequest):
+    """Enhanced version of prompt filling with better validation and processing."""
+    result = process_user_input_submission(payload.prompt_template, payload.variables)
+    if result["status"] == "incomplete":
         raise HTTPException(
             status_code=400,
-            detail="All required user input fields must be filled before generating the prompt."
+            detail=result["message"]
         )
+    return {
+        "final_prompt": result["final_prompt"],
+        "filled_variables": result["filled_variables"]
+    }
 
-    filled_prompt = payload.prompt_template
-    # For each variable, replace lines like '* [[Variable]]' with '* Variable: Value', else fallback to just replacing [[Variable]]
-    for var, value in payload.variables.items():
-        # Replace bullet lines with label
-        bullet_pattern = rf"(^[ \t]*[\*\-][ \t]*)\[\[{re.escape(var)}\]\][ \t]*$"
-        filled_prompt = re.sub(bullet_pattern, rf"\1{var}: {value}", filled_prompt, flags=re.IGNORECASE | re.MULTILINE)
-        # Fallback: replace any remaining [[Variable]]
-        pattern = rf"\[\[{re.escape(var)}\]\]"
-        filled_prompt = re.sub(pattern, value, filled_prompt, flags=re.IGNORECASE)
+# New endpoint for getting form structure
+@router.get("/prompt-form-fields")
+def get_prompt_form_fields(prompt_template: str):
+    """Get form field configuration for a prompt template."""
+    return {
+        "form_fields": create_input_form_data(prompt_template)
+    }
 
-    # Ensure the returned prompt is always a string
-    if not isinstance(filled_prompt, str):
-        try:
-            filled_prompt = str(filled_prompt)
-        except Exception:
-            filled_prompt = "[ERROR: Prompt could not be converted to string]"
+def fill_prompt_with_user_inputs(prompt_template: str, user_inputs: dict) -> str:
+    """
+    Fill the prompt template with user-provided inputs.
+    """
+    filled_prompt = prompt_template
+    for variable_name, user_value in user_inputs.items():
+        if not user_value or not str(user_value).strip():
+            continue
+        clean_value = str(user_value).strip()
+        # Pattern 1: Replace bullet point format with placeholder
+        bullet_pattern = rf"(^\s*[\*\-]\s*\*\*{re.escape(variable_name)}\s*(?:\(Optional\))?\s*:\*\*\s*)\[\[.*?\]\]"
+        filled_prompt = re.sub(
+            bullet_pattern,
+            rf"\1{clean_value}",
+            filled_prompt,
+            flags=re.IGNORECASE | re.MULTILINE
+        )
+        # Pattern 2: Replace standalone placeholders
+        standalone_pattern = rf"\[\[{re.escape(variable_name)}\]\]"
+        filled_prompt = re.sub(
+            standalone_pattern,
+            clean_value,
+            filled_prompt,
+            flags=re.IGNORECASE
+        )
+        # Pattern 3: Replace more complex formats
+        heading_pattern = rf"(\*\*{re.escape(variable_name)}\s*(?:\(Optional\))?\s*:\*\*\s*)\[\[.*?\]\]"
+        filled_prompt = re.sub(
+            heading_pattern,
+            rf"\1{clean_value}",
+            filled_prompt,
+            flags=re.IGNORECASE
+        )
+    return filled_prompt
 
-    return {"final_prompt": filled_prompt}
+def extract_and_validate_inputs(prompt_template: str, user_inputs: dict) -> dict:
+    """
+    Extract variables from prompt and validate against user inputs.
+    """
+    variables = extract_input_headings(prompt_template)
+    missing_variables = []
+    filled_variables = {}
+    for var in variables:
+        user_value = user_inputs.get(var, "")
+        if user_value and str(user_value).strip():
+            filled_variables[var] = str(user_value).strip()
+        else:
+            missing_variables.append(var)
+    return {
+        "all_variables": variables,
+        "filled_variables": filled_variables,
+        "missing_variables": missing_variables,
+        "is_complete": len(missing_variables) == 0
+    }
+
+def create_input_form_data(prompt_template: str) -> list:
+    """
+    Create form data structure for frontend to render input fields.
+    """
+    variables = extract_input_headings(prompt_template)
+    form_fields = []
+    for var in variables:
+        # Determine if field is optional
+        is_optional = "(Optional)" in extract_input_section(prompt_template)
+        placeholder = f"Enter {var.lower()}..."
+        form_fields.append({
+            "name": var,
+            "label": var,
+            "type": "textarea" if len(var) > 20 else "text",
+            "required": not is_optional,
+            "placeholder": placeholder,
+            "value": ""
+        })
+    return form_fields
+
+def process_user_input_submission(prompt_template: str, user_inputs: dict) -> dict:
+    """
+    Process user input submission and return appropriate response.
+    """
+    validation = extract_and_validate_inputs(prompt_template, user_inputs)
+    if not validation["is_complete"]:
+        return {
+            "stage": 2,
+            "status": "incomplete",
+            "missing_variables": validation["missing_variables"],
+            "message": f"Please provide values for: {', '.join(validation['missing_variables'])}",
+            "form_fields": create_input_form_data(prompt_template)
+        }
+    final_prompt = fill_prompt_with_user_inputs(prompt_template, user_inputs)
+    return {
+        "stage": 3,
+        "status": "complete",
+        "final_prompt": final_prompt,
+        "filled_variables": validation["filled_variables"]
+    }
+
+# Enhanced version of your existing function
+def extract_filled_variables_enhanced(user_input: str, variables: list) -> dict:
+    """
+    Enhanced version that tries to intelligently parse user input for multiple variables.
+    """
+    result = {}
+    user_input_clean = user_input.strip() if user_input else ''
+    if not user_input_clean:
+        return {var: '' for var in variables}
+    if len(variables) == 1:
+        result[variables[0]] = user_input_clean
+        return result
+    for var in variables:
+        patterns = [
+            rf"{re.escape(var)}\s*:\s*([^\n,;]+)",
+            rf"{re.escape(var)}\s*=\s*([^\n,;]+)",
+            rf"{re.escape(var)}\s*-\s*([^\n,;]+)"
+        ]
+        found = False
+        for pattern in patterns:
+            match = re.search(pattern, user_input_clean, re.IGNORECASE)
+            if match:
+                result[var] = match.group(1).strip()
+                found = True
+                break
+        if not found:
+            if var.lower() in user_input_clean.lower():
+                result[var] = user_input_clean
+            else:
+                result[var] = ''
+    return result
 
     # New endpoint: GET /sub-use-cases
 @router.get("/sub-use-cases")
