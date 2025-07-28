@@ -1,11 +1,8 @@
 import models  # Ensure all models are registered with SQLAlchemy
-from fastapi import FastAPI, Depends
+from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from db1 import get_db, SessionLocal
-from models.sector import Sector
-from models.usecase import UseCase
 
-from routers import generator
+from routers import generator, metadata
 
 app = FastAPI(
     title="Prompt Generator API",
@@ -13,27 +10,23 @@ app = FastAPI(
 )
 
 # Optional CORS if you're using a frontend
+# Define allowed origins for CORS. This is more secure than allowing all origins ("*").
+# Based on our previous conversations, these are good defaults.
+origins = [
+    "http://localhost:8080",  # For local React development
+    "https://promptgenfrontendupdated.vercel.app", # For your deployed frontend on Vercel
+]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
-# Include your routes
-app.include_router(generator.router, prefix="/api")
-
-@app.get("/api/sectors")
-def get_sectors(db: SessionLocal = Depends(get_db)):
-    sectors = db.query(Sector.name).all()
-    return [sector[0] for sector in sectors]
-
-@app.get("/api/use_cases/{sector_name}")
-def get_use_cases(sector_name: str, db: SessionLocal = Depends(get_db)):
-    sector = db.query(Sector).filter(Sector.name == sector_name).first()
-    if not sector:
-        return []
-    use_cases = db.query(UseCase.name).filter(UseCase.sector_id == sector.id).all()
-    return [use_case[0] for use_case in use_cases]
-
+# Include your API routers.
+# It's best practice to define the "/api" prefix within each router file
+# itself, rather than here in main.py.
+app.include_router(generator.router)
+app.include_router(metadata.router)

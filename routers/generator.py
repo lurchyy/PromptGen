@@ -1,8 +1,4 @@
-
-
 import os
-import re
-## groq import removed
 import google.generativeai as genai
 from fastapi import APIRouter, Depends, HTTPException
 from fastapi import Query
@@ -13,52 +9,49 @@ from models.sector import Sector
 from models.usecase import UseCase
 from models.prompt import Prompt
 from models.subusecase import SubUseCase
-def llm_subusecase_match(user_input, subusecase_list):
+def llm_subusecase_match(user_input: str, subusecase_list: list[str], model: str):
     """LLM fuzzy match user input to a sub-use case string from the list. Returns the best match or None."""
     if not subusecase_list:
         return None
-    # Accept model argument for LLM selection
-    import inspect
-    frame = inspect.currentframe().f_back
-    model = frame.f_locals.get('model', 'gpt')
     system_prompt = (
         f"You are a financial sub-use case matcher. Here is the list of sub-use cases:\n"
-        f"{subusecase_list}\n"
+        f"{', '.join(subusecase_list)}\n"
         "Given the user input, determine if it matches (by intent or phrasing) one of these sub-use cases. "
         "If yes, reply ONLY with the matching sub-use case string (no extra words). "
         "If not, reply ONLY with: NO_MATCH."
     )
     user_prompt = f"User Input: {user_input}"
-    result = get_llm_response([
-        {"role": "system", "content": system_prompt},
-        {"role": "user", "content": user_prompt}
-    ], model=model)
+    # The Gemini API expects a list of contents, not a role-based chat history like OpenAI.
+    # We will format the prompt as a single string for simplicity here.
+    full_prompt = f"{system_prompt}\n\n{user_prompt}"
+    result = get_llm_response(full_prompt, model=model)
     return result if result != "NO_MATCH" else None
 
-router = APIRouter()
+router = APIRouter(
+    prefix="/api",
+    tags=["Prompt Generation"]
+)
 ## GROQ_API_KEY removed
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 
-def get_llm_response(messages, model="gpt"):
-    """
-    Unified LLM response for Gemini only.
-    messages: list of dicts with 'role' and 'content'.
-    model: 'gemini' (Google Gemini)
-    """
+def get_llm_response(prompt: str, model: str = "gemini-1.5-flash"):
+    """Gets a response from a Gemini model."""
     if not GEMINI_API_KEY:
-        raise Exception("GEMINI_API_KEY not set")
-    genai.configure(api_key=GEMINI_API_KEY)
-    # Gemini expects a single prompt string, so concatenate all messages
-    prompt = "\n".join([f"{m['role']}: {m['content']}" for m in messages])
-    gemini_model = genai.GenerativeModel("gemini-2.5-flash")
-    response = gemini_model.generate_content(prompt)
-    return response.text.strip() if hasattr(response, "text") else str(response)
+        raise HTTPException(status_code=500, detail="GEMINI_API_KEY not configured on server.")
+    try:
+        genai.configure(api_key=GEMINI_API_KEY)
+        gemini_model = genai.GenerativeModel(model)
+        response = gemini_model.generate_content(prompt)
+        return response.text.strip()
+    except Exception as e:
+        print(f"Error calling Gemini API: {e}")
+        raise HTTPException(status_code=503, detail="Error communicating with the AI service.")
 
 class PromptRequest(BaseModel):
     sector: str
     use_case: str
     user_input: str = ""
-    model: str = "gemini"  # Only 'gemini' is supported
+    model: str = "gemini-1.5-flash"  # Default model to use
 
 class VariableFillRequest(BaseModel):
     prompt_template: str
@@ -109,12 +102,9 @@ def extract_input_headings(prompt_template: str) -> list:
         Do not return anything else as a response, just the list of variable names. No additional formatting or text."""
     )
     user_prompt = f"Prompt Template:\n{prompt_template}\n\nExtract all input variable names as a Python list."
-    
-    # This response will be the string with the markdown block
-    response = get_llm_response([
-        {"role": "system", "content": system_prompt},
-        {"role": "user", "content": user_prompt}
-    ], model="gemini-2.5-flash") # Assuming you meant gemini-1.5-flash
+
+    full_prompt = f"{system_prompt}\n\n{user_prompt}"
+    response = get_llm_response(full_prompt, model="gemini-1.5-flash") # Use a fast model for parsing
 
     # --- Start of the fix ---
     
@@ -151,10 +141,7 @@ def clean_generated_prompt(prompt: str) -> str:
     prompt = re.sub(r"(?s)\*\*Example Output:\*\*.*?```.*?```\s*", "", prompt)
     return prompt.strip()
 
-def llm_match_decision(sector, user_use_case, text_input, use_case_list):
-    import inspect
-    frame = inspect.currentframe().f_back
-    model = frame.f_locals.get('model', 'gpt')
+def llm_match_decision(sector: str, user_use_case: str, text_input: str, use_case_list: list[str], model: str):
     system_prompt = (
         f"You are a financial use case matcher. Here is the list of use cases for the {sector} sector:\n"
         f"{use_case_list}\n"
@@ -167,15 +154,10 @@ def llm_match_decision(sector, user_use_case, text_input, use_case_list):
         f"User Use Case: {user_use_case}\n"
         f"User Input: {text_input}"
     )
-    return get_llm_response([
-        {"role": "system", "content": system_prompt},
-        {"role": "user", "content": user_prompt}
-    ], model=model)
+    full_prompt = f"{system_prompt}\n\n{user_prompt}"
+    return get_llm_response(full_prompt, model=model)
 
-def generate_structured_prompt(sector, use_case, user_input):
-    import inspect
-    frame = inspect.currentframe().f_back
-    model = frame.f_locals.get('model', 'gpt')
+def generate_structured_prompt(sector: str, use_case: str, user_input: str, model: str):
     system_prompt = """
 You are an expert Prompt Engineer.
 
@@ -210,15 +192,10 @@ Instruct the LLM to flag and report any unavailable or missing data that cannot 
         f"User Goal: {user_input}\n\n"
         "Write a complete one-shot prompt that enables an LLM to execute the task in the context above."
     )
-    return get_llm_response([
-        {"role": "system", "content": system_prompt},
-        {"role": "user", "content": user_prompt}
-    ], model=model)
+    full_prompt = f"{system_prompt}\n\n{user_prompt}"
+    return get_llm_response(full_prompt, model=model)
 
-def review_and_edit_prompt(prompt, sector, use_case, user_input):
-    import inspect
-    frame = inspect.currentframe().f_back
-    model = frame.f_locals.get('model', 'gpt')
+def review_and_edit_prompt(prompt: str, sector: str, use_case: str, user_input: str, model: str):
     system_prompt = """
 You are an expert prompt editor. Given a draft prompt, the financial sector, the use case, and the user’s specific task description:
 - If the prompt already precisely and fully matches the user's actual request, return it unchanged.
@@ -236,10 +213,8 @@ Do not include any additional explanations or comments or introduction(like Here
         f"Draft Prompt to Review:\n{prompt}\n\n"
         "Edit the above draft so it exactly matches the user query, if necessary."
     )
-    return get_llm_response([
-        {"role": "system", "content": system_prompt},
-        {"role": "user", "content": user_prompt}
-    ], model=model)
+    full_prompt = f"{system_prompt}\n\n{user_prompt}"
+    return get_llm_response(full_prompt, model=model)
 
 @router.post("/prompt-universal")
 def universal_prompt_handler(
@@ -252,11 +227,11 @@ def universal_prompt_handler(
             raise HTTPException(status_code=400, detail="Please provide a description in the input box for custom prompt generation.")
         # Always generate a new prompt for custom
         new_prompt = generate_structured_prompt(
-            req.sector, req.use_case, req.user_input
+            req.sector, req.use_case, req.user_input, model=req.model
         )
         
         final_prompt = review_and_edit_prompt(
-            new_prompt, req.sector, req.use_case, req.user_input
+            new_prompt, req.sector, req.use_case, req.user_input, model=req.model
         )
         final_prompt = clean_generated_prompt(final_prompt)
         variables = extract_input_headings(final_prompt)
@@ -309,7 +284,7 @@ def universal_prompt_handler(
     # If user_input exists: run LLM matching logic
 
     match_result = llm_match_decision(
-        req.sector, req.use_case, req.user_input, use_case_names
+        req.sector, req.use_case, req.user_input, use_case_names, model=req.model
     )
     if match_result in use_case_names:
         # Matched a use case, fetch prompt from DB
@@ -326,7 +301,7 @@ def universal_prompt_handler(
         subusecase_names = [suc.sub_use_case for suc in subusecase_qs]
         sub_match = None
         if req.user_input.strip() and subusecase_names:
-            sub_match = llm_subusecase_match(req.user_input, subusecase_names)
+            sub_match = llm_subusecase_match(req.user_input, subusecase_names, model=req.model)
         if sub_match:
             subusecase_obj = next((suc for suc in subusecase_qs if suc.sub_use_case == sub_match), None)
             if subusecase_obj:
@@ -362,7 +337,7 @@ def universal_prompt_handler(
         ).first()
         if prompt_obj:
             final_prompt = review_and_edit_prompt(
-                prompt_obj.content, req.sector, match_result, req.user_input
+                prompt_obj.content, req.sector, match_result, req.user_input, model=req.model
             )
             final_prompt = clean_generated_prompt(final_prompt)
             variables = extract_input_headings(final_prompt)
@@ -391,10 +366,10 @@ def universal_prompt_handler(
     else:
         # Not in datalake: dynamically generate a prompt
         new_prompt = generate_structured_prompt(
-            req.sector, req.use_case, req.user_input
+            req.sector, req.use_case, req.user_input, model=req.model
         )
         final_prompt = review_and_edit_prompt(
-            new_prompt, req.sector, req.use_case, req.user_input
+            new_prompt, req.sector, req.use_case, req.user_input, model=req.model
         )
         final_prompt = clean_generated_prompt(final_prompt)
         variables = extract_input_headings(final_prompt)
@@ -511,11 +486,11 @@ def create_input_form_data(prompt_template: str) -> list:
     """
     Create form data structure for frontend to render input fields.
     """
-    variables = extract_input_headings(prompt_template)
+    all_variables = extract_input_headings(prompt_template)
     form_fields = []
-    for var in variables:
-        # Determine if field is optional
-        is_optional = "(Optional)" in extract_input_headings(prompt_template)
+    for var in all_variables:
+        # Determine if field is optional based on the string itself
+        is_optional = "(optional)" in var.lower()
         placeholder = f"Enter {var.lower()}..."
         form_fields.append({
             "name": var,
