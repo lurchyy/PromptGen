@@ -1,4 +1,5 @@
 
+
 import os
 import re
 ## groq import removed
@@ -597,3 +598,27 @@ def get_sub_use_cases(
     ).all()
     sub_use_case_names = [suc.sub_use_case for suc in subusecases]
     return {"sub_use_cases": sub_use_case_names}
+
+
+@router.get("/prompt-filters")
+def get_prompt_filters(sector: str = None, db: Session = Depends(get_db)):
+    """
+    Returns sector names (for category filter) and use case names (for tag filter) from the datalake.
+    If sector is provided, only return use cases for that sector as tags.
+    """
+    # Get all sectors
+    sectors = db.query(Sector).all()
+    sector_names = [s.name for s in sectors]
+    if sector:
+        sector_obj = db.query(Sector).filter(Sector.name == sector).first()
+        if sector_obj:
+            use_cases = db.query(UseCase).filter(UseCase.sector_id == sector_obj.id).all()
+            use_case_names = [uc.name for uc in use_cases]
+        else:
+            use_case_names = []
+    else:
+        use_case_names = []
+    return {
+        "categories": sector_names,
+        "tags": use_case_names
+    }
