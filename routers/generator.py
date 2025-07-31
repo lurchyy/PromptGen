@@ -47,15 +47,17 @@ def get_llm_response(prompt: str, model: str = "gemini-2.5-flash"):
         print(f"Error calling Gemini API: {e}")
         raise HTTPException(status_code=503, detail="Error communicating with the AI service.")
 
+
 class PromptRequest(BaseModel):
     sector: str
     use_case: str
     user_input: str = ""
-    model: str = "gemini-2.5-flash"  # Default model to use
+    model: str = "gemini-2.5-flash"
+    sub_use_case: str = ""  
 
 class VariableFillRequest(BaseModel):
     prompt_template: str
-    variables: dict  # {"Variable Name": "Value"}
+    variables: dict
 
 import re
 def deduplicate(variables):
@@ -197,7 +199,7 @@ Instruct the LLM to flag and report any unavailable or missing data that cannot 
 
 def review_and_edit_prompt(prompt: str, sector: str, use_case: str, user_input: str, model: str):
     system_prompt = """
-You are an expert prompt editor. Given a draft prompt, the financial sector, the use case, and the user’s specific task description:
+You are an expert prompt editor. Given a draft prompt, the financial sector, the use case, and the user's specific task description:
 - If the prompt already precisely and fully matches the user's actual request, return it unchanged.
 - If not, edit or reframe the prompt so it is a perfect fit for the actual user need. 
 - Ensure the prompt is clear, actionable, and directly addresses the user's described task, using any specific language from the user input as needed.
@@ -216,11 +218,60 @@ Do not include any additional explanations or comments or introduction(like Here
     full_prompt = f"{system_prompt}\n\n{user_prompt}"
     return get_llm_response(full_prompt, model=model)
 
+# Debug endpoint to check sub-use case data
+@router.get("/debug-sub-use-case")
+def debug_sub_use_case(
+    sector: str = Query(...),
+    use_case: str = Query(...),
+    sub_use_case: str = Query(...),
+    db: Session = Depends(get_db),
+):
+    """Debug endpoint to see what sub-use cases exist in the database"""
+    
+    # Find sector
+    sector_obj = db.query(Sector).filter(Sector.name == sector).first()
+    if not sector_obj:
+        return {"error": "Sector not found", "sector": sector}
+    
+    # Find all sub-use cases for this sector and use_case
+    all_subusecases = db.query(SubUseCase).filter(
+        SubUseCase.sector_id == sector_obj.id,
+        SubUseCase.use_case == use_case
+    ).all()
+    
+    # Return debug info
+    result = {
+        "sector_found": True,
+        "sector_id": sector_obj.id,
+        "requested": {
+            "sector": sector,
+            "use_case": use_case,
+            "sub_use_case": sub_use_case
+        },
+        "all_subusecases_for_usecase": []
+    }
+    
+    for suc in all_subusecases:
+        result["all_subusecases_for_usecase"].append({
+            "id": suc.id,
+            "use_case": suc.use_case,
+            "sub_use_case": suc.sub_use_case,
+            "model": suc.model,
+            "exact_match": suc.sub_use_case == sub_use_case,
+            "case_insensitive_match": suc.sub_use_case.lower() == sub_use_case.lower()
+        })
+    
+    return result
+
 @router.post("/prompt-universal")
 def universal_prompt_handler(
     req: PromptRequest,
+    sub_use_case: str = Query(""),  # Accept sub_use_case as query parameter
     db: Session = Depends(get_db),
 ):
+    # Override the sub_use_case from request body with query parameter if provided
+    if sub_use_case:
+        req.sub_use_case = sub_use_case
     # If either sector or use_case is 'Something else', treat as custom prompt
     if req.sector == 'Something else' or req.use_case == 'Something else':
         if not req.user_input.strip():
@@ -251,15 +302,57 @@ def universal_prompt_handler(
     use_cases = db.query(UseCase).filter(UseCase.sector_id == sector_obj.id).all()
     use_case_names = [uc.name for uc in use_cases]
 
-    # --- SUB-USE CASE DIRECT FETCH ---
-    if hasattr(req, 'sub_use_case') and req.sub_use_case:
+    # --- SUB-USE CASE DIRECT FETCH (IMPROVED) ---
+    if req.sub_use_case and req.sub_use_case.strip():
+        print(f"DEBUG: Looking for sub-use case: '{req.sub_use_case}'")
+        
+        # First, try with the specified model (gemini)
         subusecase_obj = db.query(SubUseCase).filter(
             SubUseCase.sector_id == sector_obj.id,
             SubUseCase.use_case == req.use_case,
             SubUseCase.sub_use_case == req.sub_use_case,
-            SubUseCase.model == 'gemini'
+            SubUseCase.model == 'gpt'
         ).first()
+        
+        # If not found with gemini, try with any model
+        if not subusecase_obj:
+            print("DEBUG: Not found with gemini model, trying any model...")
+            subusecase_obj = db.query(SubUseCase).filter(
+                SubUseCase.sector_id == sector_obj.id,
+                SubUseCase.use_case == req.use_case,
+                SubUseCase.sub_use_case == req.sub_use_case
+            ).first()
+        
+        # If still not found, try case-insensitive search
+        if not subusecase_obj:
+            print("DEBUG: Not found with exact match, trying case-insensitive...")
+            subusecase_obj = db.query(SubUseCase).filter(
+                SubUseCase.sector_id == sector_obj.id,
+                SubUseCase.use_case == req.use_case,
+                SubUseCase.sub_use_case.ilike(req.sub_use_case)
+            ).first()
+        
+        # If still not found, try fuzzy matching (remove special characters)
+        if not subusecase_obj:
+            print("DEBUG: Trying fuzzy match...")
+            import re
+            # Remove special characters and normalize
+            normalized_input = re.sub(r'[^\w\s]', '', req.sub_use_case.lower())
+            
+            all_subusecases = db.query(SubUseCase).filter(
+                SubUseCase.sector_id == sector_obj.id,
+                SubUseCase.use_case == req.use_case
+            ).all()
+            
+            for suc in all_subusecases:
+                normalized_db = re.sub(r'[^\w\s]', '', suc.sub_use_case.lower())
+                if normalized_input == normalized_db:
+                    subusecase_obj = suc
+                    print(f"DEBUG: Found fuzzy match: '{suc.sub_use_case}'")
+                    break
+        
         if subusecase_obj:
+            print(f"DEBUG: Found sub-use case with model: {subusecase_obj.model}")
             final_prompt = clean_generated_prompt(subusecase_obj.prompt)
             variables = extract_input_headings(final_prompt)
             return {
@@ -270,10 +363,32 @@ def universal_prompt_handler(
                 "sub_use_case": req.sub_use_case,
                 "user_input": req.user_input,
                 "prompt_template": final_prompt,
-                "variables": variables
+                "variables": variables,
+                "model_used": subusecase_obj.model  # Include for debugging
             }
         else:
-            raise HTTPException(status_code=404, detail="Prompt not found for this sub use case.")
+            # Log what we tried to find
+            print(f"DEBUG: Sub-use case not found")
+            print(f"Sector ID: {sector_obj.id}")
+            print(f"Use case: '{req.use_case}'")
+            print(f"Sub-use case: '{req.sub_use_case}'")
+            
+            # Return available sub-use cases for this use case
+            available_subusecases = db.query(SubUseCase).filter(
+                SubUseCase.sector_id == sector_obj.id,
+                SubUseCase.use_case == req.use_case
+            ).all()
+            
+            available_list = [suc.sub_use_case for suc in available_subusecases]
+            
+            raise HTTPException(
+                status_code=404, 
+                detail={
+                    "message": "Prompt not found for this sub use case.",
+                    "requested_sub_use_case": req.sub_use_case,
+                    "available_sub_use_cases": available_list
+                }
+            )
 
     # If NO user_input, just fetch by exact use_case match (fast path)
     if not req.user_input.strip():
@@ -284,7 +399,7 @@ def universal_prompt_handler(
         if match_uc:
             prompt_obj = db.query(Prompt).filter(
                 Prompt.use_case_id == match_uc.id,
-                Prompt.model == 'gemini'
+                Prompt.model == 'gpt'
             ).first()
             if prompt_obj:
                 # Only clean the prompt, do not run review_and_edit_prompt
@@ -313,14 +428,14 @@ def universal_prompt_handler(
     if match_result in use_case_names:
         # Matched a use case, fetch prompt from DB
         match_uc = db.query(UseCase).filter(
-            UseCase.sector_id == sector_obj.id,
+            SubUseCase.sector_id == sector_obj.id,
             UseCase.name == match_result
         ).first()
         # --- SUB-USE CASE MATCHING ---
         subusecase_qs = db.query(SubUseCase).filter(
             SubUseCase.sector_id == sector_obj.id,
             SubUseCase.use_case == match_result,
-            SubUseCase.model == 'gemini'
+            SubUseCase.model == 'gpt'
         ).all()
         subusecase_names = [suc.sub_use_case for suc in subusecase_qs]
         sub_match = None
@@ -357,7 +472,7 @@ def universal_prompt_handler(
         # --- END SUB-USE CASE MATCHING ---
         prompt_obj = db.query(Prompt).filter(
             Prompt.use_case_id == match_uc.id,
-            Prompt.model == 'gemini'
+            Prompt.model == 'gpt'
         ).first()
         if prompt_obj:
             final_prompt = review_and_edit_prompt(
