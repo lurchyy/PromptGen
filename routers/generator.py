@@ -34,7 +34,7 @@ router = APIRouter(
 ## GROQ_API_KEY removed
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 
-def get_llm_response(prompt: str, model: str = "gemini-1.5-flash"):
+def get_llm_response(prompt: str, model: str = "gemini-2.5-flash"):
     """Gets a response from a Gemini model."""
     if not GEMINI_API_KEY:
         raise HTTPException(status_code=500, detail="GEMINI_API_KEY not configured on server.")
@@ -51,7 +51,7 @@ class PromptRequest(BaseModel):
     sector: str
     use_case: str
     user_input: str = ""
-    model: str = "gemini-1.5-flash"  # Default model to use
+    model: str = "gemini-2.5-flash"  # Default model to use
 
 class VariableFillRequest(BaseModel):
     prompt_template: str
@@ -104,7 +104,7 @@ def extract_input_headings(prompt_template: str) -> list:
     user_prompt = f"Prompt Template:\n{prompt_template}\n\nExtract all input variable names as a Python list."
 
     full_prompt = f"{system_prompt}\n\n{user_prompt}"
-    response = get_llm_response(full_prompt, model="gemini-1.5-flash") # Use a fast model for parsing
+    response = get_llm_response(full_prompt, model="gemini-2.5-flash") # Use a fast model for parsing
 
     # --- Start of the fix ---
     
@@ -250,6 +250,30 @@ def universal_prompt_handler(
         raise HTTPException(status_code=404, detail="Sector not found.")
     use_cases = db.query(UseCase).filter(UseCase.sector_id == sector_obj.id).all()
     use_case_names = [uc.name for uc in use_cases]
+
+    # --- SUB-USE CASE DIRECT FETCH ---
+    if hasattr(req, 'sub_use_case') and req.sub_use_case:
+        subusecase_obj = db.query(SubUseCase).filter(
+            SubUseCase.sector_id == sector_obj.id,
+            SubUseCase.use_case == req.use_case,
+            SubUseCase.sub_use_case == req.sub_use_case,
+            SubUseCase.model == 'gemini'
+        ).first()
+        if subusecase_obj:
+            final_prompt = clean_generated_prompt(subusecase_obj.prompt)
+            variables = extract_input_headings(final_prompt)
+            return {
+                "stage": 1,
+                "source": "sub_use_case",
+                "sector": req.sector,
+                "use_case": req.use_case,
+                "sub_use_case": req.sub_use_case,
+                "user_input": req.user_input,
+                "prompt_template": final_prompt,
+                "variables": variables
+            }
+        else:
+            raise HTTPException(status_code=404, detail="Prompt not found for this sub use case.")
 
     # If NO user_input, just fetch by exact use_case match (fast path)
     if not req.user_input.strip():

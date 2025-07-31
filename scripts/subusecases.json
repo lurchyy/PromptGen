@@ -1,0 +1,29 @@
+[{
+    "Sector": "Venture Capital (VC)",
+    "Use Case": "Startup Pre-screening (Red Flag Analysis)",
+    "Sub-Use Case": [
+        "Identify red flags in pitch decks",
+        "Match startup criteria with PPM thresholds",
+        "Team background assessment",
+        "SWOT analysis",
+        "Legal and regulatory risk summary"
+    ]
+},
+{
+    "Sector": "Venture Capital (VC)",
+    "Use Case": "Portfolio update reports",
+    "Sub-Use Case": [
+        "Include MIC, TVPI, DPI, and IRR metrics",
+        "Graphical benchmark comparison vs market",
+        "Rebalancing trigger suggestions"
+    ]
+},
+{
+    "Sector": "Financial Advisors / FP&A Teams",
+    "Use Case": "Financial model building (FP&A)",
+    "Sub-Use Case": [
+        "Purpose-driven modeling (valuation / budgeting / scenario)",
+        "Consolidated vs standalone statement projection",
+        "Peer multiple comparison"
+    ]
+}]

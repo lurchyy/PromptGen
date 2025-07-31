@@ -73,12 +73,11 @@ def main():
     db: Session = SessionLocal()
 
     # Load flat JSON list
-    with open("subusescases.json", encoding="utf-8") as f:
+    with open("subusecases.json", encoding="utf-8") as f:
         subusecases = json.load(f)
 
     for item in subusecases:
-        if item.get("Prompt-Worthy", "").lower() != "yes":
-            continue
+
 
         sector_name = item["Sector"].strip()
         use_case = item["Use Case"].strip()
